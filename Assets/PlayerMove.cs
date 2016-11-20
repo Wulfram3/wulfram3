@@ -61,43 +61,43 @@ public class PlayerMove : NetworkBehaviour {
         //pos.y = y + 1;
         //transform.position = pos;
 
-        float mx = Input.GetAxis("Mouse X") * sensitivityX;
-        float my = Input.GetAxis("Mouse Y") * sensitivityY;
-        float deltaX = mx - lastRotationX;
-        float deltaY = my - lastRotationY;
-        lastRotationX = mx;
-        lastRotationY = my;
-        Quaternion xQuaternion = Quaternion.AngleAxis(mx, Vector3.up);
-        Quaternion yQuaternion = Quaternion.AngleAxis(my, -Vector3.right);
-        transform.localRotation = transform.localRotation * xQuaternion * yQuaternion;
+        //float mx = Input.GetAxis("Mouse X") * sensitivityX;
+        //float my = Input.GetAxis("Mouse Y") * sensitivityY;
+        //float deltaX = mx - lastRotationX;
+        //float deltaY = my - lastRotationY;
+        //lastRotationX = mx;
+        //lastRotationY = my;
+        //Quaternion xQuaternion = Quaternion.AngleAxis(mx, Vector3.up);
+        //Quaternion yQuaternion = Quaternion.AngleAxis(my, -Vector3.right);
+        //transform.localRotation = transform.localRotation * xQuaternion * yQuaternion;
         //transform.Rotate(Vector3.up, mx);
 
         //NB Uncomment to enable mouse look
-        //if (axes == RotationAxes.MouseXAndY)
-        //{
-        //    // Read the mouse input axis
-        //    rotationX += Input.GetAxis("Mouse X") * sensitivityX;
-        //    rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
-        //    rotationX = ClampAngle(rotationX, minimumX, maximumX);
-        //    rotationY = ClampAngle(rotationY, minimumY, maximumY);
-        //    Quaternion xQuaternion = Quaternion.AngleAxis(rotationX, Vector3.up);
-        //    Quaternion yQuaternion = Quaternion.AngleAxis(rotationY, -Vector3.right);
-        //    transform.localRotation = originalRotation * xQuaternion * yQuaternion;
-        //}
-        //else if (axes == RotationAxes.MouseX)
-        //{
-        //    rotationX += Input.GetAxis("Mouse X") * sensitivityX;
-        //    rotationX = ClampAngle(rotationX, minimumX, maximumX);
-        //    Quaternion xQuaternion = Quaternion.AngleAxis(rotationX, Vector3.up);
-        //    transform.localRotation = originalRotation * xQuaternion;
-        //}
-        //else
-        //{
-        //    rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
-        //    rotationY = ClampAngle(rotationY, minimumY, maximumY);
-        //    Quaternion yQuaternion = Quaternion.AngleAxis(-rotationY, Vector3.right);
-        //    transform.localRotation = originalRotation * yQuaternion;
-        //}
+        if (axes == RotationAxes.MouseXAndY)
+        {
+            // Read the mouse input axis
+            rotationX += Input.GetAxis("Mouse X") * sensitivityX;
+            rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
+            rotationX = ClampAngle(rotationX, minimumX, maximumX);
+            rotationY = ClampAngle(rotationY, minimumY, maximumY);
+            Quaternion xQuaternion = Quaternion.AngleAxis(rotationX, Vector3.up);
+            Quaternion yQuaternion = Quaternion.AngleAxis(rotationY, -Vector3.right);
+            transform.localRotation = originalRotation * xQuaternion * yQuaternion;
+        }
+        else if (axes == RotationAxes.MouseX)
+        {
+            rotationX += Input.GetAxis("Mouse X") * sensitivityX;
+            rotationX = ClampAngle(rotationX, minimumX, maximumX);
+            Quaternion xQuaternion = Quaternion.AngleAxis(rotationX, Vector3.up);
+            transform.localRotation = originalRotation * xQuaternion;
+        }
+        else
+        {
+            rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
+            rotationY = ClampAngle(rotationY, minimumY, maximumY);
+            Quaternion yQuaternion = Quaternion.AngleAxis(-rotationY, Vector3.right);
+            transform.localRotation = originalRotation * yQuaternion;
+        }
 
         if (Input.GetMouseButtonDown(0)) {
             CmdFirePulseShell();
@@ -138,12 +138,12 @@ public class PlayerMove : NetworkBehaviour {
             //transform.rotation = Quaternion.LookRotation(proj, hit.normal);
 
             //Quaternion target = Quaternion.FromToRotation(Vector3.up, hit.normal);
-            if (z >= 0.01f)
-            {
-                Vector3 fwd = transform.forward;
-                Vector3 proj = fwd - (Vector3.Dot(fwd, hit.normal)) * hit.normal;
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(proj, hit.normal), 0.05f);
-            }
+            //if (z >= 0.01f)
+            //{
+            //    Vector3 fwd = transform.forward;
+            //    Vector3 proj = fwd - (Vector3.Dot(fwd, hit.normal)) * hit.normal;
+            //    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(proj, hit.normal), 0.05f);
+            //}
             
             //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(hit.normal), 0.05f);
 
@@ -155,7 +155,7 @@ public class PlayerMove : NetworkBehaviour {
             rb.AddForce(transform.up * 1000f);
         }
         rb.AddRelativeForce(new Vector3(x, 0, z) * 50f);
-        rb.AddTorque(new Vector3(0, 0, -x) * 0.7f); //strafe rotation
+        //rb.AddTorque(new Vector3(0, 0, -x) * 0.7f); //strafe rotation
 
 
         //RaycastHit hit;
