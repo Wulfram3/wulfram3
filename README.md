@@ -2,8 +2,8 @@
 
 
 #TO DO
--Unity Network Match Making Fix
--Switch Flak Turret Graphics
--Transfer Over Bolden Pass Map
--Add Camera Switch to First Person (C KEY)
--Change Pulse Graphics
+-Unity Network Match Making Fix<p>
+-Switch Flak Turret Graphics<p>
+-Transfer Over Bolden Pass Map<p>
+-Add Camera Switch to First Person (C KEY)<p>
+-Change Pulse Graphics<p>
