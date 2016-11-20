@@ -7,8 +7,8 @@
 
 | To Do        | In Progress          | Finished  |
 | ------------- |:-------------:| -----:|
-| Unity Network Match Making Fix     | Yes | None |
-| Switch Flak Turret Graphics      |      Yes      |   None |
-| Transfer Over Bolden Pass Map    | Yes      |   None |
-| Add Camera Switch to First Person (C KEY)    | Yes      |   None |
-| Change Pulse Graphics   | Yes      |   None |
+| Unity Network Match Making Fix     | Yes |  |
+| Switch Flak Turret Graphics      |      Yes      |    |
+| Transfer Over Bolden Pass Map    | Yes      |    |
+| Add Camera Switch to First Person (C KEY)    | Yes      |   |
+| Change Pulse Graphics   | Yes      |    |
