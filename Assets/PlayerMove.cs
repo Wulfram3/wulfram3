@@ -36,13 +36,6 @@ public class PlayerMove : NetworkBehaviour {
             return;
         }
            
-        if (isLocalPlayer)
-        {
-            Camera cam = Camera.main;
-            cam.transform.SetParent(transform);
-            cam.transform.position = new Vector3(0, 1, -3);
-            cam.transform.rotation = Quaternion.identity;
-        } 
         
         terrainCollider = GameObject.FindObjectOfType<TerrainCollider>();
 
