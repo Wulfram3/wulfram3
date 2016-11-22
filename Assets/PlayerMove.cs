@@ -35,12 +35,15 @@ public class PlayerMove : NetworkBehaviour {
             rb.isKinematic = true;
             return;
         }
-            
-        Camera cam = Camera.main;
-        cam.transform.SetParent(transform);
-        cam.transform.position = new Vector3(0, 1, -3);
-        cam.transform.rotation = Quaternion.identity;
-
+           
+        if (isLocalPlayer)
+        {
+            Camera cam = Camera.main;
+            cam.transform.SetParent(transform);
+            cam.transform.position = new Vector3(0, 1, -3);
+            cam.transform.rotation = Quaternion.identity;
+        } 
+        
         terrainCollider = GameObject.FindObjectOfType<TerrainCollider>();
 
         originalRotation = transform.localRotation;
@@ -103,8 +106,14 @@ public class PlayerMove : NetworkBehaviour {
             Quaternion yQuaternion = Quaternion.AngleAxis(-rotationY, Vector3.right);
             transform.localRotation = originalRotation * yQuaternion;
         }
-		//pulse was here before
+        //pulse was here before
 
+        //Fire Pulse
+        if (Time.time >= timestamp && (Input.GetMouseButtonDown(0)))
+        {
+            CmdFirePulseShell();
+            timestamp = Time.time + timeBetweenShots;
+        }
 
     }
 
@@ -153,12 +162,7 @@ public class PlayerMove : NetworkBehaviour {
 
         }
 
-		//Fire Pulse
-		if (Time.time >= timestamp && (Input.GetMouseButtonDown(0))) {
-
-			CmdFirePulseShell();
-			timestamp = Time.time + timeBetweenShots;
-		}
+		
 
 		//Tank Jump
 		if (Time.time >= jumptimestamp && (Input.GetKeyDown (KeyCode.Space))) {
@@ -178,10 +182,6 @@ public class PlayerMove : NetworkBehaviour {
         //    rb.velocity = new Vector3();
         //    rb.AddForce(transform.up * (forceMultiplier / (hit.distance / 2)));
         //}
-    }
-
-    public override void OnStartLocalPlayer() {
-        //GetComponent<MeshRenderer>().material.color = Color.red;
     }
 
     public static float ClampAngle(float angle, float min, float max) {
