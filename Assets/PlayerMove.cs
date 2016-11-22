@@ -7,6 +7,10 @@ public class PlayerMove : NetworkBehaviour {
 
     private TerrainCollider terrainCollider;
 
+	public float timeBetweenShots = 3.0f;
+	public float timeBetweenJumps = 3.0f;
+	public float timestamp;
+	public float jumptimestamp;
     public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
     public RotationAxes axes = RotationAxes.MouseXAndY;
     public float sensitivityX = 15F;
@@ -98,10 +102,7 @@ public class PlayerMove : NetworkBehaviour {
             Quaternion yQuaternion = Quaternion.AngleAxis(-rotationY, Vector3.right);
             transform.localRotation = originalRotation * yQuaternion;
         }
-
-        if (Input.GetMouseButtonDown(0)) {
-            CmdFirePulseShell();
-        }
+		//pulse was here before
 
 
     }
@@ -135,26 +136,37 @@ public class PlayerMove : NetworkBehaviour {
             rb.AddForce(direction * Mathf.Min(forceMultiplier / (Mathf.Max(hit.distance - height, 0.01f) / 2.0f), 40.0f));
 
             
-            //transform.rotation = Quaternion.LookRotation(proj, hit.normal);
+            /*transform.rotation = Quaternion.LookRotation(proj, hit.normal);
 
-            //Quaternion target = Quaternion.FromToRotation(Vector3.up, hit.normal);
-            //if (z >= 0.01f)
-            //{
-            //    Vector3 fwd = transform.forward;
-            //    Vector3 proj = fwd - (Vector3.Dot(fwd, hit.normal)) * hit.normal;
-            //    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(proj, hit.normal), 0.05f);
-            //}
+            Quaternion target = Quaternion.FromToRotation(Vector3.up, hit.normal);
+            if (z >= 0.01f)
+            {
+                Vector3 fwd = transform.forward;
+                Vector3 proj = fwd - (Vector3.Dot(fwd, hit.normal)) * hit.normal;
+                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(proj, hit.normal), 0.05f);
+            }
             
-            //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(hit.normal), 0.05f);
-
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(hit.normal), 0.05f);
+			*/
             Debug.DrawLine(transform.position, hit.point);
 
-        }      
-
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            rb.AddForce(transform.up * 1000f);
         }
-        rb.AddRelativeForce(new Vector3(x, 0, z) * 50f);
+
+		//Fire Pulse
+		if (Time.time >= timestamp && (Input.GetMouseButtonDown(0))) {
+
+			CmdFirePulseShell();
+			timestamp = Time.time + timeBetweenShots;
+		}
+
+		//Tank Jump
+		if (Time.time >= jumptimestamp && (Input.GetKeyDown (KeyCode.Space))) {
+			rb.AddForce (transform.up * 1000f);
+
+
+			jumptimestamp = Time.time + timeBetweenJumps;
+		}
+		rb.AddRelativeForce (new Vector3 (x, 0, z) * 50f);
         //rb.AddTorque(new Vector3(0, 0, -x) * 0.7f); //strafe rotation
 
 
