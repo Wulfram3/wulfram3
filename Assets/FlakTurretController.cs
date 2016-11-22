@@ -30,7 +30,7 @@ public class FlakTurretController : NetworkBehaviour
  
         foreach (GameObject target in objs)
         {
-            if (Vector3.Distance(transform.position, target.transform.position) < 40)
+            if (Vector3.Distance(transform.position, target.transform.position) < 100)
             {
                 Vector3 lookPos = target.transform.position - transform.position;
                 Quaternion rotation = Quaternion.LookRotation(lookPos);
