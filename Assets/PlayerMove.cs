@@ -4,6 +4,7 @@ using UnityEngine.Networking;
 public class PlayerMove : NetworkBehaviour {
 
     public GameObject pulseShellPrefab;
+	public AudioClip jumpSource;
 
     private TerrainCollider terrainCollider;
 
@@ -161,6 +162,7 @@ public class PlayerMove : NetworkBehaviour {
 
 		//Tank Jump
 		if (Time.time >= jumptimestamp && (Input.GetKeyDown (KeyCode.Space))) {
+			AudioSource.PlayClipAtPoint(jumpSource, transform.position);
 			rb.AddForce (transform.up * 1000f);
 
 
