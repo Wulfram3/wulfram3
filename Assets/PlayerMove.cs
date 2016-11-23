@@ -25,6 +25,9 @@ public class PlayerMove : NetworkBehaviour {
     float lastRotationX = 0F;
     float lastRotationY = 0F;
     Quaternion originalRotation;
+    float jumpForce = 700f;
+
+    private bool requestJump = false;
 
     // Use this for initialization
     void Start () {
@@ -108,6 +111,13 @@ public class PlayerMove : NetworkBehaviour {
             timestamp = Time.time + timeBetweenShots;
         }
 
+        //Tank Jump
+        if (Time.time >= jumptimestamp && (Input.GetKeyDown(KeyCode.Space)))
+        {
+            requestJump = true;
+            jumptimestamp = Time.time + timeBetweenJumps;
+        }
+
     }
 
     [Command]
@@ -158,12 +168,10 @@ public class PlayerMove : NetworkBehaviour {
 		
 
 		//Tank Jump
-		if (Time.time >= jumptimestamp && (Input.GetKeyDown (KeyCode.Space))) {
+		if (requestJump) {
 			AudioSource.PlayClipAtPoint(jumpSource, transform.position);
-			rb.AddForce (transform.up * 1000f);
-
-
-			jumptimestamp = Time.time + timeBetweenJumps;
+			rb.AddForce (transform.up * jumpForce);
+            requestJump = false;
 		}
 		rb.AddRelativeForce (new Vector3 (x, 0, z) * 50f);
         //rb.AddTorque(new Vector3(0, 0, -x) * 0.7f); //strafe rotation
