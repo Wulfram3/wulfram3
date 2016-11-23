@@ -5,6 +5,8 @@ public class PlayerMove : NetworkBehaviour {
 
     public GameObject pulseShellPrefab;
 	public AudioClip jumpSource;
+    public AudioClip landSource;
+    public AudioClip takeoffSource;
 
     private TerrainCollider terrainCollider;
 
@@ -26,6 +28,12 @@ public class PlayerMove : NetworkBehaviour {
     float lastRotationY = 0F;
     Quaternion originalRotation;
     float jumpForce = 700f;
+    float height = 0.5f; // tank's level above ground
+
+
+    private bool isLanded = false;
+    private bool requestLand = false;
+    private float maxDistanceToLand = 0.3f; //max distance between ground and tank that allows to land
 
     private bool requestJump = false;
 
@@ -77,31 +85,35 @@ public class PlayerMove : NetworkBehaviour {
         //transform.Rotate(Vector3.up, mx);
 
         //NB Uncomment to enable mouse look
-        if (axes == RotationAxes.MouseXAndY)
+        if (!isLanded)
         {
-            // Read the mouse input axis
-            rotationX += Input.GetAxis("Mouse X") * sensitivityX;
-            rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
-            rotationX = ClampAngle(rotationX, minimumX, maximumX);
-            rotationY = ClampAngle(rotationY, minimumY, maximumY);
-            Quaternion xQuaternion = Quaternion.AngleAxis(rotationX, Vector3.up);
-            Quaternion yQuaternion = Quaternion.AngleAxis(rotationY, -Vector3.right);
-            transform.localRotation = originalRotation * xQuaternion * yQuaternion;
+            if (axes == RotationAxes.MouseXAndY)
+            {
+                // Read the mouse input axis
+                rotationX += Input.GetAxis("Mouse X") * sensitivityX;
+                rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
+                rotationX = ClampAngle(rotationX, minimumX, maximumX);
+                rotationY = ClampAngle(rotationY, minimumY, maximumY);
+                Quaternion xQuaternion = Quaternion.AngleAxis(rotationX, Vector3.up);
+                Quaternion yQuaternion = Quaternion.AngleAxis(rotationY, -Vector3.right);
+                transform.localRotation = originalRotation * xQuaternion * yQuaternion;
+            }
+            else if (axes == RotationAxes.MouseX)
+            {
+                rotationX += Input.GetAxis("Mouse X") * sensitivityX;
+                rotationX = ClampAngle(rotationX, minimumX, maximumX);
+                Quaternion xQuaternion = Quaternion.AngleAxis(rotationX, Vector3.up);
+                transform.localRotation = originalRotation * xQuaternion;
+            }
+            else
+            {
+                rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
+                rotationY = ClampAngle(rotationY, minimumY, maximumY);
+                Quaternion yQuaternion = Quaternion.AngleAxis(-rotationY, Vector3.right);
+                transform.localRotation = originalRotation * yQuaternion;
+            }
         }
-        else if (axes == RotationAxes.MouseX)
-        {
-            rotationX += Input.GetAxis("Mouse X") * sensitivityX;
-            rotationX = ClampAngle(rotationX, minimumX, maximumX);
-            Quaternion xQuaternion = Quaternion.AngleAxis(rotationX, Vector3.up);
-            transform.localRotation = originalRotation * xQuaternion;
-        }
-        else
-        {
-            rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
-            rotationY = ClampAngle(rotationY, minimumY, maximumY);
-            Quaternion yQuaternion = Quaternion.AngleAxis(-rotationY, Vector3.right);
-            transform.localRotation = originalRotation * yQuaternion;
-        }
+        
         //pulse was here before
 
         //Fire Pulse
@@ -118,6 +130,86 @@ public class PlayerMove : NetworkBehaviour {
             jumptimestamp = Time.time + timeBetweenJumps;
         }
 
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            // raise level
+            height = Mathf.Min(height + 0.01f, 1.0f);
+            if (isLanded && height > 0.001)
+            {
+                TakeOff();
+            }
+        }
+
+        if (!isLanded && Input.GetKey(KeyCode.LeftControl))
+        {
+            // lower level
+            height = Mathf.Max(height - 0.01f, 0f);
+            if (height < 0.001)
+            {
+                requestLand = true;
+            }
+        }
+
+        if(requestLand)
+        {
+            if (CanLand())
+            {
+                Debug.Log("CanLand true");
+                Land();
+            } else
+            {
+                Debug.Log("CanLand false");
+            }
+        }
+
+    }
+
+    private bool CanLand()
+    {
+        if (height > maxDistanceToLand)
+        {
+            return false;
+        }
+
+        Ray ray = new Ray(new Vector3(transform.position.x, transform.position.y, transform.position.z), Vector3.down);
+        RaycastHit hit;
+        terrainCollider = GameObject.FindObjectOfType<TerrainCollider>();
+        return terrainCollider.Raycast(ray, out hit, 2.0f) && hit.distance <= maxDistanceToLand;
+    }
+
+    private void Land()
+    {
+        Ray ray = new Ray(new Vector3(transform.position.x, transform.position.y, transform.position.z), Vector3.down);
+        RaycastHit hit;
+        terrainCollider = GameObject.FindObjectOfType<TerrainCollider>();
+        if (terrainCollider.Raycast(ray, out hit, 2.0f))
+        {
+            Vector3 fwd = transform.forward;
+            Vector3 proj = fwd - (Vector3.Dot(fwd, hit.normal)) * hit.normal;
+            transform.rotation = Quaternion.LookRotation(proj, hit.normal);
+            transform.Translate(hit.point - transform.position);
+            transform.Translate(Vector3.up * 0.15f); //fixme: distance is calculated from center of the tank model, this moves the tank 'right' amount so that tank does not get clipped with the ground
+            Rigidbody rb = GetComponent<Rigidbody>();
+            rb.isKinematic = true; //do not let physics forces affect this body
+            isLanded = true;
+            requestLand = false;
+            AudioSource.PlayClipAtPoint(landSource, transform.position);
+            GetComponent<AudioSource>().Stop();
+        } else
+        {
+            //cannot land
+            isLanded = false;       
+        }
+    }
+
+    private void TakeOff()
+    {
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.isKinematic = false; //let physics forces affect this body again
+        requestLand = false;
+        isLanded = false;
+        AudioSource.PlayClipAtPoint(takeoffSource, transform.position);
+        GetComponent<AudioSource>().Play();
     }
 
     [Command]
@@ -135,7 +227,7 @@ public class PlayerMove : NetworkBehaviour {
         if (!isLocalPlayer)
             return;
         Rigidbody rb = GetComponent<Rigidbody>();
-        float height = 1.0f;
+        
         float forceMultiplier = 2.0f;
 
         float x = Input.GetAxis("Horizontal") * 0.1f;
@@ -146,7 +238,7 @@ public class PlayerMove : NetworkBehaviour {
         terrainCollider = GameObject.FindObjectOfType<TerrainCollider>();
         if (terrainCollider.Raycast(ray, out hit, height * 2)) {
             Vector3 direction = Vector3.up; //transform.up
-            rb.AddForce(direction * Mathf.Min(forceMultiplier / (Mathf.Max(hit.distance - height, 0.01f) / 2.0f), 40.0f));
+            rb.AddForce(direction * Mathf.Min(forceMultiplier / (Mathf.Max(hit.distance - height, 0.01f) / 2.0f), 20.0f));
 
             
             /*transform.rotation = Quaternion.LookRotation(proj, hit.normal);
