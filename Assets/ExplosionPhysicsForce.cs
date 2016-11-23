@@ -34,7 +34,7 @@ namespace UnityStandardAssets.Effects
                 Combat combat = rb.gameObject.GetComponent<Combat>();
                 if (combat != null) {
                     float distance = Vector3.Distance(rb.transform.position, transform.position);
-                    combat.TakeDamage((int) (explosionForce / distance));
+                    combat.TakeDamage((int) (explosionForce * 3f / distance));
                 }
             }
         }
