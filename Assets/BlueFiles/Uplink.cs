@@ -22,10 +22,7 @@ public class Uplink : MonoBehaviour {
 	}
 	
 	
-	
-	
 
-	
 	
 	void  OnTriggerEnter(Collider player) {
 		
@@ -51,23 +48,10 @@ public class Uplink : MonoBehaviour {
 			transform.parent = null;
 		} 
 		
-		
 
-		
-		
-		
-		if(Input.GetKeyDown("q")){
-			
-			if (other.tag == "Player"){ // only be picked by the player!
-				
-				transform.parent = Camera.main.transform; 
-				transform.GetComponent<Renderer>().enabled = false;// pick this object...
-				GetComponent<AudioSource>().PlayOneShot(pickup, 1.0f);
-				
-			}
+
 			
 			
 		}
 		
 	}
-}	
