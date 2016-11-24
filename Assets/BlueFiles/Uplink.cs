@@ -29,21 +29,16 @@ public class Uplink : MonoBehaviour {
 	
 	void  OnTriggerEnter(Collider player) {
 		
-		/*if (!hasBox){
-				
-				hasBox = true;
-				
-				box.transform.parent = player.transform;
-				
-			}else{
-				
-				Destroy(box.gameObject);
-				
-			}*/
+		if (player.tag == "Player") { // only be picked by the player!
+
+			transform.parent = Camera.main.transform; 
+			transform.GetComponent<Renderer> ().enabled = false;// pick this object...
+			GetComponent<AudioSource> ().PlayOneShot (pickup, 1.0f);
+		}
 		
 	}
 	
-	
+
 	
 	
 	void OnTriggerStay(Collider other){
