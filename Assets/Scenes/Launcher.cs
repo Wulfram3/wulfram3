@@ -104,6 +104,10 @@ namespace Com.Wulfram3 {
             }
         }
 
+        public void Quit() {
+            Application.Quit();
+        }
+
 
         #endregion
 

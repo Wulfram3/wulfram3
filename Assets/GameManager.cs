@@ -9,6 +9,9 @@ using UnityEngine.SceneManagement;
 namespace Com.Wulfram3 {
     public class GameManager : Photon.PunBehaviour {
 
+        [Tooltip("The prefab to use for representing the player")]
+        public GameObject playerPrefab;
+
         #region Photon Messages
 
 
@@ -27,7 +30,7 @@ namespace Com.Wulfram3 {
                 Debug.Log("OnPhotonPlayerConnected isMasterClient " + PhotonNetwork.isMasterClient); // called before OnPhotonPlayerDisconnected
 
 
-                LoadArena();
+                //LoadArena();
             }
         }
 
@@ -40,7 +43,7 @@ namespace Com.Wulfram3 {
                 Debug.Log("OnPhotonPlayerDisonnected isMasterClient " + PhotonNetwork.isMasterClient); // called before OnPhotonPlayerDisconnected
 
 
-                LoadArena();
+                //LoadArena();
             }
         }
 
@@ -55,6 +58,21 @@ namespace Com.Wulfram3 {
             PhotonNetwork.LeaveRoom();
         }
 
+        private void Start() {
+            if (playerPrefab == null) {
+                Debug.LogError("<Color=Red><a>Missing</a></Color> playerPrefab Reference. Please set it up in GameObject 'Game Manager'", this);
+            } else {
+                Debug.Log("We are Instantiating LocalPlayer from " + Application.loadedLevelName);
+                if (PlayerMovementManager.LocalPlayerInstance == null) {
+                    Debug.Log("We are Instantiating LocalPlayer from " + Application.loadedLevelName);
+                    // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
+                    PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
+                } else {
+                    Debug.Log("Ignoring scene load for " + Application.loadedLevelName);
+                }
+            }
+        }
+
 
         #endregion
 
@@ -64,6 +82,7 @@ namespace Com.Wulfram3 {
         void LoadArena() {
             if (!PhotonNetwork.isMasterClient) {
                 Debug.LogError("PhotonNetwork : Trying to Load a level but we are not the master Client");
+                return;
             }
             Debug.Log("PhotonNetwork : Loading Level : " + PhotonNetwork.room.PlayerCount);
             PhotonNetwork.LoadLevel("Playground");
