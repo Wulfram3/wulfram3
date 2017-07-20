@@ -14,6 +14,8 @@ namespace Com.Wulfram3 {
 
         public GameObject pulseShellPrefab;
 
+        public GameObject explosionPrefab;
+
         #region Photon Messages
 
 
@@ -79,6 +81,12 @@ namespace Com.Wulfram3 {
         public void SpawnPulseShell(Vector3 pos, Quaternion rotation) {
             if (PhotonNetwork.isMasterClient) {
                 PhotonNetwork.Instantiate(pulseShellPrefab.name, pos, rotation, 0);
+            }
+        }
+
+        public void SpawnExplosion(Vector3 pos) {
+            if (PhotonNetwork.isMasterClient) {
+                PhotonNetwork.Instantiate(explosionPrefab.name, pos, Quaternion.identity, 0);
             }
         }
 
