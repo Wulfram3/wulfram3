@@ -12,6 +12,8 @@ namespace Com.Wulfram3 {
         [Tooltip("The prefab to use for representing the player")]
         public GameObject playerPrefab;
 
+        public GameObject pulseShellPrefab;
+
         #region Photon Messages
 
 
@@ -58,7 +60,7 @@ namespace Com.Wulfram3 {
             PhotonNetwork.LeaveRoom();
         }
 
-        private void Start() {
+        public void Start() {
             if (playerPrefab == null) {
                 Debug.LogError("<Color=Red><a>Missing</a></Color> playerPrefab Reference. Please set it up in GameObject 'Game Manager'", this);
             } else {
@@ -70,6 +72,13 @@ namespace Com.Wulfram3 {
                 } else {
                     Debug.Log("Ignoring scene load for " + Application.loadedLevelName);
                 }
+            }
+        }
+
+        [PunRPC]
+        public void SpawnPulseShell(Vector3 pos, Quaternion rotation) {
+            if (PhotonNetwork.isMasterClient) {
+                PhotonNetwork.Instantiate(pulseShellPrefab.name, pos, rotation, 0);
             }
         }
 

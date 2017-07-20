@@ -8,12 +8,12 @@ namespace Com.Wulfram3 {
         [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
         public static GameObject LocalPlayerInstance;
 
-        public GameObject pulseShellPrefab;
         public AudioClip jumpSource;
         public AudioClip landSource;
         public AudioClip takeoffSource;
 
         private TerrainCollider terrainCollider;
+        private GameManager gameManager;
 
         public float timeBetweenShots = 3.0f;
         public float timeBetweenJumps = 3.0f;
@@ -44,12 +44,14 @@ namespace Com.Wulfram3 {
 
         // Use this for initialization
         void Start() {
+            
             if (!photonView.isMine) {
                 Rigidbody rb = GetComponent<Rigidbody>();
                 rb.isKinematic = true;
                 return;
             }
 
+            gameManager = FindObjectOfType<GameManager>();
 
             terrainCollider = GameObject.FindObjectOfType<TerrainCollider>();
 
@@ -99,7 +101,7 @@ namespace Com.Wulfram3 {
             //transform.Rotate(Vector3.up, mx);
 
             //NB Uncomment to enable mouse look
-            if (!isLanded) {
+            if (!isLanded && !Cursor.visible) {
                 if (axes == RotationAxes.MouseXAndY) {
                     // Read the mouse input axis
                     rotationX += Input.GetAxis("Mouse X") * sensitivityX;
@@ -125,7 +127,7 @@ namespace Com.Wulfram3 {
             //pulse was here before
 
             //Fire Pulse
-            if (Time.time >= timestamp && (Input.GetMouseButtonDown(0))) {
+            if (Time.time >= timestamp && (Input.GetMouseButtonDown(0)) && !Cursor.visible) {
                 CmdFirePulseShell();
                 timestamp = Time.time + timeBetweenShots;
             }
@@ -206,11 +208,9 @@ namespace Com.Wulfram3 {
         }
 
         void CmdFirePulseShell() {
-            GameObject pulseShell = GameObject.Instantiate(pulseShellPrefab);
-            pulseShell.transform.position = transform.position;
-            pulseShell.transform.rotation = transform.rotation;
-            pulseShell.transform.Translate(Vector3.forward * 2.0f + Vector3.up * 0.2f);
-            //NetworkServer.Spawn(pulseShell);
+            Vector3 pos = transform.position + (transform.forward * 2.0f + transform.up * 0.2f);
+            Quaternion rotation = transform.rotation;
+            gameManager.gameObject.GetComponent<PhotonView>().RPC("SpawnPulseShell", PhotonTargets.MasterClient, pos, rotation);
             Rigidbody rb = GetComponent<Rigidbody>();
             rb.AddForce(-transform.forward * 100f);
         }
