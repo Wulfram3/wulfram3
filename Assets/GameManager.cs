@@ -16,6 +16,8 @@ namespace Com.Wulfram3 {
 
         public GameObject explosionPrefab;
 
+        public GameObject hullBar;
+
         #region Photon Messages
 
 
@@ -88,6 +90,10 @@ namespace Com.Wulfram3 {
             if (PhotonNetwork.isMasterClient) {
                 PhotonNetwork.Instantiate(explosionPrefab.name, pos, Quaternion.identity, 0);
             }
+        }
+
+        public void SetHullBar(float level) {
+            hullBar.GetComponent<LevelController>().SetLevel(level);
         }
 
 

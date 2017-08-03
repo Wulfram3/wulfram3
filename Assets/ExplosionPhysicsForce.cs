@@ -2,11 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Com.Wulfram3;
 
 namespace UnityStandardAssets.Effects
 {
-    public class ExplosionPhysicsForce : MonoBehaviour
-    {
+    public class ExplosionPhysicsForce : Photon.PunBehaviour {
         public float explosionForce = 4;
 
 
@@ -23,7 +23,7 @@ namespace UnityStandardAssets.Effects
             var rigidbodies = new List<Rigidbody>();
             foreach (var col in cols)
             {
-                if (col.attachedRigidbody != null && !rigidbodies.Contains(col.attachedRigidbody))
+                if (col.attachedRigidbody != null && !rigidbodies.Contains(col.attachedRigidbody) && IsControlledByMe(col.gameObject))
                 {
                     rigidbodies.Add(col.attachedRigidbody);
                 }
@@ -31,12 +31,21 @@ namespace UnityStandardAssets.Effects
             foreach (var rb in rigidbodies)
             {
                 rb.AddExplosionForce(explosionForce*multiplier, transform.position, r, 1*multiplier, ForceMode.Impulse);
-                Combat combat = rb.gameObject.GetComponent<Combat>();
-                if (combat != null) {
-                    float distance = Vector3.Distance(rb.transform.position, transform.position);
-                    combat.TakeDamage((int) (explosionForce * 3f / distance));
+                if (PhotonNetwork.isMasterClient) {
+                    HitPointsManager hitpoints = rb.gameObject.GetComponent<HitPointsManager>();
+                    if (hitpoints != null) {
+                        float distance = Vector3.Distance(rb.transform.position, transform.position);
+                        hitpoints.TakeDamage((int)(explosionForce * 3f / distance));
+                    }
                 }
             }
+        }
+
+        private bool IsControlledByMe(GameObject o) {
+            if (o.tag.Equals("Player")) {
+                return o.GetPhotonView().isMine;
+            }
+            return PhotonNetwork.isMasterClient;
         }
     }
 }
