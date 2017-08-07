@@ -18,6 +18,8 @@ namespace Com.Wulfram3 {
 
         public GameObject hullBar;
 
+        private TargetInfoController targetChangeListener;
+
         #region Photon Messages
 
 
@@ -94,6 +96,16 @@ namespace Com.Wulfram3 {
 
         public void SetHullBar(float level) {
             hullBar.GetComponent<LevelController>().SetLevel(level);
+        }
+
+        public void SetCurrentTarget(GameObject go) {
+            if (targetChangeListener != null) {
+                targetChangeListener.TargetChanged(go);
+            }
+        }
+
+        public void AddTargetChangeListener(TargetInfoController tic) {
+            targetChangeListener = tic;
         }
 
 

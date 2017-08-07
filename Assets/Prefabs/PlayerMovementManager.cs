@@ -21,8 +21,8 @@ namespace Com.Wulfram3 {
         public float jumptimestamp;
         public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
         public RotationAxes axes = RotationAxes.MouseXAndY;
-        public float sensitivityX = 15F;
-        public float sensitivityY = 15F;
+        public float sensitivityX = 1.5F;
+        public float sensitivityY = 1.5F;
         public float minimumX = -360F;
         public float maximumX = 360F;
         public float minimumY = -60F;

@@ -8,7 +8,7 @@ namespace Com.Wulfram3 {
         public int initialHealth = 100;
         public int maxHealth = 100;
 
-        private int health;
+        public int health;
         private GameManager gameManager;
 
         public void TakeDamage(int amount) {
