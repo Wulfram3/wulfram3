@@ -27,6 +27,12 @@ namespace Com.Wulfram3 {
         public float maximumX = 360F;
         public float minimumY = -60F;
         public float maximumY = 60F;
+
+        public float destroyDelayWhenDead = 5;
+        private float timeSinceDead = 0;
+
+        private bool isDead = false;
+
         float rotationX = 0F;
         float rotationY = 0F;
         float lastRotationX = 0F;
@@ -42,16 +48,17 @@ namespace Com.Wulfram3 {
 
         private bool requestJump = false;
 
+        private HitPointsManager hitpointsManager;
+
         // Use this for initialization
         void Start() {
-            
+            hitpointsManager = GetComponent<HitPointsManager>();
+            gameManager = FindObjectOfType<GameManager>();
             if (!photonView.isMine) {
                 Rigidbody rb = GetComponent<Rigidbody>();
                 rb.isKinematic = true;
                 return;
             }
-
-            gameManager = FindObjectOfType<GameManager>();
 
             terrainCollider = GameObject.FindObjectOfType<TerrainCollider>();
 
@@ -70,9 +77,35 @@ namespace Com.Wulfram3 {
             DontDestroyOnLoad(this.gameObject);
         }
 
+        [PunRPC]
+        public void Reset() {
+            isLanded = false;
+            requestLand = false;
+            requestJump = false;
+            timeSinceDead = 0;
+        }
+
+        [PunRPC]
+        public void SetPosAndRotation(Vector3 pos, Quaternion rot) {
+            if (!photonView.isMine)
+                return;
+            transform.position = pos;
+            transform.rotation = rot;
+        }
+
         // Update is called once per frame
         void Update() {
-            if (!photonView.isMine)
+            isDead = hitpointsManager.health <= 0;
+            if (isDead && PhotonNetwork.isMasterClient) {
+                timeSinceDead += Time.deltaTime;
+                if (timeSinceDead >= destroyDelayWhenDead) {   
+                    //gameManager.SpawnExplosion(transform.position);
+                    photonView.RPC("Reset", PhotonTargets.All);
+                    gameManager.Respawn(this);        
+                }
+            }
+
+            if (!photonView.isMine || isDead)
                 return;
 
 
@@ -216,7 +249,7 @@ namespace Com.Wulfram3 {
         }
 
         public void FixedUpdate() {
-            if (!photonView.isMine)
+            if (!photonView.isMine || isDead)
                 return;
             Rigidbody rb = GetComponent<Rigidbody>();
 

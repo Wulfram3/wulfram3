@@ -14,7 +14,7 @@ namespace Com.Wulfram3 {
         public void TakeDamage(int amount) {
             if (PhotonNetwork.isMasterClient) {
                 int newHealth = Mathf.Clamp(health - amount, 0, maxHealth);
-                photonView.RPC("UpdateHealth", PhotonTargets.All, newHealth);
+                SetHealth(newHealth);
                 Debug.Log("Hitpoints: " + newHealth);
             }
         }
@@ -22,8 +22,12 @@ namespace Com.Wulfram3 {
         [PunRPC]
         public void UpdateHealth(int newHealth) {
             health = newHealth;
-            if (tag.Equals("Player") && photonView.isMine) {
-                gameManager.SetHullBar((float)health / (float)maxHealth);
+            gameManager.UnitsHealthUpdated(this);
+        }
+
+        public void SetHealth(int newHealth) {
+            if (PhotonNetwork.isMasterClient) {
+                photonView.RPC("UpdateHealth", PhotonTargets.All, newHealth);
             }
         }
 
@@ -31,7 +35,7 @@ namespace Com.Wulfram3 {
         void Start() {
             gameManager = FindObjectOfType<GameManager>();
             if (PhotonNetwork.isMasterClient) {
-                health = initialHealth;
+                SetHealth(initialHealth);
             }
         }
 

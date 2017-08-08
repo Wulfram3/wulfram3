@@ -33,6 +33,8 @@ namespace Com.Wulfram3 {
                 hitpoints.text = target.GetComponent<HitPointsManager>().health + "/" + target.GetComponent<HitPointsManager>().maxHealth;
                 name.text = target.GetComponent<Unit>().name;
                 team.text = "" + target.GetComponent<Unit>().team;
+            } else {
+                targetInfoPanel.SetActive(false);
             }
         }
 

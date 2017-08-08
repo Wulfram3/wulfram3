@@ -74,7 +74,7 @@ namespace Com.Wulfram3 {
                 if (PlayerMovementManager.LocalPlayerInstance == null) {
                     Debug.Log("We are Instantiating LocalPlayer from " + Application.loadedLevelName);
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-                    PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
+                    GameObject go = PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
                 } else {
                     Debug.Log("Ignoring scene load for " + Application.loadedLevelName);
                 }
@@ -94,6 +94,16 @@ namespace Com.Wulfram3 {
             }
         }
 
+        public void UnitsHealthUpdated(HitPointsManager hitpointsManager) {
+            if (hitpointsManager.tag.Equals("Player") && hitpointsManager.photonView.isMine) {
+                SetHullBar((float)hitpointsManager.health / (float)hitpointsManager.maxHealth);
+            }
+            if (PhotonNetwork.isMasterClient && hitpointsManager.health <= 0 && !hitpointsManager.tag.Equals("Player")) {
+                PhotonNetwork.Destroy(hitpointsManager.gameObject);
+                SpawnExplosion(hitpointsManager.transform.position);
+            }
+        }
+
         public void SetHullBar(float level) {
             hullBar.GetComponent<LevelController>().SetLevel(level);
         }
@@ -106,6 +116,32 @@ namespace Com.Wulfram3 {
 
         public void AddTargetChangeListener(TargetInfoController tic) {
             targetChangeListener = tic;
+        }
+
+        public void DestroyNow(GameObject go) {
+            if (PhotonNetwork.isMasterClient) {
+                PhotonNetwork.Destroy(go);
+                SpawnExplosion(go.transform.position);
+            }
+        }
+
+        public void Respawn(PlayerMovementManager player) {
+            if (PhotonNetwork.isMasterClient) {
+                HitPointsManager hitpointsManager = player.GetComponent<HitPointsManager>();
+                hitpointsManager.SetHealth(hitpointsManager.maxHealth);
+
+                Vector3 spawnPos = new Vector3(0f, 5f, 0f);
+                Quaternion spawnRotation = Quaternion.identity;
+
+                foreach (Unit unit in FindObjectsOfType<Unit>()) {
+                    if (unit.name.Equals("Repair Pad")) {
+                        spawnPos = unit.transform.position + new Vector3(0, 5, 0);                     
+                        break;
+                    }
+                }
+
+                player.photonView.RPC("SetPosAndRotation", PhotonTargets.All, spawnPos, spawnRotation);
+            }
         }
 
 
