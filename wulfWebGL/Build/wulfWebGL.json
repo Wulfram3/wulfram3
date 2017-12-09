@@ -1,0 +1,11 @@
+{
+"TOTAL_MEMORY": 268435456,
+"dataUrl": "wulfWebGL.data.unityweb",
+"asmCodeUrl": "wulfWebGL.asm.code.unityweb",
+"asmMemoryUrl": "wulfWebGL.asm.memory.unityweb",
+"asmFrameworkUrl": "wulfWebGL.asm.framework.unityweb",
+"graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20"
+}
