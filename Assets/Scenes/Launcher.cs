@@ -151,7 +151,13 @@ namespace Com.Wulfram3 {
 
 
         public override void OnDisconnectedFromPhoton() {
+			Debug.Log("DemoAnimator/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
+			string discordURI = "https://discordapp.com/api/webhooks/389264790230532107/LgvTNdOLb28JQmtTpK1yBzam-CMAnEhDqLkmXT4CqAyP-8id8ydWisx2yz8Ga6fQ5wX2";
 
+
+			string greetdiscord = string.Format ("{0} has disconnected from Wulfram 3!", PhotonNetwork.playerName);
+			string postdiscord = "{ \"content\": \"" + greetdiscord + "\" } ";
+			Debug.Log (postdiscord);
             Debug.LogWarning("DemoAnimator/Launcher: OnDisconnectedFromPhoton() was called by PUN");
         }
 
@@ -161,6 +167,7 @@ namespace Com.Wulfram3 {
             // #Critical: we failed to join a random room, maybe none exists or they are all full. No worries, we create a new room.
             PhotonNetwork.CreateRoom(null, new RoomOptions() { MaxPlayers = MaxPlayersPerRoom }, null);
         }
+
 
         public override void OnJoinedRoom() {
           
