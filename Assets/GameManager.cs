@@ -18,6 +18,8 @@ namespace Com.Wulfram3 {
 
         public GameObject hullBar;
 
+        public GameObject playerInfoPanelPrefab;
+
         private TargetInfoController targetChangeListener;
 
         #region Photon Messages

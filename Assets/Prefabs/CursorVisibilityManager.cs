@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;// Required when using Event data.
 
 namespace Com.Wulfram3 {
-    public class CursorVisibilityManager : MonoBehaviour {
+	public class CursorVisibilityManager : MonoBehaviour {
 
         // Use this for initialization
         void Start() {
@@ -16,7 +17,13 @@ namespace Com.Wulfram3 {
             if (Input.GetKeyDown(KeyCode.Escape)) {
                 Cursor.visible = !Cursor.visible;
                 UpdateLockMode();
+				Debug.Log("ESC was pressed");
             }
+			if (Input.GetMouseButtonDown(0)){
+				UpdateLockMode();
+				Debug.Log("Cursor locked!");
+			}
+		
         }
 
         private void UpdateLockMode() {

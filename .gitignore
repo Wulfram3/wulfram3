@@ -30,3 +30,4 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+webgl/index.html
