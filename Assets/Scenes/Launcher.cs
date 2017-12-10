@@ -43,7 +43,7 @@ namespace Com.Wulfram3 {
         /// </summary>
         bool isConnecting;
 
-
+        DiscordApi discordApi;
         #endregion
 
 
@@ -86,6 +86,7 @@ namespace Com.Wulfram3 {
         /// MonoBehaviour method called on GameObject by Unity during initialization phase.
         /// </summary>
         void Start() {
+            discordApi = new DiscordApi();
             progressLabel.SetActive(false);
             controlPanel.SetActive(true);
         }
@@ -107,14 +108,16 @@ namespace Com.Wulfram3 {
             isConnecting = true;
             progressLabel.SetActive(true);
             controlPanel.SetActive(false);
-			Debug.Log("DemoAnimator/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
-			string discordURI = "https://discordapp.com/api/webhooks/389264790230532107/LgvTNdOLb28JQmtTpK1yBzam-CMAnEhDqLkmXT4CqAyP-8id8ydWisx2yz8Ga6fQ5wX2";
+            StartCoroutine(discordApi.PlayerJoined(PhotonNetwork.playerName));
+
+   //         Debug.Log("DemoAnimator/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
+			//string discordURI = "https://discordapp.com/api/webhooks/389264790230532107/LgvTNdOLb28JQmtTpK1yBzam-CMAnEhDqLkmXT4CqAyP-8id8ydWisx2yz8Ga6fQ5wX2";
 
 
-			string greetdiscord = string.Format ("{0} has started playing Wulfram 3!", PhotonNetwork.playerName);
-			string postdiscord = "{ \"content\": \"" + greetdiscord + "\" } ";
-			Debug.Log (postdiscord);
-			StartCoroutine(Post(discordURI, postdiscord));
+			//string greetdiscord = string.Format ("{0} has started playing Wulfram 3!", PhotonNetwork.playerName);
+			//string postdiscord = "{ \"content\": \"" + greetdiscord + "\" } ";
+			//Debug.Log (postdiscord);
+			//StartCoroutine(Post(discordURI, postdiscord));
             // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
             if (PhotonNetwork.connected) {
                 // #Critical we need at this point to attempt joining a Random Room. If it fails, we'll get notified in OnPhotonRandomJoinFailed() and we'll create one.
@@ -126,6 +129,7 @@ namespace Com.Wulfram3 {
         }
 
         public void Quit() {
+            StartCoroutine(discordApi.PlayerLeft(PhotonNetwork.playerName));
             Application.Quit();
         }
 
