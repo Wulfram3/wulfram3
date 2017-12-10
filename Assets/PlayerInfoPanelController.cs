@@ -14,8 +14,6 @@ namespace Com.Wulfram3 {
         void Start() {
             Canvas canvas = FindObjectOfType<Canvas>();
             transform.SetParent(canvas.transform);
-            string playerName = target.GetComponent<PhotonView>().owner.NickName;
-            playerNameText.text = playerName;
         }
 
         // Update is called once per frame
@@ -25,6 +23,10 @@ namespace Com.Wulfram3 {
                 pos.z = 0;
                 RectTransform rectTransform = GetComponent<RectTransform>();
                 pos.y += 50;
+
+                string playerName = target.GetComponent<PhotonView>().owner.NickName;
+                string hitpoints = target.GetComponent<HitPointsManager>().health + "/" + target.GetComponent<HitPointsManager>().maxHealth;
+                playerNameText.text = playerName + " " + hitpoints;
 
                 rectTransform.SetPositionAndRotation(pos, rectTransform.rotation);
             }
