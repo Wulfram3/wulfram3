@@ -18,7 +18,8 @@ namespace Com.Wulfram3 {
 
         // Update is called once per frame
         void LateUpdate() {
-            if (target != null) {
+            if (target != null && target.GetComponentInChildren<Renderer>().isVisible) {
+                playerNameText.gameObject.SetActive(true);
                 pos = Camera.main.WorldToScreenPoint(target.transform.position);
                 pos.z = 0;
                 RectTransform rectTransform = GetComponent<RectTransform>();
@@ -29,6 +30,8 @@ namespace Com.Wulfram3 {
                 playerNameText.text = playerName + " " + hitpoints;
 
                 rectTransform.SetPositionAndRotation(pos, rectTransform.rotation);
+            } else {
+                playerNameText.gameObject.SetActive(false);
             }
         }
 
