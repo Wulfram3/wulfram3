@@ -159,19 +159,19 @@ namespace Com.Wulfram3 {
 
         public override void OnJoinedRoom() {
             Debug.Log("DemoAnimator/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
+            string discordURI = "https://discordapp.com/api/webhooks/389264790230532107/LgvTNdOLb28JQmtTpK1yBzam-CMAnEhDqLkmXT4CqAyP-8id8ydWisx2yz8Ga6fQ5wX2";
 
+
+            string greetdiscord = string.Format ("{0} has started playing Wulfram 3!", PhotonNetwork.playerName);
+            string postdiscord = "{ \"content\": \"" + greetdiscord + "\" } ";
+            Debug.Log (postdiscord);
+            StartCoroutine(Post(discordURI, postdiscord));
+
+            Debug.Log("Sent Post!' ");
             // #Critical: We only load if we are the first player, else we rely on  PhotonNetwork.automaticallySyncScene to sync our instance scene.
             if (PhotonNetwork.room.PlayerCount == 1) {
                 Debug.Log("We load the 'Playground' ");
-				string discordURI = "https://discordapp.com/api/webhooks/389264790230532107/LgvTNdOLb28JQmtTpK1yBzam-CMAnEhDqLkmXT4CqAyP-8id8ydWisx2yz8Ga6fQ5wX2";
-
-
-				string greetdiscord = string.Format ("{0} has started playing Wulfram 3!", PhotonNetwork.playerName);
-				string postdiscord = "{ \"content\": \"" + greetdiscord + "\" } ";
-				Debug.Log (postdiscord);
-				StartCoroutine(Post(discordURI, postdiscord));
-
-				Debug.Log("Sent Post!' ");
+			
 
                 // #Critical
                 // Load the Room Level. 
