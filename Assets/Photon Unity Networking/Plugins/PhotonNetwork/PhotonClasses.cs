@@ -20,7 +20,7 @@
 /// \brief Useful GUI elements for PUN.
 #pragma warning restore 1587
 
-#if UNITY_5 && !UNITY_5_0 && !UNITY_5_1 && !UNITY_5_2
+#if UNITY_5 && !UNITY_5_0 && !UNITY_5_1 && !UNITY_5_2 || UNITY_5_4_OR_NEWER
 #define UNITY_MIN_5_3
 #endif
 
@@ -1292,7 +1292,7 @@ public class PhotonStream
 }
 
 
-#if UNITY_5_0 || !UNITY_5
+#if UNITY_5_0 || !UNITY_5 && !UNITY_2017
 /// <summary>Empty implementation of the upcoming HelpURL of Unity 5.1. This one is only for compatibility of attributes.</summary>
 /// <remarks>http://feedback.unity3d.com/suggestions/override-component-documentation-slash-help-link</remarks>
 public class HelpURL : Attribute
@@ -1304,7 +1304,7 @@ public class HelpURL : Attribute
 #endif
 
 
-#if !UNITY_MIN_5_3  && ! UNITY_2017
+#if !UNITY_MIN_5_3
 // in Unity 5.3 and up, we have to use a SceneManager. This section re-implements it for older Unity versions
 
 #if UNITY_EDITOR

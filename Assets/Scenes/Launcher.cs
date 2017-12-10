@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
-
+using UnityEngine.Networking;
+using System.Collections;
+using System.Text;
+using System.Net;
 
 namespace Com.Wulfram3 {
     public class Launcher : Photon.PunBehaviour {
@@ -45,7 +48,18 @@ namespace Com.Wulfram3 {
 
 
         #region MonoBehaviour CallBacks
+		IEnumerator Post(string url, string bodyJsonString)
+		{
+			var request = new UnityWebRequest(url, "POST");
+			byte[] bodyRaw = Encoding.UTF8.GetBytes(bodyJsonString);
+			request.uploadHandler = (UploadHandler) new UploadHandlerRaw(bodyRaw);
+			request.downloadHandler = (DownloadHandler) new DownloadHandlerBuffer();
+			request.SetRequestHeader("Content-Type", "application/json");
 
+			yield return request.Send();
+
+			Debug.Log("Status Code: " + request.responseCode);
+		}
 
         /// <summary>
         /// MonoBehaviour method called on GameObject by Unity during early initialization phase.
@@ -149,7 +163,15 @@ namespace Com.Wulfram3 {
             // #Critical: We only load if we are the first player, else we rely on  PhotonNetwork.automaticallySyncScene to sync our instance scene.
             if (PhotonNetwork.room.PlayerCount == 1) {
                 Debug.Log("We load the 'Playground' ");
+				string discordURI = "https://discordapp.com/api/webhooks/389264790230532107/LgvTNdOLb28JQmtTpK1yBzam-CMAnEhDqLkmXT4CqAyP-8id8ydWisx2yz8Ga6fQ5wX2";
 
+
+				string greetdiscord = string.Format ("{0} has started playing Wulfram 3!", PhotonNetwork.playerName);
+				string postdiscord = "{ \"content\": \"" + greetdiscord + "\" } ";
+				Debug.Log (postdiscord);
+				StartCoroutine(Post(discordURI, postdiscord));
+
+				Debug.Log("Sent Post!' ");
 
                 // #Critical
                 // Load the Room Level. 

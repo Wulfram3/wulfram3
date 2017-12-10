@@ -1339,6 +1339,7 @@ using ExitGames.Client.Photon;
         public const byte ExchangeKeysForEncryption = 250;
 
         /// <summary>(255) Code for OpJoin, to get into a room.</summary>
+		[Obsolete]
         public const byte Join = 255;
 
         /// <summary>(231) Authenticates this peer and connects to a virtual application</summary>
@@ -1662,6 +1663,20 @@ using ExitGames.Client.Photon;
     {
         /// <summary>Default options: CachingOption: DoNotCache, InterestGroup: 0, targetActors: null, receivers: Others, sequenceChannel: 0.</summary>
         public readonly static RaiseEventOptions Default = new RaiseEventOptions();
+
+		/// <summary>
+		/// Reset this instance. For better memory handling than instanciating a new one always,
+		/// </summary>
+		public void Reset()
+		{
+			this.CachingOption = Default.CachingOption;
+			this.InterestGroup = Default.InterestGroup;
+			this.TargetActors = Default.TargetActors;
+			this.Receivers = Default.Receivers;
+			this.SequenceChannel = Default.SequenceChannel;
+			this.ForwardToWebhook = Default.ForwardToWebhook;
+			this.Encrypt = Default.Encrypt;
+		}
 
         /// <summary>Defines if the server should simply send the event, put it in the cache or remove events that are like this one.</summary>
         /// <remarks>
