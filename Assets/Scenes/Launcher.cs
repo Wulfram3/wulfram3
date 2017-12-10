@@ -107,7 +107,14 @@ namespace Com.Wulfram3 {
             isConnecting = true;
             progressLabel.SetActive(true);
             controlPanel.SetActive(false);
+			Debug.Log("DemoAnimator/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
+			string discordURI = "https://discordapp.com/api/webhooks/389264790230532107/LgvTNdOLb28JQmtTpK1yBzam-CMAnEhDqLkmXT4CqAyP-8id8ydWisx2yz8Ga6fQ5wX2";
 
+
+			string greetdiscord = string.Format ("{0} has started playing Wulfram 3!", PhotonNetwork.playerName);
+			string postdiscord = "{ \"content\": \"" + greetdiscord + "\" } ";
+			Debug.Log (postdiscord);
+			StartCoroutine(Post(discordURI, postdiscord));
             // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
             if (PhotonNetwork.connected) {
                 // #Critical we need at this point to attempt joining a Random Room. If it fails, we'll get notified in OnPhotonRandomJoinFailed() and we'll create one.
@@ -144,8 +151,6 @@ namespace Com.Wulfram3 {
 
 
         public override void OnDisconnectedFromPhoton() {
-            progressLabel.SetActive(false);
-            controlPanel.SetActive(true);
 
             Debug.LogWarning("DemoAnimator/Launcher: OnDisconnectedFromPhoton() was called by PUN");
         }
@@ -158,14 +163,7 @@ namespace Com.Wulfram3 {
         }
 
         public override void OnJoinedRoom() {
-            Debug.Log("DemoAnimator/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
-            string discordURI = "https://discordapp.com/api/webhooks/389264790230532107/LgvTNdOLb28JQmtTpK1yBzam-CMAnEhDqLkmXT4CqAyP-8id8ydWisx2yz8Ga6fQ5wX2";
-
-
-            string greetdiscord = string.Format ("{0} has started playing Wulfram 3!", PhotonNetwork.playerName);
-            string postdiscord = "{ \"content\": \"" + greetdiscord + "\" } ";
-            Debug.Log (postdiscord);
-            StartCoroutine(Post(discordURI, postdiscord));
+          
 
             Debug.Log("Sent Post!' ");
             // #Critical: We only load if we are the first player, else we rely on  PhotonNetwork.automaticallySyncScene to sync our instance scene.
