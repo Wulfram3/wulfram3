@@ -24,7 +24,7 @@ namespace ExitGames.Demos.DemoAnimator
 	/// Deals with quiting the room and the game
 	/// Deals with level loading (outside the in room synchronization)
 	/// </summary>
-	public class GameManager : Photon.MonoBehaviour {
+	public class GameManager : Photon.PunBehaviour {
 
 		#region Public Variables
 
@@ -100,7 +100,7 @@ namespace ExitGames.Demos.DemoAnimator
 		/// Called when a Photon Player got connected. We need to then load a bigger scene.
 		/// </summary>
 		/// <param name="other">Other.</param>
-		public void OnPhotonPlayerConnected( PhotonPlayer other  )
+		public override void OnPhotonPlayerConnected( PhotonPlayer other  )
 		{
 			Debug.Log( "OnPhotonPlayerConnected() " + other.NickName); // not seen if you're the player connecting
 
@@ -116,7 +116,7 @@ namespace ExitGames.Demos.DemoAnimator
 		/// Called when a Photon Player got disconnected. We need to load a smaller scene.
 		/// </summary>
 		/// <param name="other">Other.</param>
-		public void OnPhotonPlayerDisconnected( PhotonPlayer other  )
+		public override void OnPhotonPlayerDisconnected( PhotonPlayer other  )
 		{
 			Debug.Log( "OnPhotonPlayerDisconnected() " + other.NickName ); // seen when other disconnects
 
@@ -131,7 +131,7 @@ namespace ExitGames.Demos.DemoAnimator
 		/// <summary>
 		/// Called when the local player left the room. We need to load the launcher scene.
 		/// </summary>
-		public virtual void OnLeftRoom()
+		public override void OnLeftRoom()
 		{
 			SceneManager.LoadScene("PunBasics-Launcher");
 		}

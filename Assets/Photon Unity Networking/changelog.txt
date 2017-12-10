@@ -1,10 +1,41 @@
+v1.87 (11. October 2017)
+    Fixed: Basic Tutorial: remove obsolete warnings in Unity 5 and up versions for override of methods defined in PunBehaviour.
+    Fixed: Demo hub doesn't throw anymore !dest.m_MultiFrameGUIState.m_NamedKeyControlList on Unity 4.7 and early version of 5 due to a Unity bug (https://issuetracker.unity3d.com/issues/dest-dot-m-multiframeguistate-dot-m-namedkeycontrollist-when-pressing-any-key).
+    Fixed: Editor scripts for demos are now resolving "Photon Unity Networking" dynamically to allow for developers to move this folder around within the Assets. This applied to Demos and server settings handling.
+    New: Best Region WhiteList dashboard link in ServerSettings.
+    Updated: RPC calls allocate less memory.
+    Updated: NetworkingPeer.ExecuteRPC() now takes Sender as ID instead of PhotonPlayer class, this change also allows sender to be unidentified wereas before it would throw an exception
+    Added: Russia 'ru' as a selectable region.
+    Added: Check for GameObject being null in RunViewUpdate(). There seems to be a rare condition in which this causes havoc.
+    Added: SetExpectedUsers() for a Room.
+    Fixed: Handling of Event "Error Info" (code 251). The content wasn't read and passed-on.
+	Updated: To Photon3Unity3d.dll v4.1.1.17. See release_history.txt for details.
+Xbox One:
+	Note: You must get the latest Xbox One "Addon" v1.87, as there are a fixes you should apply.
+	Fixed: In the addon, the WebSocket implementation was fixed to avoid a crash bug when you disconnected and reconnected in quick succession.
+	Fixed: In the addon, the Photon3Unity3D.dll was exchanged to be compatible with IL2CPP, Roslyn and .Net 4.6 as build settings. It's still compatible with Mono 2.x, too.
+
+
+v1.86 (30. August 2017)
+    Fixed: The fallback thread implementation to always call SendAcksOnly, as long as isMessageQueueRunning is false. This keeps connections from timing out by sending ACKs and Pings as needed.
+    Fixed: Compatibility with Unity 2017.
+    Fixed: Auth reply from server was not storing PlayerName properly.
+    Changed: In the PhotonServerSettings, you can now select any of the implemented Transport Protocols for Photon: UDP, TCP and WebSockets. WebGL will always use WebSockets and Xbox One has it available, too. If you want to use it on other platforms, you have to set the define WEBSOCKET and make sure the websocket dll exports to the target platform.
+    Note: Check your PhotonServerSettings to make sure the (Transport) Protocol setting is valid after updating.
+    Note: A few files were moved within the Unity project. The Editor should figure out they are moved and updated. If it logs errors about duplicate definitions, look up the location of the class in this package and remove the other.
+    Updated: PUN to no longer uses obsolete enum values of the Photon library (dll).
+    Added: tvOS to the meta settings of Assets\Plugins\Photon3Unity3d.dll.
+    Updated: Photon3Unity3d.dll to v4.1.1.15. See Assets\Plugins\release_history.txt for details.
+Xbox One:
+    Changed: This PUN version only allows WSS communication on Xbox One. A thin native library is used as wrapper for the platform implementation of WSS.
+    Updated: The warnings/errors for UNITY_XBOXONE for the cases: "No authentication value", "Wrong authentication type", "XSTS token not set for authentication" and "Not using WSS".
+
 v1.85 (6. July 2017)
 Fixed: Interest Groups IDs are now of type byte for Instantiate (and all related code) as well. This fixes a cast exception.
 Fixed: Internal use of NetworkingPeer.IsInitialConnect. It's now reset when the connection fails while connecting. This (currently) affects the "connected" and "connecting" values, which is likely to change. This fix is minimal by design.
 Updated: PUN to no longer make use of obsolete enum values of the Photon library (dll).
 Updated: Chat API and ChatGui. Now uses a thread to call SendOutgoingCommands, which keeps connections up (except on WebGL, where threading is not available).
 Updated: To Photon library v4.1.1.14 with various fixes. See plugins\release_history.txt.
-
 
 v1.84.1 (2. June 2017)
 Fixed: A minor bug in the Photon3Unity3d.dll, which is now v4.1.1.13. The StreamBuffer.Seek() could fail to seek position 0 when length is 0.
@@ -39,7 +70,7 @@ Updated: To Photon3Unity3D.dll v4.1.1.10 with some additional improvements in te
 v1.81 (16. March 2017)
 Updated: Basic Demo Launcher.cs: removed Log Level setup, it's now done in the Photon Settings.
 Updated: Chat Demo ChatGui.cs: removed running in background setup, it's now done in the Photon settings.
-Fixed: NetworkingPeer.cs: Fixed Scene Object OwnerShip transfer on late Join. 
+Fixed: NetworkingPeer.cs: Fixed Scene Object OwnerShip transfer on late Join.
 Fixed: ColorPerPlayer.cs and ColorPerPlayerApply.cs for a more robust connection with PlayerRoomIndexing.cs instance.
 Fixed: Ownership handling when returning to a game.
 Updated: Setting the log levels via code will now override the logging settings ("Pun Logging" and "Network Logging") from the PhotonServerSettings config.
@@ -143,7 +174,7 @@ Changed: The initial Dictionary size used in a PhotonView. This stores the the o
 Fixed: Compatibility with Unity 5.4 by not adding a MonoBehaviour as Component. Instead, a derived class is used.
 
 v1.73 (26. July 2016)
-Changed: Some variable and field names. PeerState is now ClientState. 
+Changed: Some variable and field names. PeerState is now ClientState.
 Renamed: mAppId is now simply AppId. mAppVersion is now AppVersion.
 Renamed: networkingPeer.server is now networkingPeer.Server (uppercase, being public).
 Replaced: Most checks of PhotonNetwork.connectionStateDetailed being PeerState.Joined (or not) with checking PhotonNetwork.inRoom.

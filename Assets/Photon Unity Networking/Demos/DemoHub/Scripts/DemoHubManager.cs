@@ -277,5 +277,12 @@ namespace ExitGames.Demos
 		{
 			Application.OpenURL(MainDemoWebLink);
 		}
+
+		// Fixes the annoying issue described here: http://forum.unity3d.com/threads/158676-!dest-m_MultiFrameGUIState-m_NamedKeyControlList/page2
+		Rect BugFixbounds = new Rect(0,0,0,0);
+		void OnGUI() {
+			GUI.SetNextControlName(gameObject.GetHashCode().ToString());
+			GUI.TextField(BugFixbounds, string.Empty, 0);
+		}
 	}
 }

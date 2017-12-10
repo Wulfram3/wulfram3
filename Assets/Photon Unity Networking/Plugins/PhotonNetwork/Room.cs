@@ -317,6 +317,28 @@ public class Room : RoomInfo
         PhotonNetwork.networkingPeer.OpSetPropertiesOfRoom(props, expected, webForward: false);
     }
 
+    /// <summary>
+    /// Attempts to set the current expected users list.
+    /// </summary>
+    /// <remarks>
+    /// Note that this operation can conflict with new/other users joining. They might be
+    /// adding users to the list of expected users before or after this client called SetExpectedUsers.
+    /// If the list changes before this operation arrives, the server will not modify the list and
+    /// SetExpectedUsers() fails.
+    ///
+    /// This room's expectedUsers value will be sent by the server.
+    ///
+    /// Internals: This methods wraps up setting the ExpectedUsers property of a room.
+    /// </remarks>
+    public void SetExpectedUsers(string[] expectedUsers)
+    {
+        Hashtable props = new Hashtable();
+        props[GamePropertyKey.ExpectedUsers] = expectedUsers;
+        Hashtable expected = new Hashtable();
+        expected[GamePropertyKey.ExpectedUsers] = this.ExpectedUsers;
+        PhotonNetwork.networkingPeer.OpSetPropertiesOfRoom(props, expected, webForward: false);
+    }
+
 
     /// <summary>Returns a summary of this Room instance as string.</summary>
     /// <returns>Summary of this Room instance.</returns>

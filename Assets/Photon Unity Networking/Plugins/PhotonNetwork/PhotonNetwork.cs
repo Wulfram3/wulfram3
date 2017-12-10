@@ -28,7 +28,7 @@ using System.IO;
 public static class PhotonNetwork
 {
     /// <summary>Version number of PUN. Also used in GameVersion to separate client version from each other.</summary>
-    public const string versionPUN = "1.85";
+    public const string versionPUN = "1.87";
 
     /// <summary>Version string for your this build. Can be used to separate incompatible clients. Sent during connect.</summary>
     /// <remarks>This is only sent when you connect so that is also the place you set it usually (e.g. in ConnectUsingSettings).</remarks>
@@ -53,10 +53,6 @@ public static class PhotonNetwork
 
     /// <summary>Name of the PhotonServerSettings file (used to load and by PhotonEditor to save new files).</summary>
     internal const string serverSettingsAssetFile = "PhotonServerSettings";
-
-    /// <summary>Path to the PhotonServerSettings file (used by PhotonEditor).</summary>
-    internal const string serverSettingsAssetPath = "Assets/Photon Unity Networking/Resources/" + PhotonNetwork.serverSettingsAssetFile + ".asset";
-
 
     /// <summary>Serialized server settings, written by the Setup Wizard for use in ConnectUsingSettings.</summary>
     public static ServerSettings PhotonServerSettings = (ServerSettings)Resources.Load(PhotonNetwork.serverSettingsAssetFile, typeof(ServerSettings));
@@ -1129,8 +1125,7 @@ public static class PhotonNetwork
 
 
         #if UNITY_XBOXONE
-        networkingPeer.AuthMode = AuthModeOption.AuthOnceWss;
-        networkingPeer.EncryptionMode = EncryptionMode.DatagramEncryption;
+        networkingPeer.AuthMode = AuthModeOption.Auth;
         #endif
 
         if (UsePreciseTimer)
@@ -3270,6 +3265,74 @@ public static class PhotonNetwork
 
 
 #if UNITY_EDITOR
+
+
+	/// <summary>
+	/// Finds the asset path base on its name or search query: https://docs.unity3d.com/ScriptReference/AssetDatabase.FindAssets.html
+	/// </summary>
+	/// <returns>The asset path.</returns>
+	/// <param name="asset">Asset.</param>
+	public static string FindAssetPath(string asset)
+	{
+		string[] guids = AssetDatabase.FindAssets (asset, null);
+		if (guids.Length != 1)
+		{
+			return string.Empty;
+		} else
+		{
+			return AssetDatabase.GUIDToAssetPath (guids [0]);
+		}
+	}
+
+
+	/// <summary>
+	/// Finds the pun asset folder. Something like Assets/Photon Unity Networking/Resources/
+	/// </summary>
+	/// <returns>The pun asset folder.</returns>
+	public static string FindPunAssetFolder()
+	{
+		string _thisPath =	FindAssetPath("PhotonClasses");
+		string _PunFolderPath = string.Empty;
+
+		_PunFolderPath = GetParent(_thisPath,"Photon Unity Networking");
+
+		if (_PunFolderPath != null)
+		{
+			return "Assets" + _PunFolderPath.Substring(Application.dataPath.Length)+"/";
+		}
+
+		return "Assets/Photon Unity Networking/";
+	}
+
+	/// <summary>
+	/// Gets the parent directory of a path. Recursive Function, will return null if parentName not found
+	/// </summary>
+	/// <returns>The parent directory</returns>
+	/// <param name="path">Path.</param>
+	/// <param name="parentName">Parent name.</param>
+	public static string GetParent(string path, string parentName)
+	{
+		var dir = new DirectoryInfo(path);
+
+		if (dir.Parent == null)
+		{
+			return null;
+		}
+
+		if (string.IsNullOrEmpty(parentName))
+		{
+			return  dir.Parent.FullName;
+		}
+
+		if (dir.Parent.Name == parentName)
+		{
+			return dir.Parent.FullName;
+		}
+
+		return GetParent(dir.Parent.FullName, parentName);
+	}
+
+
     [Conditional("UNITY_EDITOR")]
     public static void CreateSettings()
     {
@@ -3292,7 +3355,13 @@ public static class PhotonNetwork
         // if still not loaded, create one
         if (PhotonNetwork.PhotonServerSettings == null)
         {
-            string settingsPath = Path.GetDirectoryName(PhotonNetwork.serverSettingsAssetPath);
+			string _PunResourcesPath = PhotonNetwork.FindPunAssetFolder();
+
+			_PunResourcesPath += "Resources/";
+
+
+			string serverSettingsAssetPath = _PunResourcesPath+ PhotonNetwork.serverSettingsAssetFile + ".asset";
+			string settingsPath = Path.GetDirectoryName(serverSettingsAssetPath);
             if (!Directory.Exists(settingsPath))
             {
                 Directory.CreateDirectory(settingsPath);
@@ -3302,7 +3371,7 @@ public static class PhotonNetwork
             PhotonNetwork.PhotonServerSettings = (ServerSettings)ScriptableObject.CreateInstance("ServerSettings");
             if (PhotonNetwork.PhotonServerSettings != null)
             {
-                AssetDatabase.CreateAsset(PhotonNetwork.PhotonServerSettings, PhotonNetwork.serverSettingsAssetPath);
+				AssetDatabase.CreateAsset(PhotonNetwork.PhotonServerSettings, serverSettingsAssetPath);
             }
             else
             {

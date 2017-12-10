@@ -17,14 +17,6 @@ using UnityEngine;
 [CustomEditor(typeof (ServerSettings))]
 public class ServerSettingsInspector : Editor
 {
-    // has to be extended when rHTTP becomes available
-    public enum ProtocolChoices
-    {
-        Udp = ConnectionProtocol.Udp,
-        Tcp = ConnectionProtocol.Tcp
-    }
-
-
     private bool showMustHaveRegion;
 	private CloudRegionCode lastUsedRegion;
     private ServerConnection lastServer;
@@ -76,7 +68,7 @@ public class ServerSettingsInspector : Editor
                 {
                     settings.PreferredRegion = (CloudRegionCode)EditorGUILayout.EnumPopup("Region", settings.PreferredRegion);
                 }
-                else
+		else // Bestregion
                 {
                     string _regionFeedback = "Prefs:"+ServerSettings.BestRegionCodeInPreferences.ToString();
 
@@ -88,7 +80,7 @@ public class ServerSettingsInspector : Editor
 
 					EditorGUILayout.BeginHorizontal ();
 					EditorGUILayout.PrefixLabel (" ");
-					Rect rect = GUILayoutUtility.GetRect(new GUIContent("_regionFeedback"),"Label");
+					Rect rect = GUILayoutUtility.GetRect(new GUIContent(_regionFeedback),"Label");
 					int indentLevel = EditorGUI.indentLevel;
 					EditorGUI.indentLevel = 0;
 					EditorGUI.LabelField (rect, _regionFeedback);
@@ -105,8 +97,34 @@ public class ServerSettingsInspector : Editor
 					EditorGUILayout.EndHorizontal ();
 
 
+				// Dashboard region settings
+				EditorGUILayout.BeginHorizontal ();
+				EditorGUILayout.PrefixLabel ("Regions");
+				Rect rect2 = GUILayoutUtility.GetRect(new GUIContent("Online WhiteList"),"Label");
+				if (!string.IsNullOrEmpty(settings.AppID))
+				{
+				int indentLevel2 = EditorGUI.indentLevel;
+				EditorGUI.indentLevel = 0;
+				EditorGUI.LabelField (rect2, "Online WhiteList");
+				EditorGUI.indentLevel = indentLevel2;
 
-                    CloudRegionFlag valRegions = (CloudRegionFlag)EditorGUILayout.EnumMaskField("Enabled Regions", settings.EnabledRegions);
+				rect2.x += rect2.width-80;
+				rect2.width = 80;
+
+				rect2.height -=2;
+				if (GUI.Button(rect2,"Dashboard",EditorStyles.miniButton))
+				{
+					Application.OpenURL("https://www.photonengine.com/en-US/Dashboard/Manage/"+settings.AppID);
+				}
+				}else{
+					GUI.Label(rect2,"n/a");
+				}
+
+				EditorGUILayout.EndHorizontal ();
+
+
+				EditorGUI.indentLevel ++;
+				CloudRegionFlag valRegions = (CloudRegionFlag)EditorGUILayout.EnumMaskField(" ", settings.EnabledRegions);
 
                     if (valRegions != settings.EnabledRegions)
                     {
@@ -117,6 +135,7 @@ public class ServerSettingsInspector : Editor
                     {
                         EditorGUILayout.HelpBox("You should enable at least two regions for 'Best Region' hosting.", MessageType.Warning);
                     }
+				EditorGUI.indentLevel --;
 
 
 
@@ -135,8 +154,8 @@ public class ServerSettingsInspector : Editor
                 }
 
                 // protocol
-                ProtocolChoices valProtocol = settings.Protocol == ConnectionProtocol.Tcp ? ProtocolChoices.Tcp : ProtocolChoices.Udp;
-                valProtocol = (ProtocolChoices) EditorGUILayout.EnumPopup("Protocol", valProtocol);
+                ConnectionProtocol valProtocol = settings.Protocol;
+                valProtocol = (ConnectionProtocol) EditorGUILayout.EnumPopup("Protocol", valProtocol);
                 settings.Protocol = (ConnectionProtocol) valProtocol;
                 #if UNITY_WEBGL
                 EditorGUILayout.HelpBox("WebGL always use Secure WebSockets as protocol.\nThis setting gets ignored in current export.", MessageType.Warning);
@@ -168,9 +187,9 @@ public class ServerSettingsInspector : Editor
                     settings.ServerPort = EditorGUILayout.IntField("Server Port", settings.ServerPort);
                 }
                 // protocol
-                valProtocol = settings.Protocol == ConnectionProtocol.Tcp ? ProtocolChoices.Tcp : ProtocolChoices.Udp;
-                valProtocol = (ProtocolChoices) EditorGUILayout.EnumPopup("Protocol", valProtocol);
-                settings.Protocol = (ConnectionProtocol) valProtocol;
+                valProtocol = settings.Protocol;
+                valProtocol = (ConnectionProtocol)EditorGUILayout.EnumPopup("Protocol", valProtocol);
+                settings.Protocol = (ConnectionProtocol)valProtocol;
                 #if UNITY_WEBGL
                 EditorGUILayout.HelpBox("WebGL always use Secure WebSockets as protocol.\nThis setting gets ignored in current export.", MessageType.Warning);
                 #endif
