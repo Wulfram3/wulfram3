@@ -7,6 +7,7 @@ namespace Com.Wulfram3 {
     public class PlayerInfoPanelController : Photon.PunBehaviour {
         private GameObject target;
         private Vector3 pos;
+        private GameManager gameManager;
 
         public Text playerNameText;
 
@@ -28,6 +29,11 @@ namespace Com.Wulfram3 {
                 string playerName = target.GetComponent<PhotonView>().owner.NickName;
                 string hitpoints = target.GetComponent<HitPointsManager>().health + "/" + target.GetComponent<HitPointsManager>().maxHealth;
                 playerNameText.text = playerName + " " + hitpoints;
+                if (target.GetComponent<PhotonView>().owner.IsMasterClient) {
+                    playerNameText.color = Color.yellow;
+                } else {
+                    playerNameText.color = Color.white;
+                }        
 
                 rectTransform.SetPositionAndRotation(pos, rectTransform.rotation);
             } else {
