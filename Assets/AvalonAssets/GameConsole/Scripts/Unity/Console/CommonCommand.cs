@@ -22,7 +22,7 @@ namespace AvalonAssets.Unity.Console
         /// </summary>
         public void CommandNotExist(Action<string> output, string[] args)
         {
-            output.Invoke("This command does not exists. Type \"Help\" to see what commands are available.");
+            //output.Invoke("This command does not exists. Type \"Help\" to see what commands are available.");
         }
 
         /// <summary>
