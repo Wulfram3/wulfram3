@@ -89,6 +89,8 @@ namespace Com.Wulfram3 {
             discordApi = new DiscordApi();
             progressLabel.SetActive(false);
             controlPanel.SetActive(true);
+
+
         }
 
 
@@ -108,7 +110,9 @@ namespace Com.Wulfram3 {
             isConnecting = true;
             progressLabel.SetActive(true);
             controlPanel.SetActive(false);
+
             StartCoroutine(discordApi.PlayerJoined(PhotonNetwork.playerName));
+
 
    //         Debug.Log("DemoAnimator/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
 			//string discordURI = "https://discordapp.com/api/webhooks/389264790230532107/LgvTNdOLb28JQmtTpK1yBzam-CMAnEhDqLkmXT4CqAyP-8id8ydWisx2yz8Ga6fQ5wX2";
