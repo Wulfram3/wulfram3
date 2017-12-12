@@ -243,7 +243,8 @@ namespace Com.Wulfram3 {
         void CmdFirePulseShell() {
             Vector3 pos = transform.position + (transform.forward * 2.0f + transform.up * 0.2f);
             Quaternion rotation = transform.rotation;
-            gameManager.gameObject.GetComponent<PhotonView>().RPC("SpawnPulseShell", PhotonTargets.MasterClient, pos, rotation);
+            //gameManager.gameObject.GetComponent<PhotonView>().RPC("SpawnPulseShell", PhotonTargets.MasterClient, pos, rotation);
+            PhotonNetwork.Instantiate(gameManager.pulseShellPrefab.name, pos, rotation, 0);
             Rigidbody rb = GetComponent<Rigidbody>();
             rb.AddForce(-transform.forward * 100f);
         }
