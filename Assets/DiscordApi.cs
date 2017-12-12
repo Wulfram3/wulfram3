@@ -1,4 +1,4 @@
-﻿using Assets.Plugins.webgljs;
+﻿//using Assets.Plugins.webgljs;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -14,7 +14,7 @@ namespace Com.Wulfram3
         private const string leftMessage = "{0} has left Wulfram 3!";
         private string player;
 
-        public DiscordApi()
+       /* public DiscordApi()
         {
             var userString = WebLocalStorage.GetValue("test");
             Debug.Log("User from Local Storage: " + userString);
@@ -23,7 +23,7 @@ namespace Com.Wulfram3
             userString = WebLocalStorage.GetValue("test");
             Debug.Log("User from Local Storage After set: " + userString);
 
-        }
+        }*/
 
         public IEnumerator PlayerJoined(string playerName)
         {
