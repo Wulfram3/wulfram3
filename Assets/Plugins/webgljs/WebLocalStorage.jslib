@@ -13,3 +13,4 @@ var WebLocalStorage = {
         localStorage.setItem(Pointer_stringify(key), Pointer_stringify(value));
     }
 };
+mergeInto(LibraryManager.library, WebLocalStorage);
