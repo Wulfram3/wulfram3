@@ -8,6 +8,7 @@ namespace Com.Wulfram3 {
         public int initialHealth = 100;
         public int maxHealth = 100;
 
+        [HideInInspector]
         public int health;
         private GameManager gameManager;
 
