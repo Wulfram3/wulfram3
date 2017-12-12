@@ -19,7 +19,6 @@ namespace Com.Wulfram3
             var userString = WebLocalStorage.GetValue("test");
             Debug.Log("User from Local Storage: " + userString);
 
-
             WebLocalStorage.SetValue("test", @"{""username:""""Knight""}");
             userString = WebLocalStorage.GetValue("test");
             Debug.Log("User from Local Storage After set: " + userString);
