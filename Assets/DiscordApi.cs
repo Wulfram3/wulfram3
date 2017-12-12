@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Plugins.webgljs;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
@@ -12,6 +13,17 @@ namespace Com.Wulfram3
         private const string joinMessage = "{0} has started playing Wulfram 3!";
         private const string leftMessage = "{0} has left Wulfram 3!";
         private string player;
+
+        public DiscordApi()
+        {
+            var userString = WebLocalStorage.GetValue("test");
+            Debug.Log("User from Local Storage: " + userString);
+
+            WebLocalStorage.SetValue("test", @"{""username:""""Knight""}");
+            userString = WebLocalStorage.GetValue("test");
+            Debug.Log("User from Local Storage After set: " + userString);
+
+        }
 
         public IEnumerator PlayerJoined(string playerName)
         {

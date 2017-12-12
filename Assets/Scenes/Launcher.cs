@@ -48,25 +48,11 @@ namespace Com.Wulfram3 {
 
 
         #region MonoBehaviour CallBacks
-		IEnumerator Post(string url, string bodyJsonString)
-		{
-			var request = new UnityWebRequest(url, "POST");
-			byte[] bodyRaw = Encoding.UTF8.GetBytes(bodyJsonString);
-			request.uploadHandler = (UploadHandler) new UploadHandlerRaw(bodyRaw);
-			request.downloadHandler = (DownloadHandler) new DownloadHandlerBuffer();
-			request.SetRequestHeader("Content-Type", "application/json");
-
-			yield return request.Send();
-
-			Debug.Log("Status Code: " + request.responseCode);
-		}
 
         /// <summary>
         /// MonoBehaviour method called on GameObject by Unity during early initialization phase.
         /// </summary>
         void Awake() {
-
-
             // #Critical
             // we don't join the lobby. There is no need to join a lobby to get the list of rooms.
             PhotonNetwork.autoJoinLobby = false;
@@ -89,8 +75,6 @@ namespace Com.Wulfram3 {
             discordApi = new DiscordApi();
             progressLabel.SetActive(false);
             controlPanel.SetActive(true);
-
-
         }
 
 
@@ -110,18 +94,8 @@ namespace Com.Wulfram3 {
             isConnecting = true;
             progressLabel.SetActive(true);
             controlPanel.SetActive(false);
-
             StartCoroutine(discordApi.PlayerJoined(PhotonNetwork.playerName));
 
-
-   //         Debug.Log("DemoAnimator/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
-			//string discordURI = "https://discordapp.com/api/webhooks/389264790230532107/LgvTNdOLb28JQmtTpK1yBzam-CMAnEhDqLkmXT4CqAyP-8id8ydWisx2yz8Ga6fQ5wX2";
-
-
-			//string greetdiscord = string.Format ("{0} has started playing Wulfram 3!", PhotonNetwork.playerName);
-			//string postdiscord = "{ \"content\": \"" + greetdiscord + "\" } ";
-			//Debug.Log (postdiscord);
-			//StartCoroutine(Post(discordURI, postdiscord));
             // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
             if (PhotonNetwork.connected) {
                 // #Critical we need at this point to attempt joining a Random Room. If it fails, we'll get notified in OnPhotonRandomJoinFailed() and we'll create one.
@@ -191,6 +165,12 @@ namespace Com.Wulfram3 {
                 // Load the Room Level. 
                 PhotonNetwork.LoadLevel("Playground");
             }
+        }
+
+        public override void OnLeftRoom()
+        {
+            Debug.Log("OnLeftRoom!' ");
+            base.OnLeftRoom();
         }
 
 
