@@ -12,6 +12,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 using System.Collections;
+using Assets.Plugins.webgljs;
 
 namespace ExitGames.Demos.DemoAnimator
 {
@@ -40,14 +41,24 @@ namespace ExitGames.Demos.DemoAnimator
 
 			if (_inputField!=null)
 			{
-				if (PlayerPrefs.HasKey(playerNamePrefKey))
-				{
-					defaultName = PlayerPrefs.GetString(playerNamePrefKey);
-					_inputField.text = defaultName;
-				}
-			}
+                var userString = WebLocalStorage.GetValue("Name");
+                if (userString != "null")
+                {
+                    defaultName = userString;
+                    _inputField.text = defaultName;
+                }
+                else
+                {
+                    if (PlayerPrefs.HasKey(playerNamePrefKey))
+                    {
+                        defaultName = PlayerPrefs.GetString(playerNamePrefKey);
+                        _inputField.text = defaultName;
+                    }
+                }
+            }
+            
 
-			PhotonNetwork.playerName =	defaultName;
+            PhotonNetwork.playerName =	defaultName;
 		}
 
 		#endregion
