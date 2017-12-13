@@ -14,4 +14,3 @@ var WebLocalStorage = {
     }
 };
 mergeInto(LibraryManager.library, WebLocalStorage);
-

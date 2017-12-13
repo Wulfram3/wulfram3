@@ -11,7 +11,8 @@ namespace Com.Wulfram3 {
 
         // Use this for initialization
         void Start() {
-            if (PhotonNetwork.isMasterClient) {
+            
+            if (photonView.owner.IsLocal) {
                 Rigidbody rb = GetComponent<Rigidbody>();
                 rb.velocity = transform.forward * velocity;
                 gameManager = FindObjectOfType<GameManager>();
@@ -24,14 +25,15 @@ namespace Com.Wulfram3 {
         }
 
         void OnCollisionEnter(Collision col) {
-            if (PhotonNetwork.isMasterClient) {
+            if (photonView.owner.IsLocal) {
                 HitPointsManager hitpoints = col.gameObject.GetComponent<HitPointsManager>();
                 if (hitpoints != null) {
                     hitpoints.TakeDamage(directHitpointsDamage);
                 }
 
                 Vector3 pos = col.contacts[0].point;
-                gameManager.SpawnExplosion(pos);
+                //gameManager.SpawnExplosion(pos);
+                PhotonNetwork.Instantiate(gameManager.explosionPrefab.name, pos, Quaternion.identity, 0);
 
                 PhotonNetwork.Destroy(gameObject);
             }

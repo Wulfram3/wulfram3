@@ -10,7 +10,6 @@ namespace Assets.Plugins.webgljs
 {
     public class WebLocalStorage : MonoBehaviour
     {
-
         [DllImport("__Internal")]
         public static extern string GetValue(string key);
 
