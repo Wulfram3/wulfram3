@@ -31,7 +31,8 @@ namespace Com.Wulfram3 {
         public float destroyDelayWhenDead = 5;
         private float timeSinceDead = 0;
 
-        private bool isDead = false;
+        [HideInInspector]
+        public bool isDead = false;
 
         float rotationX = 0F;
         float rotationY = 0F;

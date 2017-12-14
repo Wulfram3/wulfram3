@@ -22,6 +22,12 @@ namespace Com.Wulfram3 {
 
         public GameObject playerInfoPanelPrefab;
 
+        [HideInInspector]
+        public Camera normalCamera;
+
+        [HideInInspector]
+        public Camera overheadCamera;
+
         private TargetInfoController targetChangeListener;
 
         #region Photon Messages
@@ -86,6 +92,10 @@ namespace Com.Wulfram3 {
                 } else {
                     Debug.Log("Ignoring scene load for " + Application.loadedLevelName);
                 }
+                normalCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+                overheadCamera = GameObject.FindGameObjectWithTag("OverheadCamera").GetComponent<Camera>();
+
+
             }
         }
 
@@ -135,20 +145,24 @@ namespace Com.Wulfram3 {
 
         public void Respawn(PlayerMovementManager player) {
             if (PhotonNetwork.isMasterClient) {
-                HitPointsManager hitpointsManager = player.GetComponent<HitPointsManager>();
-                hitpointsManager.SetHealth(hitpointsManager.maxHealth);
+
 
                 Vector3 spawnPos = new Vector3(0f, 5f, 0f);
                 Quaternion spawnRotation = Quaternion.identity;
 
-                foreach (Unit unit in FindObjectsOfType<Unit>()) {
-                    if (unit.name.Equals("Repair Pad")) {
-                        spawnPos = unit.transform.position + new Vector3(0, 5, 0);                     
-                        break;
-                    }
+                if (FindObjectOfType<RepairPad>() != null)
+                {
+                    // TODO: Player will have to hope that all repair pads don't die by the time they click.
+                    overheadCamera.enabled = true;
+                    normalCamera.enabled = false;
+                    Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.None;
+                } else
+                {
+                    player.photonView.RPC("SetPosAndRotation", PhotonTargets.All, spawnPos, spawnRotation);
                 }
 
-                player.photonView.RPC("SetPosAndRotation", PhotonTargets.All, spawnPos, spawnRotation);
+                
             }
         }
 
