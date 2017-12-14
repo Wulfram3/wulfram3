@@ -86,7 +86,7 @@ namespace Com.Wulfram3 {
         private void SetUserName()
         {
             var userController = DepenencyInjector.Resolve<IUserController>();
-            PhotonNetwork.playerName = userController.GetUsername();
+            PhotonNetwork.playerName = userController.GetWulframPlayerData().Username;
         }
 
         #endregion

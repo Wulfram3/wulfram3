@@ -34,10 +34,12 @@ namespace Assets.InternalApis
         {
             if (typeInstances.ContainsKey(contract))
             {
+                Debug.Log("Resolve Instance:" + contract.Name);
                 return typeInstances[contract];
             }
             else
             {
+                Debug.Log("Resolve New:" + contract.Name);
                 Type implementation = types[contract];
                 ConstructorInfo constructor = implementation.GetConstructors().ToList()[0];
                 ParameterInfo[] constructorParameters = constructor.GetParameters();
@@ -58,7 +60,7 @@ namespace Assets.InternalApis
         public static void SetupInjection()
         {
             Register<IInternalStorage, JavascriptLocalStorage>();
-            Register<IUserController, UserController>();
+            Register<IUserController, UserController>(new UserController());
             Register<IDiscordApi, DiscordApi>();
         }
     }
