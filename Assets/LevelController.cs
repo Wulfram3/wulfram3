@@ -6,15 +6,21 @@ namespace Com.Wulfram3 {
     public class LevelController : MonoBehaviour {
 
         private RectTransform tr;
+        private bool updatedOnFirstFrame = false;
 
         // Use this for initialization
         void Start() {
             tr = GetComponent<RectTransform>();
+            
         }
 
         // Update is called once per frame
         void Update() {
-
+            //TODO: hack/fix, doesn't work in Start, gets rect.width as 0
+            if (!updatedOnFirstFrame) {
+                SetLevel(1);
+                updatedOnFirstFrame = true;
+            }
         }
 
         public void SetLevel(float level) {
