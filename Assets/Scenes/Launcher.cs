@@ -3,6 +3,9 @@ using UnityEngine.Networking;
 using System.Collections;
 using System.Text;
 using System.Net;
+using Assets.InternalApis;
+using Assets.InternalApis.Interfaces;
+using Assets.InternalApis.Implementations;
 
 namespace Com.Wulfram3 {
     public class Launcher : Photon.PunBehaviour {
@@ -43,7 +46,7 @@ namespace Com.Wulfram3 {
         /// </summary>
         bool isConnecting;
 
-        DiscordApi discordApi;
+        IDiscordApi discordApi;
         #endregion
 
 
@@ -72,11 +75,19 @@ namespace Com.Wulfram3 {
         /// MonoBehaviour method called on GameObject by Unity during initialization phase.
         /// </summary>
         void Start() {
-            discordApi = new DiscordApi();
+            DepenencyInjector.SetupInjection();
+            this.SetUserName();
+            discordApi = DepenencyInjector.Resolve<IDiscordApi>();
             progressLabel.SetActive(false);
             controlPanel.SetActive(true);
         }
 
+
+        private void SetUserName()
+        {
+            var userController = DepenencyInjector.Resolve<IUserController>();
+            PhotonNetwork.playerName = userController.GetUsername();
+        }
 
         #endregion
 
@@ -107,7 +118,6 @@ namespace Com.Wulfram3 {
         }
 
         public void Quit() {
-            StartCoroutine(discordApi.PlayerLeft(PhotonNetwork.playerName));
             Application.Quit();
         }
 
