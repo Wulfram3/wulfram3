@@ -31,7 +31,8 @@ namespace Com.Wulfram3 {
         public float destroyDelayWhenDead = 5;
         private float timeSinceDead = 0;
 
-        private bool isDead = false;
+        [HideInInspector]
+        public bool isDead = false;
 
         float rotationX = 0F;
         float rotationY = 0F;
@@ -96,7 +97,7 @@ namespace Com.Wulfram3 {
         // Update is called once per frame
         void Update() {
             isDead = hitpointsManager.health <= 0;
-            if (isDead && PhotonNetwork.isMasterClient) {
+            if (isDead && photonView.isMine) {
                 timeSinceDead += Time.deltaTime;
                 if (timeSinceDead >= destroyDelayWhenDead) {   
                     //gameManager.SpawnExplosion(transform.position);
