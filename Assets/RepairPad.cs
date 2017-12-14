@@ -16,6 +16,11 @@ public class RepairPad : MonoBehaviour {
     void OnMouseDown()
     {
         PlayerMovementManager player = PlayerMovementManager.LocalPlayerInstance.GetComponent<PlayerMovementManager>();
+        Spawn(gameManager, player, gameObject.transform.position);
+    }
+
+    public static void Spawn(GameManager gameManager, PlayerMovementManager player, Vector3 position)
+    {
         if (player.isDead)
         {
             gameManager.normalCamera.enabled = true;
@@ -23,9 +28,9 @@ public class RepairPad : MonoBehaviour {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
 
-            player.photonView.RPC("SetPosAndRotation", PhotonTargets.All, gameObject.transform.position + new Vector3(0, 5, 0), Quaternion.identity);
+            player.photonView.RPC("SetPosAndRotation", PhotonTargets.All, position + new Vector3(0, 5, 0), Quaternion.identity);
 
-            if(PhotonNetwork.isMasterClient)
+            if (PhotonNetwork.isMasterClient)
             {
                 HitPointsManager hitpointsManager = player.GetComponent<HitPointsManager>();
                 hitpointsManager.SetHealth(hitpointsManager.maxHealth);

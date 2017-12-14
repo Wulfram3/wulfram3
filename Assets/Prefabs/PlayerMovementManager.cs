@@ -97,7 +97,7 @@ namespace Com.Wulfram3 {
         // Update is called once per frame
         void Update() {
             isDead = hitpointsManager.health <= 0;
-            if (isDead && PhotonNetwork.isMasterClient) {
+            if (isDead && photonView.isMine) {
                 timeSinceDead += Time.deltaTime;
                 if (timeSinceDead >= destroyDelayWhenDead) {   
                     //gameManager.SpawnExplosion(transform.position);
