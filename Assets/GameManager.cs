@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Assets.InternalApis;
+using Assets.InternalApis.Interfaces;
+using System;
 using System.Collections;
 
 
@@ -65,10 +67,14 @@ namespace Com.Wulfram3 {
 
 
         public void LeaveRoom() {
+            var userControler = DepenencyInjector.Resolve<IUserController>();
+            var discordApi = DepenencyInjector.Resolve<IDiscordApi>();
             PhotonNetwork.LeaveRoom();
+            StartCoroutine(discordApi.PlayerLeft(userControler.GetUsername()));
         }
 
         public void Start() {
+            DepenencyInjector.SetupInjection();
             if (playerPrefab == null) {
                 Debug.LogError("<Color=Red><a>Missing</a></Color> playerPrefab Reference. Please set it up in GameObject 'Game Manager'", this);
             } else {
