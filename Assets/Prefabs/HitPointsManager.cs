@@ -23,7 +23,14 @@ namespace Com.Wulfram3 {
         [PunRPC]
         public void UpdateHealth(int newHealth) {
             health = newHealth;
-            gameManager.UnitsHealthUpdated(this);
+            GetGameManager().UnitsHealthUpdated(this);
+        }
+
+        private GameManager GetGameManager() {
+            if (gameManager == null) {
+                gameManager = FindObjectOfType<GameManager>();
+            }
+            return gameManager;
         }
 
         public void SetHealth(int newHealth) {
@@ -46,7 +53,7 @@ namespace Com.Wulfram3 {
 
         // Use this for initialization
         void Start() {
-            gameManager = FindObjectOfType<GameManager>();
+            gameManager = GetGameManager();
             if (PhotonNetwork.isMasterClient) {
                 SetHealth(initialHealth);
             }

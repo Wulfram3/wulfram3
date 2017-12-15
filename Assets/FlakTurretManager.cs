@@ -20,8 +20,15 @@ namespace Com.Wulfram3 {
         // Use this for initialization
         void Start() {
             if (PhotonNetwork.isMasterClient) {
+                gameManager = GetGameManager();
+            }
+        }
+
+        private GameManager GetGameManager() {
+            if (gameManager == null) {
                 gameManager = FindObjectOfType<GameManager>();
             }
+            return gameManager;
         }
 
         // Update is called once per frame
@@ -39,7 +46,7 @@ namespace Com.Wulfram3 {
             if (timeSinceLastFire >= reloadTime && targetOnSight) {
                 Vector3 pos = transform.position + (transform.forward * 3.0f + transform.up * 0.2f);
                 Quaternion rotation = transform.rotation;
-                gameManager.SpawnFlakShell(pos, rotation);
+                GetGameManager().SpawnFlakShell(pos, rotation);
                 timeSinceLastFire = 0;
             }
         }

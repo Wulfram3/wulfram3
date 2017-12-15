@@ -14,7 +14,7 @@ namespace Com.Wulfram3 {
 
         // Update is called once per frame
         void Update() {
-            if (PhotonNetwork.isMasterClient) {
+            if (photonView.isMine) {
                 lifeTime += Time.deltaTime;
                 if (lifeTime >= maxLifeTime) {
                     PhotonNetwork.Destroy(gameObject);
