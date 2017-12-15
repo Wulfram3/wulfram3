@@ -30,11 +30,8 @@ public class RepairPad : MonoBehaviour {
 
             player.photonView.RPC("SetPosAndRotation", PhotonTargets.All, position + new Vector3(0, 5, 0), Quaternion.identity);
 
-            if (PhotonNetwork.isMasterClient)
-            {
-                HitPointsManager hitpointsManager = player.GetComponent<HitPointsManager>();
-                hitpointsManager.SetHealth(hitpointsManager.maxHealth);
-            }
+            HitPointsManager hitpointsManager = player.GetComponent<HitPointsManager>();
+            hitpointsManager.TellServerHealth(hitpointsManager.maxHealth);
         }
     }
 }

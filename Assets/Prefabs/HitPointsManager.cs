@@ -32,6 +32,18 @@ namespace Com.Wulfram3 {
             }
         }
 
+        [PunRPC]
+        public void SetHealthFromClient(int newHealth)
+        {
+            // Can do validation here later
+            SetHealth(newHealth);
+        }
+
+        public void TellServerHealth(int newHealth)
+        {
+            photonView.RPC("SetHealthFromClient", PhotonTargets.MasterClient, newHealth);
+        }
+
         // Use this for initialization
         void Start() {
             gameManager = FindObjectOfType<GameManager>();
