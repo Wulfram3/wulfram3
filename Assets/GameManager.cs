@@ -97,8 +97,7 @@ namespace Com.Wulfram3 {
                 }
                 normalCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
                 overheadCamera = GameObject.FindGameObjectWithTag("OverheadCamera").GetComponent<Camera>();
-
-
+                overheadCamera.enabled = false; //set disabled so that it does't render in the background
             }
         }
 
