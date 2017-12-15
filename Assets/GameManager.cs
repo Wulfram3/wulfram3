@@ -16,6 +16,8 @@ namespace Com.Wulfram3 {
 
         public GameObject pulseShellPrefab;
 
+		public GameObject flakShellPrefab;
+
         public GameObject explosionPrefab;
 
         public GameObject hullBar;
@@ -105,6 +107,11 @@ namespace Com.Wulfram3 {
                 PhotonNetwork.Instantiate(pulseShellPrefab.name, pos, rotation, 0);
             }
         }
+		public void SpawnFlakShell(Vector3 pos, Quaternion rotation) {
+			if (PhotonNetwork.isMasterClient) {
+				PhotonNetwork.Instantiate(flakShellPrefab.name, pos, rotation, 0);
+			}
+		}
 
         public void SpawnExplosion(Vector3 pos) {
             if (PhotonNetwork.isMasterClient) {

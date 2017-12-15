@@ -39,7 +39,7 @@ namespace Com.Wulfram3 {
             if (timeSinceLastFire >= reloadTime && targetOnSight) {
                 Vector3 pos = transform.position + (transform.forward * 3.0f + transform.up * 0.2f);
                 Quaternion rotation = transform.rotation;
-                gameManager.SpawnPulseShell(pos, rotation);
+                gameManager.SpawnFlakShell(pos, rotation);
                 timeSinceLastFire = 0;
             }
         }
