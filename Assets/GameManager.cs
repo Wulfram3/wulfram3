@@ -78,11 +78,10 @@ namespace Com.Wulfram3 {
             var userControler = DepenencyInjector.Resolve<IUserController>();
             var discordApi = DepenencyInjector.Resolve<IDiscordApi>();
             PhotonNetwork.LeaveRoom();
-            StartCoroutine(discordApi.PlayerLeft(userControler.GetUsername()));
+            StartCoroutine(discordApi.PlayerLeft(userControler.GetWulframPlayerData().Username));
         }
 
         public void Start() {
-            DepenencyInjector.SetupInjection();
             if (playerPrefab == null) {
                 Debug.LogError("<Color=Red><a>Missing</a></Color> playerPrefab Reference. Please set it up in GameObject 'Game Manager'", this);
             } else {
