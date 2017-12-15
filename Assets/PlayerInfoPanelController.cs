@@ -19,7 +19,7 @@ namespace Com.Wulfram3 {
 
         // Update is called once per frame
         void LateUpdate() {
-            if (target != null && target.GetComponentInChildren<Renderer>().isVisible) {
+            if (target != null && target.GetComponentInChildren<Renderer>().isVisible && Camera.main != null) {
                 playerNameText.gameObject.SetActive(true);
                 pos = Camera.main.WorldToScreenPoint(target.transform.position);
                 pos.z = 0;
