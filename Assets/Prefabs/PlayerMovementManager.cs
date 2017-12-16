@@ -169,7 +169,7 @@ namespace Com.Wulfram3 {
             }
 
             //Tank Jump
-            if (Time.time >= jumptimestamp && (Input.GetKeyDown(KeyCode.Space))) {
+            if (Time.time >= jumptimestamp && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Keypad0))) {
                 requestJump = true;
                 jumptimestamp = Time.time + timeBetweenJumps;
             }
