@@ -80,6 +80,8 @@ namespace Com.Wulfram3 {
 
         [PunRPC]
         public void Reset() {
+            Rigidbody rb = GetComponent<Rigidbody>();
+            rb.isKinematic = false;
             isLanded = false;
             requestLand = false;
             requestJump = false;
