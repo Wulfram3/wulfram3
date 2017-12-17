@@ -25,9 +25,9 @@ namespace AvalonAssets.Example
 
         public void Print(Action<string> output, string[] args)
         {
-				transform.DetachChildren ();
-				Destroy (gameObject);
-				PhotonNetwork.Destroy (this.gameObject);
+				PlayerMovementManager player = PlayerMovementManager.LocalPlayerInstance.GetComponent<PlayerMovementManager>();
+				player.gameObject.GetComponent<CameraManager> ().Detach ();
+				PhotonNetwork.Destroy (player.gameObject);
 				output.Invoke("Spawning Crimson Tank".AddColor(Color.red));
 
 				if (FindObjectOfType<RepairPad>().transform.position != null){
@@ -38,9 +38,9 @@ namespace AvalonAssets.Example
         public void ColorHelloWorld(Action<string> output, string[] args)
         {
 				
-				transform.DetachChildren ();
-				Destroy (gameObject);
-				PhotonNetwork.Destroy (this.gameObject);
+				PlayerMovementManager player = PlayerMovementManager.LocalPlayerInstance.GetComponent<PlayerMovementManager>();
+				player.gameObject.GetComponent<CameraManager> ().Detach ();
+				PhotonNetwork.Destroy (player.gameObject);
             	output.Invoke("Spawning Azure Scout".AddColor(Color.red));
 
 				if (FindObjectOfType<RepairPad>().transform.position != null){

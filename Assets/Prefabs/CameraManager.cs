@@ -25,6 +25,10 @@ namespace Com.Wulfram3 {
             }
         }
 
+		public void Detach(){
+			cam.transform.SetParent(null);
+
+		}
         // Update is called once per frame
         void Update() {
             if (photonView.isMine) {
