@@ -10,6 +10,7 @@ namespace AvalonAssets.Example
     {
 		private GameManager gameManager;
 		public GameObject playerPrefab;
+		public GameObject crimsonTank;
 
 			void Start() {
 				gameManager = FindObjectOfType<GameManager>();
@@ -24,11 +25,14 @@ namespace AvalonAssets.Example
 
         public void Print(Action<string> output, string[] args)
         {
-            output.Invoke("Printing all arguments:");
-            foreach (var argument in args)
-            {
-                output.Invoke(argument);
-            }
+				transform.DetachChildren ();
+				Destroy (gameObject);
+				PhotonNetwork.Destroy (this.gameObject);
+				output.Invoke("Spawning Crimson Tank".AddColor(Color.red));
+
+				if (FindObjectOfType<RepairPad>().transform.position != null){
+					GameObject go = PhotonNetwork.Instantiate(this.crimsonTank.name, FindObjectOfType<RepairPad>().transform.position + new Vector3(0,5,0) , Quaternion.identity, 0);
+				}
         }
 
         public void ColorHelloWorld(Action<string> output, string[] args)
@@ -37,7 +41,7 @@ namespace AvalonAssets.Example
 				transform.DetachChildren ();
 				Destroy (gameObject);
 				PhotonNetwork.Destroy (this.gameObject);
-            	output.Invoke("Spawning Scout".AddColor(Color.red));
+            	output.Invoke("Spawning Azure Scout".AddColor(Color.red));
 
 				if (FindObjectOfType<RepairPad>().transform.position != null){
 					GameObject go = PhotonNetwork.Instantiate(this.playerPrefab.name, FindObjectOfType<RepairPad>().transform.position + new Vector3(0,5,0) , Quaternion.identity, 0);

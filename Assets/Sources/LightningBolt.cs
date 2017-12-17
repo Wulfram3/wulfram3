@@ -22,7 +22,7 @@ public class LightningBolt : Photon.PunBehaviour
 	
 	void Start()
 	{
-
+			target = new GameObject();
 		GetComponent<ParticleEmitter>();
 		oneOverZigs = 1f / (float)zigs;
 		GetComponent<ParticleEmitter>().emit = false;
