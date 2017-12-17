@@ -98,6 +98,10 @@ namespace AvalonAssets.Unity.Console
 
         private void Awake()
         {
+			InputField.gameObject.SetActive(!InputField.gameObject.activeSelf);
+			Scrollbar.gameObject.SetActive(!Scrollbar.gameObject.activeSelf);
+			OutputText.gameObject.SetActive(!OutputText.gameObject.activeSelf);
+			ScrollRect.gameObject.SetActive(!ScrollRect.gameObject.activeSelf);
             _console = new CommandLineConsole(OutputMessage);
             if (InputField == null)
                 throw new NullReferenceException("InputField cannot be null.");
@@ -138,6 +142,7 @@ namespace AvalonAssets.Unity.Console
         {
             if (!AllowConsole) return;
             if (!Input.GetKeyDown(OpenConsoleKey)) return;
+
             // Open and Close console
             InputField.gameObject.SetActive(!InputField.gameObject.activeSelf);
             Scrollbar.gameObject.SetActive(!Scrollbar.gameObject.activeSelf);
