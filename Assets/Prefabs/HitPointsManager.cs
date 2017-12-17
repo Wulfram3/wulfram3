@@ -12,6 +12,7 @@ namespace Com.Wulfram3 {
         public int health;
         private GameManager gameManager;
 
+        [PunRPC]
         public void TakeDamage(int amount) {
             if (PhotonNetwork.isMasterClient) {
                 int newHealth = Mathf.Clamp(health - amount, 0, maxHealth);
@@ -44,11 +45,15 @@ namespace Com.Wulfram3 {
         {
             // Can do validation here later
             SetHealth(newHealth);
-        }
+        }   
 
         public void TellServerHealth(int newHealth)
         {
             photonView.RPC("SetHealthFromClient", PhotonTargets.MasterClient, newHealth);
+        }
+
+        public void TellServerTakeDamage(int amount) {
+            photonView.RPC("TakeDamage", PhotonTargets.MasterClient, amount);
         }
 
         // Use this for initialization
