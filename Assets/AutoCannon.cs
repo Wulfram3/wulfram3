@@ -5,6 +5,8 @@ using UnityEngine;
 namespace Com.Wulfram3 {
     public class AutoCannon : Photon.PunBehaviour {
         public AudioClip autoCannonSound;
+		public AudioClip shootCannonSound;
+		public AudioSource audio;
         public int bulletDamageinHitpoints = 1;
         public float bulletsPerSecond = 10;
         public float range = 40;
@@ -17,15 +19,23 @@ namespace Com.Wulfram3 {
 
         // Use this for initialization
         void Start() {
+			
             timeBetweenShots = 1f / bulletsPerSecond;
         }
+
 
         // Update is called once per frame
         void Update() {
             if (!photonView.isMine)
                 return;
             
-            if (Input.GetMouseButton(1)) {
+			if (Input.GetMouseButton(1)) {
+				bool soundplaying = true;
+				if (soundplaying == true) {
+					audio.PlayOneShot(autoCannonSound, 1);
+						soundplaying = false;
+				}
+
                 float currentTime = Time.time;
                 if (lastFireTime + timeBetweenShots > currentTime) {
                     return;
@@ -48,11 +58,12 @@ namespace Com.Wulfram3 {
                     HitPointsManager hitPointsManager = objectHit.transform.GetComponent<HitPointsManager>();
                     hitPointsManager.TellServerTakeDamage(bulletDamageinHitpoints);
                     print("autocannon hit");
+					AudioSource.PlayClipAtPoint(autoCannonSound, transform.position);
                 }
 
                 
 
-                //AudioSource.PlayClipAtPoint(autoCannonSound, transform.position);
+               
             }
         }
 
