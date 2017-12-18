@@ -11,6 +11,19 @@ namespace Com.Wulfram3 {
         public float bulletsPerSecond = 10;
         public float range = 40;
         public float deviationConeRadius = 1;
+		private GameManager gameManager;
+		//Start of the laser
+		public Transform gunEnd;
+		//camera for firing
+		public Camera fpsCam;
+
+
+		//wait for second on laser
+		private WaitForSeconds shotDuration = new WaitForSeconds(.07f);
+		//line render for gun shots
+		public LineRenderer laserLine;
+		//next fire of laser
+		private float nextFire;
 
         public bool debug = true;
 
@@ -19,13 +32,38 @@ namespace Com.Wulfram3 {
 
         // Use this for initialization
         void Start() {
-			
+
+			gameManager = FindObjectOfType<GameManager>();
+
+			//laser stuff
+			laserLine = GetComponent<LineRenderer> ();
+			fpsCam = GetComponentInParent<Camera> ();
+			fpsCam = Camera.main;
+			//original
             timeBetweenShots = 1f / bulletsPerSecond;
+
+
         }
+
+
+
+		private IEnumerator ShotEffect()
+		{
+			laserLine.enabled = true;
+			yield return shotDuration;
+			laserLine.enabled = false;
+
+		}
+
+
+
 
 
         // Update is called once per frame
         void Update() {
+
+
+
             if (!photonView.isMine)
                 return;
             
@@ -35,6 +73,24 @@ namespace Com.Wulfram3 {
                 if (lastFireTime + timeBetweenShots > currentTime) {
                     return;
                 }
+				//Laser Effect
+				StartCoroutine (ShotEffect ());
+				Vector3 rayOrigin = fpsCam.ViewportToWorldPoint (new Vector3 (0.5f, 0.5f, 0));
+				RaycastHit hit;
+
+				laserLine.SetPosition (0, gunEnd.position);
+				if (Physics.Raycast (rayOrigin, fpsCam.transform.forward, out hit, range)) {
+					laserLine.SetPosition (1, hit.point);
+				} else {
+					laserLine.SetPosition (1, rayOrigin + (fpsCam.transform.forward * range));
+
+				}
+
+
+
+
+
+				//play sound
 				audio.PlayOneShot(autoCannonSound, 1);
                 lastFireTime = currentTime;
 
@@ -61,11 +117,15 @@ namespace Com.Wulfram3 {
 
                
             }
+
         }
 
         private Vector3 GetRandomPointInCircle() {
             Vector2 randomPoint = Random.insideUnitCircle * deviationConeRadius;
             return new Vector3(randomPoint.x, randomPoint.y, 0);
         }
+
+
     }
+
 }

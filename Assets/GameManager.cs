@@ -86,9 +86,11 @@ namespace Com.Wulfram3 {
                 Debug.LogError("<Color=Red><a>Missing</a></Color> playerPrefab Reference. Please set it up in GameObject 'Game Manager'", this);
             } else {
                 Debug.Log("We are Instantiating LocalPlayer from " + Application.loadedLevelName);
+
                 if (PlayerMovementManager.LocalPlayerInstance == null) {
                     Debug.Log("We are Instantiating LocalPlayer from " + Application.loadedLevelName);
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
+
 					if (FindObjectOfType<RepairPad>().transform.position != null){
 						GameObject go = PhotonNetwork.Instantiate(this.playerPrefab.name, FindObjectOfType<RepairPad>().transform.position + new Vector3(0,5,0) , Quaternion.identity, 0);
 					}
@@ -118,6 +120,8 @@ namespace Com.Wulfram3 {
                 PhotonNetwork.Instantiate(explosionPrefab.name, pos, Quaternion.identity, 0);
             }
         }
+
+	
 
         public void UnitsHealthUpdated(HitPointsManager hitpointsManager) {
             if (hitpointsManager.tag.Equals("Player") && hitpointsManager.photonView.isMine) {
