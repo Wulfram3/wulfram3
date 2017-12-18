@@ -73,7 +73,7 @@ namespace Com.Wulfram3 {
             if (!photonView.isMine)
                 return;
             
-			if (Input.GetMouseButton(1)) {
+			if (Input.GetMouseButton(0)) {
 
                 float currentTime = Time.time;
                 if (lastFireTime + timeBetweenShots > currentTime) {

@@ -163,7 +163,7 @@ namespace Com.Wulfram3 {
             //pulse was here before
 
             //Fire Pulse
-            if (Time.time >= timestamp && (Input.GetMouseButtonDown(0)) && !Cursor.visible) {
+            if (Time.time >= timestamp && (Input.GetMouseButtonDown(1)) && !Cursor.visible) {
                 CmdFirePulseShell();
                 timestamp = Time.time + timeBetweenShots;
             }

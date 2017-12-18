@@ -117,7 +117,7 @@ public class PlayerMove : NetworkBehaviour {
         //pulse was here before
 
         //Fire Pulse
-        if (Time.time >= timestamp && (Input.GetMouseButtonDown(0)))
+        if (Time.time >= timestamp && (Input.GetMouseButtonDown(1)))
         {
             CmdFirePulseShell();
             timestamp = Time.time + timeBetweenShots;
