@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 using System.Collections;
 using System.Text;
 using System.Net;
@@ -27,6 +28,10 @@ namespace Com.Wulfram3 {
         [Tooltip("The UI Label to inform the user that the connection is in progress")]
         public GameObject progressLabel;
 
+		public GameObject playername;
+
+		public AudioClip clicksound;
+		public AudioSource click;
 
         #endregion
 
@@ -80,6 +85,7 @@ namespace Com.Wulfram3 {
             discordApi = DepenencyInjector.Resolve<IDiscordApi>();
             progressLabel.SetActive(false);
             controlPanel.SetActive(true);
+
         }
 
 
@@ -102,6 +108,7 @@ namespace Com.Wulfram3 {
         /// </summary>
         public void Connect() {
             // keep track of the will to join a room, because when we come back from the game we will get a callback that we are connected, so we need to know what to do then
+			click.PlayOneShot(clicksound, 3f);
             isConnecting = true;
             progressLabel.SetActive(true);
             controlPanel.SetActive(false);
@@ -109,6 +116,7 @@ namespace Com.Wulfram3 {
 
             // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
             if (PhotonNetwork.connected) {
+				
                 // #Critical we need at this point to attempt joining a Random Room. If it fails, we'll get notified in OnPhotonRandomJoinFailed() and we'll create one.
                 PhotonNetwork.JoinRandomRoom();
             } else {
@@ -170,7 +178,6 @@ namespace Com.Wulfram3 {
             if (PhotonNetwork.room.PlayerCount == 1) {
                 Debug.Log("We load the 'Playground' ");
 			
-
                 // #Critical
                 // Load the Room Level. 
                 PhotonNetwork.LoadLevel("Playground");

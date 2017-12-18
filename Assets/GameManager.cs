@@ -121,6 +121,15 @@ namespace Com.Wulfram3 {
             }
         }
 
+		//laser stuff autocannon
+		/*public void DrawLine(Vector3 startPos, Vector3 endPos)
+		{ 
+			if (PhotonNetwork.isMasterClient) {
+				//PhotonNetwork.Instantiate(lineRender, startPos, Quaternion.identity, 0);
+
+			}
+
+		}*/
 	
 
         public void UnitsHealthUpdated(HitPointsManager hitpointsManager) {

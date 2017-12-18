@@ -33,7 +33,7 @@ namespace Com.Wulfram3 {
         // Use this for initialization
         void Start() {
 
-			gameManager = FindObjectOfType<GameManager>();
+
 
 			//laser stuff
 			laserLine = GetComponent<LineRenderer> ();
@@ -45,6 +45,12 @@ namespace Com.Wulfram3 {
 
         }
 
+		private GameManager GetGameManager() {
+			if (gameManager == null) {
+				gameManager = FindObjectOfType<GameManager>();
+			}
+			return gameManager;
+		}
 
 
 		private IEnumerator ShotEffect()
@@ -86,6 +92,8 @@ namespace Com.Wulfram3 {
 
 				}
 
+				//lets work on syncing it all
+				//GetGameManager().DrawLine(gunEnd.position, laserLine);
 
 
 
