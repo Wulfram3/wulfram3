@@ -99,7 +99,7 @@ namespace Com.Wulfram3 {
 
 
 				//play sound
-				audio.PlayOneShot(autoCannonSound, 1);
+				audio.PlayOneShot(shootCannonSound, 1);
                 lastFireTime = currentTime;
 
                 Vector3 pos = transform.position + (transform.forward * 1.0f + transform.up * 0.2f);
