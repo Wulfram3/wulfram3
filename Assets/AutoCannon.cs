@@ -30,16 +30,12 @@ namespace Com.Wulfram3 {
                 return;
             
 			if (Input.GetMouseButton(1)) {
-				bool soundplaying = true;
-				if (soundplaying == true) {
-					audio.PlayOneShot(autoCannonSound, 1);
-						soundplaying = false;
-				}
 
                 float currentTime = Time.time;
                 if (lastFireTime + timeBetweenShots > currentTime) {
                     return;
                 }
+				audio.PlayOneShot(autoCannonSound, 1);
                 lastFireTime = currentTime;
 
                 Vector3 pos = transform.position + (transform.forward * 1.0f + transform.up * 0.2f);
