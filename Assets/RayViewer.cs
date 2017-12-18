@@ -11,6 +11,7 @@ public class RayViewer : Photon.PunBehaviour {
 
 	void Start () {
 		fpsCam = GetComponentInParent<Camera> ();
+		fpsCam = Camera.main;
 	}
 
 
