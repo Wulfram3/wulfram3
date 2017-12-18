@@ -1,0 +1,158 @@
+fileFormatVersion: 2
+guid: 9a5297d6835f21f47a2d9d6f6a8303d4
+timeCreated: 1513623881
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Line03
+    100002: Omni01
+    100004: Omni02
+    100006: Omni03
+    100008: Omni04
+    100010: Omni05
+    100012: Omni06
+    100014: Omni07
+    100016: Omni08
+    100018: //RootNode
+    400000: Line03
+    400002: Omni01
+    400004: Omni02
+    400006: Omni03
+    400008: Omni04
+    400010: Omni05
+    400012: Omni06
+    400014: Omni07
+    400016: Omni08
+    400018: //RootNode
+    2300000: Line03
+    3300000: Line03
+    4300000: Line03
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Msentry2
+    second: {fileID: 2100000, guid: 38064e41b7a41ec43a7e9d1f525cc7bf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: darkdish
+    second: {fileID: 2100000, guid: 9cba6f57d406ff64e94445bacbdc759f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: e2posts
+    second: {fileID: 2100000, guid: 572f9313295edff4eb553319229c7984, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: metalT2
+    second: {fileID: 2100000, guid: b9ce0c21312eda74085c8e1ed898cb0d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: p2frontrtR
+    second: {fileID: 2100000, guid: 007410db0e9f248419d40651be71da7a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: p2sidetwangerR
+    second: {fileID: 2100000, guid: f39514b56bd0c05478687f2f47ea01fc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ramp1R
+    second: {fileID: 2100000, guid: 23da5892d0e4e684fae9c9c7b7c54b34, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: s1bottomsR
+    second: {fileID: 2100000, guid: f64369d76ce8b394bab8b591de91c0b5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sk1dish
+    second: {fileID: 2100000, guid: e9134ff1d3e3d6a4092b53c53c23118a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ventpannel2R
+    second: {fileID: 2100000, guid: 07844a0f7ca916c429e26cbfdb26f697, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

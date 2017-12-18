@@ -1,0 +1,182 @@
+fileFormatVersion: 2
+guid: 9ae614e79d049394f9ef2a3e0e3404cf
+timeCreated: 1513623881
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Omni01
+    100004: Omni02
+    100006: Omni03
+    100008: Omni04
+    100010: Omni05
+    100012: Omni06
+    100014: Omni07
+    100016: Omni08
+    100018: Omni09
+    100020: Omni10
+    100022: tank1
+    400000: //RootNode
+    400002: Omni01
+    400004: Omni02
+    400006: Omni03
+    400008: Omni04
+    400010: Omni05
+    400012: Omni06
+    400014: Omni07
+    400016: Omni08
+    400018: Omni09
+    400020: Omni10
+    400022: tank1
+    2300000: tank1
+    3300000: tank1
+    4300000: tank1
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: barrel
+    second: {fileID: 2100000, guid: eed97e7a6709b774d899679e89067a19, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cockpit_guntop
+    second: {fileID: 2100000, guid: fec19c47dcd13d04f93789dc41990270, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: jets
+    second: {fileID: 2100000, guid: a825fc7a0313b6d4b99854c385c59521, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tankbottomback
+    second: {fileID: 2100000, guid: d2ef9146fea6d6e4497801ec63e7330b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tankbottomfront
+    second: {fileID: 2100000, guid: ab3ce1ce27abd1c4b81001c4fd4ce54d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tanktopfront
+    second: {fileID: 2100000, guid: 304b238dd7dcd424a92c2822deee65bb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: top
+    second: {fileID: 2100000, guid: 8c191eb82a5b11045b0056971a331ae1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wingbottomsmiddl
+    second: {fileID: 2100000, guid: 0cbd1537ea401dc4f85c93b29e8decb4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wingbttomsback
+    second: {fileID: 2100000, guid: bddebad2f159e7a4395ea1313ac75a5c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wingends
+    second: {fileID: 2100000, guid: d7a336645e72f194581347cf225f835e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wingtipstop
+    second: {fileID: 2100000, guid: d09186ea5e567bc4eb2f580d6c4f618c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wingtopsback
+    second: {fileID: 2100000, guid: 4b9675381a426274ba0da3437a0dfd12, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wingtopsfront
+    second: {fileID: 2100000, guid: 635cfd7598235eb4eba750a8714b725c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wingtopsmiddle
+    second: {fileID: 2100000, guid: 912494371f1111b489e149f63a2f70c1, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

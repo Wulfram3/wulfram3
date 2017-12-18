@@ -1,0 +1,146 @@
+fileFormatVersion: 2
+guid: a82e881286cb45d4e8af7a894b93e5a3
+timeCreated: 1513623885
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Line02
+    100002: Omni01
+    100004: Omni02
+    100006: Omni03
+    100008: Omni04
+    100010: Omni05
+    100012: Omni06
+    100014: Omni07
+    100016: Omni08
+    100018: Omni09
+    100020: Omni10
+    100022: Omni11
+    100024: Omni12
+    100026: //RootNode
+    400000: Line02
+    400002: Omni01
+    400004: Omni02
+    400006: Omni03
+    400008: Omni04
+    400010: Omni05
+    400012: Omni06
+    400014: Omni07
+    400016: Omni08
+    400018: Omni09
+    400020: Omni10
+    400022: Omni11
+    400024: Omni12
+    400026: //RootNode
+    2300000: Line02
+    3300000: Line02
+    4300000: Line02
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: redmlcenterlongs
+    second: {fileID: 2100000, guid: b8729a8cca41cb642ba89ea17025043d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: redmlcentershort
+    second: {fileID: 2100000, guid: 5ca2efbd96d74124c8b2ce0fe39db8ff, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: redmlends
+    second: {fileID: 2100000, guid: c52052ddcd76daa4dba0dd9b765d9e84, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: redmllauncherpor
+    second: {fileID: 2100000, guid: 766cbfcb6086b214f9c7beb8a0bf6167, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: redmllaunchersid
+    second: {fileID: 2100000, guid: 91749b64cf2e6e5469eb3653410a95fc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: redmlsidesidetop
+    second: {fileID: 2100000, guid: bc251e95d6891c747a84db5e7a77dc63, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

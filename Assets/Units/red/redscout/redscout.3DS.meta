@@ -1,0 +1,160 @@
+fileFormatVersion: 2
+guid: bc82deeea23e1f343a4571b9a2f9c74e
+timeCreated: 1513623887
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Line09
+    100002: Omni02
+    100004: Omni03
+    100006: Omni04
+    100008: Omni05
+    100010: Omni06
+    100012: Omni07
+    100014: Omni08
+    100016: Omni09
+    100018: Omni10
+    100020: //RootNode
+    400000: Line09
+    400002: Omni02
+    400004: Omni03
+    400006: Omni04
+    400008: Omni05
+    400010: Omni06
+    400012: Omni07
+    400014: Omni08
+    400016: Omni09
+    400018: Omni10
+    400020: //RootNode
+    2300000: Line09
+    3300000: Line09
+    4300000: Line09
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: redscoutbottomfr
+    second: {fileID: 2100000, guid: 58dbd15bf4dc36245b87eb759871a137, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: redscoutcockpit
+    second: {fileID: 2100000, guid: 63613576eb8fc1e4aac61e3f5a51a1fb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: redscoutgunbarre
+    second: {fileID: 2100000, guid: b6ce587fe73aa974dba60990dcaec365, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: redscoutmainjets
+    second: {fileID: 2100000, guid: 7a61bc460c499a14082973e27b2f364a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: redscoutrearbott
+    second: {fileID: 2100000, guid: 80e3043ad6577ee45a1ae7a00781ac6c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: redscoutrearmidt
+    second: {fileID: 2100000, guid: 7efc3457b20e5f44aa32462b682b88a9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: redscoutsidesbot
+    second: {fileID: 2100000, guid: 5e17e86829c8e2d4b97ecc327ebb3b6c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: redscoutturretsi
+    second: {fileID: 2100000, guid: 6b5d458aac327204c9eac758d174c8d1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: redscoutwingback
+    second: {fileID: 2100000, guid: a444e2dff49b1b34c8253bd7f4953f2e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: redscoutwingtopf
+    second: {fileID: 2100000, guid: 9ab1eca627377a54fb5bdaa36a5ccf55, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

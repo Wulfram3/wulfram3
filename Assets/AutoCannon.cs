@@ -117,7 +117,7 @@ namespace Com.Wulfram3 {
                 if (targetFound) {
                     HitPointsManager hitPointsManager = objectHit.transform.GetComponent<HitPointsManager>();
                     hitPointsManager.TellServerTakeDamage(bulletDamageinHitpoints);
-                    print("autocannon hit");
+                    //print("autocannon hit");
 					AudioSource.PlayClipAtPoint(autoCannonSound, transform.position);
                 }
 
