@@ -14,8 +14,12 @@ namespace Com.Wulfram3 {
 		private GameManager gameManager;
 		//Start of the laser
 		public Transform gunEnd;
+        bool shooting = false;
 		//camera for firing
 		public Camera fpsCam;
+        public float simDelayInSeconds = 0.1f;
+
+        private float lastSimTime = 0;
 
 
 		//wait for second on laser
@@ -61,45 +65,34 @@ namespace Com.Wulfram3 {
 
 		}
 
-
-
-
+        [PunRPC]
+        public void SetShooting(bool newShootingValue) {
+            if (!photonView.isMine) {
+                shooting = newShootingValue;
+            }   
+        }
 
         // Update is called once per frame
         void Update() {
 
+            if (photonView.isMine) {
+                CheckAndFire();
+            }
+            ShowFeedback();
+        }
 
-
-            if (!photonView.isMine)
-                return;
-            
-			if (Input.GetMouseButton(0)) {
+        private void CheckAndFire() {
+            if (Input.GetMouseButton(0)) {
 
                 float currentTime = Time.time;
                 if (lastFireTime + timeBetweenShots > currentTime) {
+                    //shooting = false;
+                    //SyncShooting();
                     return;
                 }
-				//Laser Effect
-				StartCoroutine (ShotEffect ());
-				Vector3 rayOrigin = fpsCam.ViewportToWorldPoint (new Vector3 (0.5f, 0.5f, 0));
-				RaycastHit hit;
+                shooting = true;
+                SyncShooting();
 
-				laserLine.SetPosition (0, gunEnd.position);
-				if (Physics.Raycast (rayOrigin, fpsCam.transform.forward, out hit, range)) {
-					laserLine.SetPosition (1, hit.point);
-				} else {
-					laserLine.SetPosition (1, rayOrigin + (fpsCam.transform.forward * range));
-
-				}
-
-				//lets work on syncing it all
-				//GetGameManager().DrawLine(gunEnd.position, laserLine);
-
-
-
-
-				//play sound
-				audio.PlayOneShot(shootCannonSound, 1);
                 lastFireTime = currentTime;
 
                 Vector3 pos = transform.position + (transform.forward * 1.0f + transform.up * 0.2f);
@@ -117,15 +110,48 @@ namespace Com.Wulfram3 {
                 if (targetFound) {
                     HitPointsManager hitPointsManager = objectHit.transform.GetComponent<HitPointsManager>();
                     hitPointsManager.TellServerTakeDamage(bulletDamageinHitpoints);
-                    //print("autocannon hit");
-					AudioSource.PlayClipAtPoint(autoCannonSound, transform.position);
+                    print("autocannon hit");
+                    AudioSource.PlayClipAtPoint(autoCannonSound, transform.position);
                 }
 
-                
-
-               
+            } else {
+                shooting = false;
+                SyncShooting();
             }
+        }
 
+        private void ShowFeedback() {
+            if (shooting && (lastSimTime + simDelayInSeconds) < Time.time) {
+                lastSimTime = Time.time;
+
+                //Laser Effect
+                StartCoroutine(ShotEffect());
+                Vector3 rayOrigin = fpsCam.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
+                RaycastHit hit;
+
+                laserLine.SetPosition(0, gunEnd.position);
+
+                Vector3 pos = transform.position + (transform.forward * 1.0f + transform.up * 0.2f);
+                Quaternion rotation = transform.rotation;
+                Vector3 bulletHitPoint;
+                Vector3 targetPoint = rotation * GetRandomPointInCircle();
+                targetPoint += pos + transform.forward * range;
+                RaycastHit objectHit;
+                Vector3 targetDirection = (targetPoint - pos).normalized;
+                if (Physics.Raycast(rayOrigin, targetDirection, out hit, range)) {
+                    bulletHitPoint = hit.point;
+                } else {
+                    bulletHitPoint = targetPoint;
+                }
+                laserLine.SetPosition(1, bulletHitPoint);
+
+                //play sound
+                audio.PlayOneShot(shootCannonSound, 1);
+            }    
+        }
+
+        private void SyncShooting() {
+            photonView.RPC("SetShooting", PhotonTargets.AllBuffered, shooting);
         }
 
         private Vector3 GetRandomPointInCircle() {
