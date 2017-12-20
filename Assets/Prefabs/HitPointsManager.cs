@@ -22,7 +22,8 @@ namespace Com.Wulfram3 {
         }
 
         [PunRPC]
-        public void UpdateHealth(int newHealth) {
+        public void UpdateHealth(int amount) {
+            int newHealth = Mathf.Clamp(amount, 0, maxHealth);
             health = newHealth;
             GetGameManager().UnitsHealthUpdated(this);
         }
