@@ -7,7 +7,6 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 namespace Com.Wulfram3 {
     public class GameManager : Photon.PunBehaviour {
 
@@ -23,7 +22,8 @@ namespace Com.Wulfram3 {
         public GameObject hullBar;
 
         public GameObject playerInfoPanelPrefab;
-
+        public Transform[] spawnPointsBlue;
+        public Transform[] spawnPointsRed;
         [HideInInspector]
         public Camera normalCamera;
 
@@ -32,7 +32,10 @@ namespace Com.Wulfram3 {
 
         private TargetInfoController targetChangeListener;
 
+    
         #region Photon Messages
+
+
 
 
         /// <summary>
@@ -44,7 +47,7 @@ namespace Com.Wulfram3 {
 
         public override void OnPhotonPlayerConnected(PhotonPlayer other) {
             Debug.Log("OnPhotonPlayerConnected() " + other.NickName); // not seen if you're the player connecting
-
+            
 
             if (PhotonNetwork.isMasterClient) {
                 Debug.Log("OnPhotonPlayerConnected isMasterClient " + PhotonNetwork.isMasterClient); // called before OnPhotonPlayerDisconnected
@@ -91,9 +94,38 @@ namespace Com.Wulfram3 {
                     Debug.Log("We are Instantiating LocalPlayer from " + Application.loadedLevelName);
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
 
-					if (FindObjectOfType<RepairPad>().transform.position != null){
+
+                    //team start
+                    Debug.Log("count of players in team " + PunTeams.PlayersPerTeam[PunTeams.Team.red].Count);
+                    if (PunTeams.PlayersPerTeam[PunTeams.Team.blue].Count >= PunTeams.PlayersPerTeam[PunTeams.Team.red].Count)
+                    {
+                        Debug.Log("Spawn red tank");
+                        GameObject player = PhotonNetwork.Instantiate("RedTank", spawnPointsRed[PunTeams.PlayersPerTeam[PunTeams.Team.red].Count].position, spawnPointsRed[PunTeams.PlayersPerTeam[PunTeams.Team.red].Count].rotation, 0);
+                        PhotonNetwork.player.SetTeam(PunTeams.Team.red);
+                    }
+                    else if (PunTeams.PlayersPerTeam[PunTeams.Team.red].Count >= PunTeams.PlayersPerTeam[PunTeams.Team.blue].Count)
+                    {
+                        GameObject player = PhotonNetwork.Instantiate("PlayerTank", spawnPointsBlue[PunTeams.PlayersPerTeam[PunTeams.Team.blue].Count].position, spawnPointsBlue[PunTeams.PlayersPerTeam[PunTeams.Team.blue].Count].rotation, 0);
+                        PhotonNetwork.player.SetTeam(PunTeams.Team.blue);
+                    }
+                    else if (PunTeams.PlayersPerTeam[PunTeams.Team.red].Count == PunTeams.PlayersPerTeam[PunTeams.Team.blue].Count)
+                    {
+                        GameObject player = PhotonNetwork.Instantiate("RedTank", spawnPointsRed[PunTeams.PlayersPerTeam[PunTeams.Team.red].Count].position, spawnPointsRed[PunTeams.PlayersPerTeam[PunTeams.Team.red].Count].rotation, 0);
+                        PhotonNetwork.player.SetTeam(PunTeams.Team.red);
+                    }
+
+
+
+
+
+
+
+
+                    //team end
+                    
+                   /* if (FindObjectOfType<RepairPad>().transform.position != null){
 						GameObject go = PhotonNetwork.Instantiate(this.playerPrefab.name, FindObjectOfType<RepairPad>().transform.position + new Vector3(0,5,0) , Quaternion.identity, 0);
-					}
+					}*/
                 } else {
                     Debug.Log("Ignoring scene load for " + Application.loadedLevelName);
                 }
