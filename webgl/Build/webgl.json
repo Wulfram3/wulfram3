@@ -5,9 +5,10 @@
 "asmCodeUrl": "webgl.asm.code.unityweb",
 "asmMemoryUrl": "webgl.asm.memory.unityweb",
 "asmFrameworkUrl": "webgl.asm.framework.unityweb",
-"TOTAL_MEMORY": 629145600,
+"TOTAL_MEMORY": 734003200,
 "graphicsAPI": ["WebGL 2.0", "WebGL 1.0"],
 "webglContextAttributes": {"preserveDrawingBuffer": false},
 "splashScreenStyle": "Dark",
-"backgroundColor": "#231F20"
+"backgroundColor": "#231F20",
+"cacheControl": {"dataUrl": "must-revalidate"}
 }
