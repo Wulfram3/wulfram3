@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Com.Wulfram3
-{
-    public class HitPointsManager : Photon.PunBehaviour
-    {
+namespace Com.Wulfram3 {
+    public class HitPointsManager : Photon.PunBehaviour {
 
         public int initialHealth = 100;
         public int maxHealth = 100;
@@ -15,10 +13,8 @@ namespace Com.Wulfram3
         private GameManager gameManager;
 
         [PunRPC]
-        public void TakeDamage(int amount)
-        {
-            if (PhotonNetwork.isMasterClient)
-            {
+        public void TakeDamage(int amount) {
+            if (PhotonNetwork.isMasterClient) {
                 int newHealth = Mathf.Clamp(health - amount, 0, maxHealth);
                 SetHealth(newHealth);
                 Debug.Log("Hitpoints: " + newHealth);
@@ -26,26 +22,21 @@ namespace Com.Wulfram3
         }
 
         [PunRPC]
-        public void UpdateHealth(int amount)
-        {
+        public void UpdateHealth(int amount) {
             int newHealth = Mathf.Clamp(amount, 0, maxHealth);
             health = newHealth;
             GetGameManager().UnitsHealthUpdated(this);
         }
 
-        private GameManager GetGameManager()
-        {
-            if (gameManager == null)
-            {
+        private GameManager GetGameManager() {
+            if (gameManager == null) {
                 gameManager = FindObjectOfType<GameManager>();
             }
             return gameManager;
         }
 
-        public void SetHealth(int newHealth)
-        {
-            if (PhotonNetwork.isMasterClient)
-            {
+        public void SetHealth(int newHealth) {
+            if (PhotonNetwork.isMasterClient) {
                 photonView.RPC("UpdateHealth", PhotonTargets.AllBuffered, newHealth);
             }
         }
@@ -55,31 +46,27 @@ namespace Com.Wulfram3
         {
             // Can do validation here later
             SetHealth(newHealth);
-        }
+        }   
 
         public void TellServerHealth(int newHealth)
         {
             photonView.RPC("SetHealthFromClient", PhotonTargets.MasterClient, newHealth);
         }
 
-        public void TellServerTakeDamage(int amount)
-        {
+        public void TellServerTakeDamage(int amount) {
             photonView.RPC("TakeDamage", PhotonTargets.MasterClient, amount);
         }
 
         // Use this for initialization
-        void Start()
-        {
+        void Start() {
             gameManager = GetGameManager();
-            if (PhotonNetwork.isMasterClient)
-            {
+            if (PhotonNetwork.isMasterClient) {
                 SetHealth(initialHealth);
             }
         }
 
         // Update is called once per frame
-        void Update()
-        {
+        void Update() {
 
         }
     }
