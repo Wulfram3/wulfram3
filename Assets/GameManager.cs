@@ -23,6 +23,8 @@ namespace Com.Wulfram3
 
         public GameObject hullBar;
 
+        public GameObject fuelBar;
+
         public GameObject playerInfoPanelPrefab;
         public Transform[] spawnPointsBlue;
         public Transform[] spawnPointsRed;
@@ -204,6 +206,14 @@ namespace Com.Wulfram3
         public void SetHullBar(float level)
         {
             hullBar.GetComponent<LevelController>().SetLevel(level);
+        }
+
+        public void FuelLevelUpdated(FuelManager fuelManager) {
+            SetFuelBar((float) fuelManager.fuel / (float) fuelManager.maxFuel);
+        }
+
+        public void SetFuelBar(float level) {
+            fuelBar.GetComponent<LevelController>().SetLevel(level);
         }
 
         public void SetCurrentTarget(GameObject go)

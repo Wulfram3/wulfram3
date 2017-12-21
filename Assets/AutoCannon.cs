@@ -11,6 +11,7 @@ namespace Com.Wulfram3 {
         public float bulletsPerSecond = 10;
         public float range = 40;
         public float deviationConeRadius = 1;
+        public int fuelPerBullet = 1;
 		private GameManager gameManager;
 		//Start of the laser
 		public Transform gunEnd;
@@ -85,9 +86,14 @@ namespace Com.Wulfram3 {
             if (Input.GetMouseButton(0)) {
 
                 float currentTime = Time.time;
-                if (lastFireTime + timeBetweenShots > currentTime) {
+                if (lastFireTime + timeBetweenShots > currentTime ) {
                     //shooting = false;
                     //SyncShooting();
+                    return;
+                }
+                if (!GetComponent<FuelManager>().TakeFuel(fuelPerBullet)) {
+                    shooting = false;
+                    SyncShooting();
                     return;
                 }
                 shooting = true;

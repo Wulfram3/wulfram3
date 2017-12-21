@@ -27,6 +27,8 @@ namespace Com.Wulfram3 {
         public float maximumX = 360F;
         public float minimumY = -60F;
         public float maximumY = 60F;
+        public int fuelPerPulse = 40;
+        public int fuelPerJump = 30;
 
         public float destroyDelayWhenDead = 5;
         private float timeSinceDead = 0;
@@ -164,14 +166,18 @@ namespace Com.Wulfram3 {
 
             //Fire Pulse
             if (Time.time >= timestamp && (Input.GetMouseButtonDown(1)) && !Cursor.visible) {
-                CmdFirePulseShell();
-                timestamp = Time.time + timeBetweenShots;
+                if (GetComponent<FuelManager>().TakeFuel(fuelPerPulse)) {
+                    CmdFirePulseShell();
+                    timestamp = Time.time + timeBetweenShots;
+                }   
             }
 
             //Tank Jump
             if (Time.time >= jumptimestamp && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Keypad0))) {
-                requestJump = true;
-                jumptimestamp = Time.time + timeBetweenJumps;
+                if (GetComponent<FuelManager>().TakeFuel(fuelPerJump)) {
+                    requestJump = true;
+                    jumptimestamp = Time.time + timeBetweenJumps;
+                }
             }
 
             if (Input.GetKey(KeyCode.LeftShift)) {
