@@ -19,9 +19,9 @@ namespace AvalonAssets.Example
 
         public void Madoka(Action<string> output, string[] args)
         {
-            output.Invoke("no");
-        
-        }
+                PhotonNetwork.LoadLevel("Tron");
+                PhotonNetwork.DestroyAll();
+            }
 
         public void Print(Action<string> output, string[] args)
         {

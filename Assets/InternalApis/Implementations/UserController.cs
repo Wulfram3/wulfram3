@@ -43,8 +43,10 @@ namespace Assets.InternalApis.Implementations
                 defaultName = userString;
                 Debug.Log("defaultName:" + defaultName);
             }
-            else
-            {
+            else if (userString == "Gotcha")
+                {
+                    defaultName = "[MOD]Gotcha";
+                }  else{
                 if (PlayerPrefs.HasKey("PlayerName"))
                 {
                     defaultName = PlayerPrefs.GetString("PlayerName");
