@@ -1,0 +1,421 @@
+fileFormatVersion: 2
+guid: 85cc1fb9ab327ee48b364b06c633e229
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: CannonRecoil
+    100002: CannonPartRight2
+    100004: Union
+    100006: CannonRecoilRight
+    100008: CannonHolderRight
+    100010: CannonAxisRotationLeft
+    100012: CannonPartRight1
+    100014: CannonPartLeft1
+    100016: TurretBase
+    100018: LightAndSensorsRight
+    100020: ShieldsRight
+    100022: TurretLeft
+    100024: Floor
+    100026: CannonAxisRotationRight
+    100028: CapacitorsLeft
+    100030: Camera
+    100032: Texture Group
+    100034: TurretRight
+    100036: LightAndSensorsLeft
+    100038: Directional Light
+    100040: CapacitorsRight
+    100042: //RootNode
+    100044: CannonHolderLeft
+    100046: ShieldsLeft
+    100048: CannonPartLeft2
+    100050: 'Pure 01.lxp '
+    400000: CannonRecoil
+    400002: CannonPartRight2
+    400004: Union
+    400006: CannonRecoilRight
+    400008: CannonHolderRight
+    400010: CannonAxisRotationLeft
+    400012: CannonPartRight1
+    400014: CannonPartLeft1
+    400016: TurretBase
+    400018: LightAndSensorsRight
+    400020: ShieldsRight
+    400022: TurretLeft
+    400024: Floor
+    400026: CannonAxisRotationRight
+    400028: CapacitorsLeft
+    400030: Camera
+    400032: Texture Group
+    400034: TurretRight
+    400036: LightAndSensorsLeft
+    400038: Directional Light
+    400040: CapacitorsRight
+    400042: //RootNode
+    400044: CannonHolderLeft
+    400046: ShieldsLeft
+    400048: CannonPartLeft2
+    400050: 'Pure 01.lxp '
+    2300000: CannonRecoil
+    2300002: CannonPartRight2
+    2300004: Union
+    2300006: CannonRecoilRight
+    2300008: CannonHolderRight
+    2300010: CannonAxisRotationLeft
+    2300012: CannonPartRight1
+    2300014: CannonPartLeft1
+    2300016: LightAndSensorsRight
+    2300018: ShieldsRight
+    2300020: TurretLeft
+    2300022: Floor
+    2300024: CannonAxisRotationRight
+    2300026: CapacitorsLeft
+    2300028: TurretRight
+    2300030: LightAndSensorsLeft
+    2300032: CapacitorsRight
+    2300034: CannonHolderLeft
+    2300036: ShieldsLeft
+    2300038: CannonPartLeft2
+    3300000: CannonRecoil
+    3300002: CannonPartRight2
+    3300004: Union
+    3300006: CannonRecoilRight
+    3300008: CannonHolderRight
+    3300010: CannonAxisRotationLeft
+    3300012: CannonPartRight1
+    3300014: CannonPartLeft1
+    3300016: LightAndSensorsRight
+    3300018: ShieldsRight
+    3300020: TurretLeft
+    3300022: Floor
+    3300024: CannonAxisRotationRight
+    3300026: CapacitorsLeft
+    3300028: TurretRight
+    3300030: LightAndSensorsLeft
+    3300032: CapacitorsRight
+    3300034: CannonHolderLeft
+    3300036: ShieldsLeft
+    3300038: CannonPartLeft2
+    4300000: Union
+    4300002: TurretLeft
+    4300004: ShieldsLeft
+    4300006: LightAndSensorsLeft
+    4300008: CannonHolderLeft
+    4300010: CannonPartLeft1
+    4300012: CannonPartLeft2
+    4300014: CannonRecoil
+    4300016: CapacitorsLeft
+    4300018: CannonAxisRotationLeft
+    4300020: TurretRight
+    4300022: LightAndSensorsRight
+    4300024: ShieldsRight
+    4300026: CannonHolderRight
+    4300028: CannonPartRight1
+    4300030: CannonPartRight2
+    4300032: CannonRecoilRight
+    4300034: CapacitorsRight
+    4300036: CannonAxisRotationRight
+    4300038: Floor
+    7400000: IdleAnim
+    7400002: TurretDeployAnim
+    7400004: IdleDeployedAnim
+    7400006: DeployedIdle
+    9500000: //RootNode
+    11100000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 3
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: TurretDeployAnim
+      takeName: 
+      firstFrame: 1
+      lastFrame: 45
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Camera
+        weight: 1
+      - path: Directional Light
+        weight: 1
+      - path: Floor
+        weight: 1
+      - path: Texture Group
+        weight: 1
+      - path: 'Texture Group/Pure 01.lxp '
+        weight: 1
+      - path: TurretBase
+        weight: 1
+      - path: TurretBase/TurretLeft
+        weight: 1
+      - path: TurretBase/TurretLeft/CannonAxisRotationLeft
+        weight: 1
+      - path: TurretBase/TurretLeft/CannonHolderLeft
+        weight: 1
+      - path: TurretBase/TurretLeft/CannonHolderLeft/CannonPartLeft1
+        weight: 1
+      - path: TurretBase/TurretLeft/CannonHolderLeft/CannonPartLeft1/CannonPartLeft2
+        weight: 1
+      - path: TurretBase/TurretLeft/CannonHolderLeft/CannonPartLeft1/CannonPartLeft2/CannonRecoil
+        weight: 1
+      - path: TurretBase/TurretLeft/CapacitorsLeft
+        weight: 1
+      - path: TurretBase/TurretLeft/LightAndSensorsLeft
+        weight: 1
+      - path: TurretBase/TurretLeft/ShieldsLeft
+        weight: 1
+      - path: TurretBase/TurretRight
+        weight: 1
+      - path: TurretBase/TurretRight/CannonAxisRotationRight
+        weight: 1
+      - path: TurretBase/TurretRight/CannonHolderRight
+        weight: 1
+      - path: TurretBase/TurretRight/CannonHolderRight/CannonPartRight1
+        weight: 1
+      - path: TurretBase/TurretRight/CannonHolderRight/CannonPartRight1/CannonPartRight2
+        weight: 1
+      - path: TurretBase/TurretRight/CannonHolderRight/CannonPartRight1/CannonPartRight2/CannonRecoilRight
+        weight: 1
+      - path: TurretBase/TurretRight/CapacitorsRight
+        weight: 1
+      - path: TurretBase/TurretRight/LightAndSensorsRight
+        weight: 1
+      - path: TurretBase/TurretRight/ShieldsRight
+        weight: 1
+      - path: TurretBase/Union
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: IdleAnim
+      takeName: modo_Anim
+      firstFrame: 0
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Camera
+        weight: 1
+      - path: Directional Light
+        weight: 1
+      - path: Floor
+        weight: 1
+      - path: Texture Group
+        weight: 1
+      - path: 'Texture Group/Pure 01.lxp '
+        weight: 1
+      - path: TurretBase
+        weight: 1
+      - path: TurretBase/TurretLeft
+        weight: 1
+      - path: TurretBase/TurretLeft/CannonAxisRotationLeft
+        weight: 1
+      - path: TurretBase/TurretLeft/CannonHolderLeft
+        weight: 1
+      - path: TurretBase/TurretLeft/CannonHolderLeft/CannonPartLeft1
+        weight: 1
+      - path: TurretBase/TurretLeft/CannonHolderLeft/CannonPartLeft1/CannonPartLeft2
+        weight: 1
+      - path: TurretBase/TurretLeft/CannonHolderLeft/CannonPartLeft1/CannonPartLeft2/CannonRecoil
+        weight: 1
+      - path: TurretBase/TurretLeft/CapacitorsLeft
+        weight: 1
+      - path: TurretBase/TurretLeft/LightAndSensorsLeft
+        weight: 1
+      - path: TurretBase/TurretLeft/ShieldsLeft
+        weight: 1
+      - path: TurretBase/TurretRight
+        weight: 1
+      - path: TurretBase/TurretRight/CannonAxisRotationRight
+        weight: 1
+      - path: TurretBase/TurretRight/CannonHolderRight
+        weight: 1
+      - path: TurretBase/TurretRight/CannonHolderRight/CannonPartRight1
+        weight: 1
+      - path: TurretBase/TurretRight/CannonHolderRight/CannonPartRight1/CannonPartRight2
+        weight: 1
+      - path: TurretBase/TurretRight/CannonHolderRight/CannonPartRight1/CannonPartRight2/CannonRecoilRight
+        weight: 1
+      - path: TurretBase/TurretRight/CapacitorsRight
+        weight: 1
+      - path: TurretBase/TurretRight/LightAndSensorsRight
+        weight: 1
+      - path: TurretBase/TurretRight/ShieldsRight
+        weight: 1
+      - path: TurretBase/Union
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: DeployedIdle
+      takeName: modo_Anim
+      firstFrame: 45
+      lastFrame: 46
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Camera
+        weight: 1
+      - path: Directional Light
+        weight: 1
+      - path: Floor
+        weight: 1
+      - path: Texture Group
+        weight: 1
+      - path: 'Texture Group/Pure 01.lxp '
+        weight: 1
+      - path: TurretBase
+        weight: 1
+      - path: TurretBase/TurretLeft
+        weight: 1
+      - path: TurretBase/TurretLeft/CannonAxisRotationLeft
+        weight: 1
+      - path: TurretBase/TurretLeft/CannonHolderLeft
+        weight: 1
+      - path: TurretBase/TurretLeft/CannonHolderLeft/CannonPartLeft1
+        weight: 1
+      - path: TurretBase/TurretLeft/CannonHolderLeft/CannonPartLeft1/CannonPartLeft2
+        weight: 1
+      - path: TurretBase/TurretLeft/CannonHolderLeft/CannonPartLeft1/CannonPartLeft2/CannonRecoil
+        weight: 1
+      - path: TurretBase/TurretLeft/CapacitorsLeft
+        weight: 1
+      - path: TurretBase/TurretLeft/LightAndSensorsLeft
+        weight: 1
+      - path: TurretBase/TurretLeft/ShieldsLeft
+        weight: 1
+      - path: TurretBase/TurretRight
+        weight: 1
+      - path: TurretBase/TurretRight/CannonAxisRotationRight
+        weight: 1
+      - path: TurretBase/TurretRight/CannonHolderRight
+        weight: 1
+      - path: TurretBase/TurretRight/CannonHolderRight/CannonPartRight1
+        weight: 1
+      - path: TurretBase/TurretRight/CannonHolderRight/CannonPartRight1/CannonPartRight2
+        weight: 1
+      - path: TurretBase/TurretRight/CannonHolderRight/CannonPartRight1/CannonPartRight2/CannonRecoilRight
+        weight: 1
+      - path: TurretBase/TurretRight/CapacitorsRight
+        weight: 1
+      - path: TurretBase/TurretRight/LightAndSensorsRight
+        weight: 1
+      - path: TurretBase/TurretRight/ShieldsRight
+        weight: 1
+      - path: TurretBase/Union
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: TurretBase
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
