@@ -4,7 +4,9 @@
  */
 
 using Photon;
-
+using UnityEngine;
+using System.Collections;
+using Com.Wulfram3;
 namespace PhotonChatUI
 {
     public class ChatUIAutoLogin : PunBehaviour
@@ -16,11 +18,11 @@ namespace PhotonChatUI
             get { return _chatUI ?? (_chatUI = GetComponent<ChatUI>()); }
         }
 
-        public override void OnJoinedRoom()
+        void Start()
         {
             base.OnJoinedRoom();
-
             chatUI.Connect(PhotonNetwork.playerName);
+            
         }
     }
 }
