@@ -120,15 +120,6 @@ public class HubGui : MonoBehaviour
 			this.demoBtn = new DemoBtn() { Text = "Start", Link = "DemoRPS-Scene" };
 			this.webLink = new DemoBtn();
 		}
-
-
-        GUILayout.Label("Tutorial", m_Headline);
-        if (GUILayout.Button("Marco Polo Tutorial", GUILayout.Width(280)))
-        {
-            demoDescription = "<color=orange>Marco Polo Tutorial</color>\n\nFinal result you could get when you do the Marco Polo Tutorial.\nSlightly modified to be more compatible with this package.";
-            this.demoBtn = new DemoBtn() { Text = "Start", Link = "MarcoPolo-Scene" };
-            this.webLink = new DemoBtn() { Text = "Open Tutorial (www)", Link = "http://tinyurl.com/nmylf44" };
-        }
         GUILayout.EndScrollView();
 
         GUILayout.BeginVertical(GUILayout.Width(Screen.width - 345));

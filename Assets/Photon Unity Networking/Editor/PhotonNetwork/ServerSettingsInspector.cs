@@ -22,7 +22,6 @@ public class ServerSettingsInspector : Editor
     private ServerConnection lastServer;
 
 
-    [ExecuteInEditMode]
     public void OnEnable()
     {
 		this.lastUsedRegion = ServerSettings.BestRegionCodeInPreferences;

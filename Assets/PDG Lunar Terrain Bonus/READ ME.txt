@@ -1,0 +1,41 @@
+PDG Lunar Terrain Bonus Pack
+----------------------------
+
+Overview:
+This asset contains additional textures for your PDG Lunar Terrain asset.
+
+
+Detail Textures
+---------------
+One example set of three different, tiling textures, see folder "Detail Textures"
+They are intended to work as detailed ground-cover and could be painted on the terrain
+manually or automatically (via splatmaps)
+
+
+Splatmaps
+---------
+The "Splatmaps" folder contains 15 splatmaps, matching the topology of the lunar terrains.
+They can be used to automatically control the distribution of detail textures.
+
+
+Diffuse Textures
+----------------
+The diffuse textures in this package got no Ambient Occlusion "baked" into their RGB channels
+, instead the AO was put into the Alpha Channel. This textures are best to
+use with the Marmoset Skyshop Terrain Shader, but can also be used with standard
+unity shaders. Just give them a try and see, which suits you best!
+
+For further and more detailed informations, please see the "PDG Lunar Terrain Manual v1.1"
+.pdf document inside the main package!
+
+
+
+Got questions or want to give us your feedback? - just be sure to drop an email: 
+unity@play-da-gaimz.de or search for "PDG Terrain" on Unity Forum http://forum.unity3d.com/forum.php
+
+If you like this asset – please let other users know by rating it and write a short line or two about it! 
+
+
+Best Regards
+
+

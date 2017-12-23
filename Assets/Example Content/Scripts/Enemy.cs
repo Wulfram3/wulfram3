@@ -94,7 +94,7 @@ using Com.Wulfram3;
             
             if (bullet != null)
                 {
-                //GetComponent<HitPointsManager>().TakeDamage(-1);
+               
                 Damage(bullet.bulletDamage);
                 }
             }
