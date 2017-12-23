@@ -2,6 +2,7 @@
 using Assets.InternalApis.Interfaces;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 
 using UnityEngine;
@@ -24,6 +25,8 @@ namespace Com.Wulfram3
         public GameObject hullBar;
 
         public GameObject fuelBar;
+
+        public GameObject cargoPrefab;
 
         public GameObject playerInfoPanelPrefab;
         public Transform[] spawnPointsBlue;
@@ -260,6 +263,69 @@ namespace Com.Wulfram3
 
         }
 
+        [PunRPC]
+        public void RequestPickUpCargo(CargoManager cargoManager) {
+            if (PhotonNetwork.isMasterClient) {
+                if (cargoManager.pickedUpCargo != "") {
+                    return;
+                }
+                Cargo cargo = FindCargoInRange(cargoManager.transform.position, 5f);
+                if (cargo != null) {
+                    cargoManager.photonView.RPC("SetPickedUpCargo", PhotonTargets.AllBuffered, cargo.content);
+                    if (cargo.GetComponentInParent<PlayerMovementManager>() != null) {
+                    }
+                    PhotonNetwork.Destroy(cargo.gameObject);
+                }
+            }
+        }
+
+        private Cargo FindCargoInRange(Vector3 position, float scanRadius) {
+            Transform closestTarget = null;
+            float minDistance = scanRadius + 10f;
+            var cols = Physics.OverlapSphere(position, scanRadius);
+            var rigidbodies = new List<Rigidbody>();
+            foreach (var col in cols) {
+                if (col.attachedRigidbody != null && !rigidbodies.Contains(col.attachedRigidbody) && col.attachedRigidbody.GetComponentInParent<Cargo>() != null) {
+                    rigidbodies.Add(col.attachedRigidbody);
+                }
+            }
+
+            foreach (Rigidbody rb in rigidbodies) {
+                Transform target = rb.transform;
+
+                float distance = Vector3.Distance(position, target.transform.position);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    closestTarget = target;
+                }
+            }
+
+            if (closestTarget == null) {
+                return null;
+            }
+            return closestTarget.GetComponentInParent<Cargo>();
+        }
+
+        public void PickUpCargo(CargoManager cargoManager) {
+            photonView.RPC("RequestPickUpCargo", PhotonTargets.MasterClient, cargoManager);
+        }
+
+        [PunRPC]
+        public void RequestDropCargo(CargoManager cargoManager) {
+            if (PhotonNetwork.isMasterClient) {
+                string pickedUpCargo = cargoManager.pickedUpCargo;
+                if (pickedUpCargo == "") {
+                    return;
+                }
+                cargoManager.photonView.RPC("SetPickedUpCargo", PhotonTargets.AllBuffered, "");
+                GameObject go = PhotonNetwork.Instantiate(cargoPrefab.name, cargoManager.transform.position, Quaternion.identity, 0);
+                go.GetComponent<Cargo>().photonView.RPC("SetContent", PhotonTargets.AllBuffered, pickedUpCargo);
+            }
+        }
+
+        public void DropCargo(CargoManager cargoManager) {
+            photonView.RPC("RequestDropCargo", PhotonTargets.MasterClient, cargoManager);
+        }
 
         #endregion
 

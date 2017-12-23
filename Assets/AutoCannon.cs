@@ -30,7 +30,7 @@ namespace Com.Wulfram3 {
 		//next fire of laser
 		private float nextFire;
 
-        public bool debug = true;
+        public bool debug = false;
 
         private float timeBetweenShots;
         private float lastFireTime;
@@ -115,9 +115,10 @@ namespace Com.Wulfram3 {
                 bool targetFound = Physics.Raycast(pos, targetDirection, out objectHit, range) && objectHit.transform.GetComponent<Unit>() != null;
                 if (targetFound) {
                     HitPointsManager hitPointsManager = objectHit.transform.GetComponent<HitPointsManager>();
-                    hitPointsManager.TellServerTakeDamage(bulletDamageinHitpoints);
-                    print("autocannon hit");
-                    AudioSource.PlayClipAtPoint(autoCannonSound, transform.position);
+                    if (hitPointsManager != null) {
+                        hitPointsManager.TellServerTakeDamage(bulletDamageinHitpoints);
+                        AudioSource.PlayClipAtPoint(autoCannonSound, transform.position);
+                    }              
                 }
 
             } else {

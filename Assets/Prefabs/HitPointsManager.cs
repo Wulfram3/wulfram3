@@ -17,7 +17,6 @@ namespace Com.Wulfram3 {
             if (PhotonNetwork.isMasterClient) {
                 int newHealth = Mathf.Clamp(health - amount, 0, maxHealth);
                 SetHealth(newHealth);
-                Debug.Log("Hitpoints: " + newHealth);
             }
         }
 
