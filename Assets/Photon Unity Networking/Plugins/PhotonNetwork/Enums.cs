@@ -172,7 +172,8 @@ public enum PhotonNetworkingMessage
     OnFailedToConnectToPhoton,
 
     /// <summary>
-    /// Called for any update of the room-listing while in a lobby (PhotonNetwork.insideLobby) on the Master Server.
+    /// Called for any update of the room-listing while in a lobby (PhotonNetwork.insideLobby) on the Master Server
+    /// or when a response is received for PhotonNetwork.GetCustomRoomList().
     /// </summary>
     /// <remarks>
     /// PUN provides the list of rooms by PhotonNetwork.GetRoomList().<br/>
@@ -518,6 +519,8 @@ public enum CloudRegionCode
     @in = 10,
     /// <summary>Russia, ru</summary>
     ru = 11,
+    /// <summary>Russia East, rue</summary>
+    rue = 12,
 
     /// <summary>No region selected.</summary>
     none = 4
@@ -541,7 +544,8 @@ public enum CloudRegionFlag
     cae =   1 << 7,
     kr =    1 << 8,
     @in =   1 << 9,
-    ru =    1 << 10
+    ru =    1 << 10,
+    rue =   1 << 11
 };
 
 

@@ -1874,7 +1874,7 @@
         <member name="F:ExitGames.Client.Photon.SimulationItem.TimeToExecute">
             <summary>Timestamp after which this item must be executed.</summary>
         </member>
-        <member name="F:ExitGames.Client.Photon.SimulationItem.ActionToExecute">
+        <member name="F:ExitGames.Client.Photon.SimulationItem.DelayedData">
             <summary>Action to execute when the lag-time passed.</summary>
         </member>
         <member name="M:ExitGames.Client.Photon.SimulationItem.#ctor">

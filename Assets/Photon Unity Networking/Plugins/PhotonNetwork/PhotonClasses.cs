@@ -205,7 +205,8 @@ public interface IPunCallbacks
     void OnPhotonInstantiate(PhotonMessageInfo info);
 
     /// <summary>
-    /// Called for any update of the room-listing while in a lobby (PhotonNetwork.insideLobby) on the Master Server.
+    /// Called for any update of the room-listing while in a lobby (PhotonNetwork.insideLobby) on the Master Server
+    /// or when a response is received for PhotonNetwork.GetCustomRoomList().
     /// </summary>
     /// <remarks>
     /// PUN provides the list of rooms by PhotonNetwork.GetRoomList().<br/>
@@ -680,7 +681,8 @@ namespace Photon
         }
 
         /// <summary>
-        /// Called for any update of the room-listing while in a lobby (PhotonNetwork.insideLobby) on the Master Server.
+        /// Called for any update of the room-listing while in a lobby (PhotonNetwork.insideLobby) on the Master Server
+        /// or when a response is received for PhotonNetwork.GetCustomRoomList().
         /// </summary>
         /// <remarks>
         /// PUN provides the list of rooms by PhotonNetwork.GetRoomList().<br/>
@@ -938,6 +940,7 @@ namespace Photon
 public struct PhotonMessageInfo
 {
     private readonly int timeInt;
+    /// <summary>The sender of a message / event. May be null.</summary>
     public readonly PhotonPlayer sender;
     public readonly PhotonView photonView;
 

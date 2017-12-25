@@ -211,20 +211,6 @@ namespace ExitGames.Demos
 				Scene = "DemoRPS-Scene"
 				}
 			);
-
-			_data.Add(
-				"MarcoPoloTutorial", 
-				new DemoData()
-				{
-				Title = "Marco Polo Tutorial",
-				Description = "Final result you could get when you do the Marco Polo Tutorial.\n" +
-					"Slightly modified to be more compatible with this package.",
-				Scene = "MarcoPolo-Scene",
-				TutorialLink = "http://tinyurl.com/nmylf44"
-				}
-			);
-
-
 		}
 
 		public void SelectDemo(string Reference)

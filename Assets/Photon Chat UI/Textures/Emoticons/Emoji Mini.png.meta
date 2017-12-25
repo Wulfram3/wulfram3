@@ -1,0 +1,914 @@
+fileFormatVersion: 2
+guid: a8fa701e895f12f4fabe9d0bacf643f9
+timeCreated: 1446219153
+licenseType: Store
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Emoji_0
+    21300002: Emoji_1
+    21300004: Emoji_2
+    21300006: Emoji_3
+    21300008: Emoji_4
+    21300010: Emoji_5
+    21300012: Emoji_6
+    21300014: Emoji_7
+    21300016: Emoji_8
+    21300018: Emoji_9
+    21300020: Emoji_10
+    21300022: Emoji_11
+    21300024: Emoji_12
+    21300026: Emoji_13
+    21300028: Emoji_14
+    21300030: Emoji_15
+    21300032: Emoji_16
+    21300034: Emoji_17
+    21300036: Emoji_18
+    21300038: Emoji_19
+    21300040: Emoji_20
+    21300042: Emoji_21
+    21300044: Emoji_22
+    21300046: Emoji_23
+    21300048: Emoji_24
+    21300050: Emoji_25
+    21300052: Emoji_26
+    21300054: Emoji_27
+    21300056: Emoji_28
+    21300058: Emoji_29
+    21300060: Emoji_30
+    21300062: Emoji_31
+    21300064: Emoji_32
+    21300066: Emoji_33
+    21300068: Emoji_34
+    21300070: Emoji_35
+    21300072: Emoji_36
+    21300074: Emoji_37
+    21300076: Emoji_38
+    21300078: Emoji_39
+    21300080: Emoji_40
+    21300082: Emoji_41
+    21300084: Emoji_42
+    21300086: Emoji_43
+    21300088: Emoji_44
+    21300090: Emoji_45
+    21300092: Emoji_46
+    21300094: Emoji_47
+    21300096: Emoji_48
+    21300098: Emoji_49
+    21300100: Emoji_50
+    21300102: Emoji_51
+    21300104: Emoji_52
+    21300106: Emoji_53
+    21300108: Emoji_54
+    21300110: Emoji_55
+    21300112: Emoji_56
+    21300114: Emoji_57
+    21300116: Emoji_58
+    21300118: Emoji_59
+    21300120: Emoji_60
+    21300122: Emoji_61
+    21300124: Emoji_62
+    21300126: Emoji_63
+    21300128: Emoji_64
+    21300130: Emoji_65
+    21300132: Emoji_66
+    21300134: Emoji_67
+    21300136: Emoji_68
+    21300138: Emoji_69
+    21300140: Emoji_70
+    21300142: Emoji_71
+    21300144: Emoji_72
+    21300146: Emoji_73
+    21300148: Emoji_74
+    21300150: Emoji_75
+    21300152: Emoji_76
+    21300154: Emoji_77
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 175
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Emoji_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 325
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_1
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 325
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_2
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 325
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_3
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 325
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_4
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 325
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_5
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 325
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_6
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 325
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_7
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 325
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_8
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 325
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_9
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 325
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_10
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 325
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_11
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 325
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_12
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 325
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 260
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_14
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 260
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_15
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 260
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_16
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 260
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_17
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 260
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_18
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 260
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_19
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 260
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_20
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 260
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_21
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 260
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_22
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 260
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_23
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 260
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_24
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 260
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_25
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 260
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_26
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 195
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_27
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 195
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_28
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 195
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_29
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 195
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_30
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 195
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_31
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 195
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_32
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 195
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_33
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 195
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_34
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 195
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_35
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 195
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_36
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 195
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_37
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 195
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_38
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 195
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_39
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 130
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_40
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 130
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_41
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 130
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_42
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 130
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_43
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 130
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_44
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 130
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_45
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 130
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_46
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 130
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_47
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 130
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_48
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 130
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_49
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 130
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_50
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 130
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_51
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 130
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_52
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 65
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_53
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 65
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_54
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 65
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_55
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 65
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_56
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 65
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_57
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 65
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_58
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 65
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_59
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 65
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_60
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 65
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_61
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 65
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_62
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 65
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_63
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 65
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_64
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 65
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_65
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_66
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 0
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_67
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 0
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_68
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 0
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_69
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 0
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_70
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 0
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_71
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 0
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_72
+      rect:
+        serializedVersion: 2
+        x: 455
+        y: 0
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_73
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 0
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_74
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 0
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_75
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 0
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_76
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 0
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Emoji_77
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 0
+        width: 51
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
