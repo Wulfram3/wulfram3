@@ -7,6 +7,7 @@ using System.Net;
 using Assets.InternalApis;
 using Assets.InternalApis.Interfaces;
 using Assets.InternalApis.Implementations;
+using PhotonChatUI;
 
 namespace Com.Wulfram3 {
     public class Launcher : Photon.PunBehaviour {
@@ -32,12 +33,14 @@ namespace Com.Wulfram3 {
 
 		public AudioClip clicksound;
 		public AudioSource click;
+       
 
+        
         #endregion
 
 
         #region Private Variables
-
+        private ChatUI _chatUI;
 
         /// <summary>
         /// This client's version number. Users are separated from each other by gameversion (which allows you to make breaking changes).
@@ -99,7 +102,10 @@ namespace Com.Wulfram3 {
 
 
         #region Public Methods
-
+        public ChatUI chatUI
+        {
+            get { return _chatUI ?? (_chatUI = GetComponent<ChatUI>()); }
+        }
 
         /// <summary>
         /// Start the connection process. 
@@ -181,6 +187,7 @@ namespace Com.Wulfram3 {
                 // #Critical
                 // Load the Room Level. 
                 PhotonNetwork.LoadLevel("Playground");
+               
             }
         }
 

@@ -99,6 +99,9 @@ namespace Com.Wulfram3
 
         public void Start()
         {
+
+
+
             if (playerPrefab == null)
             {
                 Debug.LogError("<Color=Red><a>Missing</a></Color> playerPrefab Reference. Please set it up in GameObject 'Game Manager'", this);
@@ -331,6 +334,22 @@ namespace Com.Wulfram3
 
         #region Private Methods
 
+        public override void OnJoinedRoom()
+        {
+
+
+            Debug.Log("Sent Post!' ");
+            // #Critical: We only load if we are the first player, else we rely on  PhotonNetwork.automaticallySyncScene to sync our instance scene.
+            if (PhotonNetwork.room.PlayerCount == 1)
+            {
+                Debug.Log("We load the 'Playground' ");
+
+                // #Critical
+                // Load the Room Level. 
+                PhotonNetwork.LoadLevel("Playground");
+
+            }
+        }
 
         void LoadArena()
         {

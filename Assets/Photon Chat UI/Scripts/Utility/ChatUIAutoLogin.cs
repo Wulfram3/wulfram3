@@ -9,6 +9,7 @@ namespace PhotonChatUI
 {
     public class ChatUIAutoLogin : PunBehaviour
     {
+        bool ischatConnected = false;
         private ChatUI _chatUI;
 
         public ChatUI chatUI
@@ -16,11 +17,15 @@ namespace PhotonChatUI
             get { return _chatUI ?? (_chatUI = GetComponent<ChatUI>()); }
         }
 
-        public void Start()
+        void Update()
         {
-            base.OnJoinedRoom();
+            if (ischatConnected == false)
+            {
+                base.OnJoinedRoom();
 
-            chatUI.Connect(PhotonNetwork.playerName);
+                chatUI.Connect(PhotonNetwork.playerName);
+                ischatConnected = true;
+            }
         }
     }
 }
