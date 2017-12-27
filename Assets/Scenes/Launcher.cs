@@ -8,6 +8,8 @@ using Assets.InternalApis;
 using Assets.InternalApis.Interfaces;
 using Assets.InternalApis.Implementations;
 using PhotonChatUI;
+using UnityEngine.Experimental.UIElements;
+using System;
 
 namespace Com.Wulfram3 {
     public class Launcher : Photon.PunBehaviour {
@@ -26,12 +28,29 @@ namespace Com.Wulfram3 {
 
         [Tooltip("The Ui Panel to let the user enter name, connect and play")]
         public GameObject controlPanel;
+        [Tooltip("The Ui Panel to let the user enter name, connect and play")]
+        public GameObject loginUsername;
+        [Tooltip("The Ui Panel to let the user enter name, connect and play")]
+        public GameObject loginPassword;
+
+        [Tooltip("The Ui Panel to let the user enter name, connect and play")]
+        public GameObject registrationPanel;
+        [Tooltip("The Ui Panel to let the user enter name, connect and play")]
+        public GameObject registrationUsername;
+        [Tooltip("The Ui Panel to let the user enter name, connect and play")]
+        public GameObject registrationPassword;
+        [Tooltip("The Ui Panel to let the user enter name, connect and play")]
+        public GameObject registrationEmail;
+
         [Tooltip("The UI Label to inform the user that the connection is in progress")]
         public GameObject progressLabel;
 
-		public GameObject playername;
+        public GameObject errorLabel;
+
+        public GameObject playername;
 
 		public AudioClip clicksound;
+
 		public AudioSource click;
        
 
@@ -45,7 +64,7 @@ namespace Com.Wulfram3 {
         /// <summary>
         /// This client's version number. Users are separated from each other by gameversion (which allows you to make breaking changes).
         /// </summary>
-        string _gameVersion = "1";
+        string _gameVersion = "1.6 alpha";
 
         /// <summary>
         /// Keep track of the current process. Since connection is asynchronous and is based on several callbacks from Photon, 
@@ -88,14 +107,15 @@ namespace Com.Wulfram3 {
             discordApi = DepenencyInjector.Resolve<IDiscordApi>();
             progressLabel.SetActive(false);
             controlPanel.SetActive(true);
-
+            registrationPanel.SetActive(false);
+            errorLabel.SetActive(false);
         }
 
 
         private void SetUserName()
         {
             var userController = DepenencyInjector.Resolve<IUserController>();
-            PhotonNetwork.playerName = userController.GetWulframPlayerData().Username;
+            PhotonNetwork.playerName = userController.GetWulframPlayerData().userName;
         }
 
         #endregion
@@ -129,6 +149,82 @@ namespace Com.Wulfram3 {
                 // #Critical, we must first and foremost connect to Photon Online Server.
                 PhotonNetwork.ConnectUsingSettings(_gameVersion);
             }
+        }
+
+        public void Login()
+        {
+            progressLabel.SetActive(true);
+            controlPanel.SetActive(false);
+            progressLabel.GetComponent<UnityEngine.UI.Text>().text = "Connecting to secure server...";
+
+            InputField userNameInputField = loginUsername.GetComponent<InputField>();
+            InputField passwordInputField = loginPassword.GetComponent<InputField>();
+
+            DepenencyInjector.Resolve<IUserController>().LoginCompleted += LoginCompleted;
+            DepenencyInjector.Resolve<IUserController>().LoginUser(userNameInputField.text, passwordInputField.text);
+            progressLabel.GetComponent<UnityEngine.UI.Text>().text = "Checking players....";
+        }
+
+        private void LoginCompleted(Assets.InternalApis.Classes.WulframPlayer arg1, string arg2)
+        {
+            progressLabel.GetComponent<UnityEngine.UI.Text>().text = "Connecting to players..";
+            DepenencyInjector.Resolve<IUserController>().LoginCompleted -= LoginCompleted;
+
+            if (arg1 != null)
+            {
+                Connect();
+            }
+            else
+            {
+                InputField userNameInputField = loginUsername.GetComponent<InputField>();
+                InputField passwordInputField = loginPassword.GetComponent<InputField>();
+
+                userNameInputField.text = "";
+                passwordInputField.text = "";
+                progressLabel.SetActive(false);
+                controlPanel.SetActive(true);
+                // Login failed
+                errorLabel.SetActive(true);
+                //Get the GUIText Component attached to that GameObject named Best
+                errorLabel.GetComponent<UnityEngine.UI.Text>().text = arg2;
+            }
+        }
+
+        public void OpenRegistrationPanel()
+        {
+            controlPanel.SetActive(false);
+            registrationPanel.SetActive(true);
+        }
+
+        public void CloseRegistrationPanel()
+        {
+            registrationPanel.SetActive(false);
+            controlPanel.SetActive(true);
+        }
+
+        public void RegisterNewUser()
+        {
+            progressLabel.SetActive(true);
+            registrationPanel.SetActive(false);
+            progressLabel.GetComponent<UnityEngine.UI.Text>().text = "Validating new user...";
+
+            InputField userNameInputField = registrationUsername.GetComponent<InputField>();
+            InputField passwordInputField = registrationPassword.GetComponent<InputField>();
+            InputField emailInputField = registrationEmail.GetComponent<InputField>();
+
+            DepenencyInjector.Resolve<IUserController>().RegisterUserCompleted += RegisterUserCompleted;
+            DepenencyInjector.Resolve<IUserController>().RegisterUser(userNameInputField.text, passwordInputField.text, emailInputField.text);
+            progressLabel.GetComponent<UnityEngine.UI.Text>().text = "Creating new user....";
+        }
+
+        private void RegisterUserCompleted(string obj)
+        {
+            DepenencyInjector.Resolve<IUserController>().RegisterUserCompleted -= RegisterUserCompleted;
+            progressLabel.SetActive(false);
+            CloseRegistrationPanel();
+            errorLabel.SetActive(true);
+            //Get the GUIText Component attached to that GameObject named Best
+            errorLabel.GetComponent<UnityEngine.UI.Text>().text = obj;
         }
 
         public void Quit() {
