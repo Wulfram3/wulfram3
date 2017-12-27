@@ -1,10 +1,18 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: ea3898b2137d04a498fccfdd69758744
 folderAsset: yes
 timeCreated: 1514400531
 licenseType: Free
 DefaultImporter:
   externalObjects: {}
+=======
+guid: 23bf8e46c26b3b346bdcbfbb7c043d3d
+folderAsset: yes
+timeCreated: 1470273943
+licenseType: Pro
+DefaultImporter:
+>>>>>>> origin/login-enabled
   userData: 
   assetBundleName: 
   assetBundleVariant: 

@@ -94,7 +94,7 @@ namespace Com.Wulfram3
             var userControler = DepenencyInjector.Resolve<IUserController>();
             var discordApi = DepenencyInjector.Resolve<IDiscordApi>();
             PhotonNetwork.LeaveRoom();
-            StartCoroutine(discordApi.PlayerLeft(userControler.GetWulframPlayerData().Username));
+            StartCoroutine(discordApi.PlayerLeft(userControler.GetWulframPlayerData().userName));
         }
 
         public void Start()

@@ -1,9 +1,16 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 24f9739038441b7409fa27971186986d
 timeCreated: 1514400355
 licenseType: Free
 DefaultImporter:
   externalObjects: {}
+=======
+guid: 161c83cdb188fd5438ba7935e658db36
+timeCreated: 1500398158
+licenseType: Free
+DefaultImporter:
+>>>>>>> origin/login-enabled
   userData: 
   assetBundleName: 
   assetBundleVariant: 

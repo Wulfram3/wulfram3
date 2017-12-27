@@ -12,7 +12,7 @@ using UnityEngine.Experimental.UIElements;
 using System;
 
 namespace Com.Wulfram3 {
-    public class Launcher : Photon.PunBehaviour {
+    public class LauncherWithLogin : Photon.PunBehaviour {
         #region Public Variables
 
         /// <summary>
@@ -192,6 +192,14 @@ namespace Com.Wulfram3 {
 
         public void OpenRegistrationPanel()
         {
+            InputField userNameInputField = registrationUsername.GetComponent<InputField>();
+            InputField passwordInputField = registrationPassword.GetComponent<InputField>();
+            InputField emailInputField = registrationEmail.GetComponent<InputField>();
+
+            userNameInputField.text = "";
+            passwordInputField.text = "";
+            emailInputField.text = "";
+
             controlPanel.SetActive(false);
             registrationPanel.SetActive(true);
         }
