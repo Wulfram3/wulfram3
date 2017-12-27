@@ -86,13 +86,8 @@ namespace Assets.InternalApis.Implementations
 
         private void SetupSocketConnection()
         {
-            //var serverUrl = "http://localhost:8080";
-<<<<<<< HEAD
-            //var serverUrl = "http://wulfram-player-node.herokuapp.com/";
+
             var serverUrl = "http://wulfram.com:1337/";
-=======
-            var serverUrl = "http://wulfram-player-node.herokuapp.com/";
->>>>>>> origin/login-enabled
             socketServer = Socket.Connect(serverUrl);
 
             socketServer.On(SystemEvents.connect, () => {
