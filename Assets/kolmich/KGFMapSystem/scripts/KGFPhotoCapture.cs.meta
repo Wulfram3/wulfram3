@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: df7378c4fd29ba44696e9de0ce5050f9
+labels:
+- kgf
+- KGFMapSystem
+- minimap
+timeCreated: 18446744011573954816
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

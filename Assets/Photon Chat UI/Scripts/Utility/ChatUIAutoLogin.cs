@@ -4,6 +4,7 @@
  */
 
 using Photon;
+using UnityEngine;
 
 namespace PhotonChatUI
 {
@@ -19,11 +20,13 @@ namespace PhotonChatUI
 
         void Update()
         {
+      
             if (ischatConnected == false)
             {
                 base.OnJoinedRoom();
-
+                Debug.Log("Joined Room CHAT");
                 chatUI.Connect(PhotonNetwork.playerName);
+                    Debug.Log("Chat Player Connected");
                 ischatConnected = true;
             }
         }
