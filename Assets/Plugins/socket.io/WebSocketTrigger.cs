@@ -20,7 +20,7 @@ namespace socket.io {
         public UniRx.IObservable<string> OnRecvAsObservable() {
             if (_cancelPingPong == null) {
                 _cancelPingPong = gameObject.UpdateAsObservable()
-                    .Sample(TimeSpan.FromSeconds(10f))
+                    .Sample(TimeSpan.FromSeconds(30f))
                     .Subscribe(_ => {
                         WebSocket.Send(Packet.Ping);
                         Debug.LogFormat("socket.io => {0} ping~", WebSocket.Url.ToString());
@@ -68,18 +68,26 @@ namespace socket.io {
         public bool IsProbed { get; set; }
 
         public bool IsUpgraded { get; set; }
-        
+
+        private float nextActionTime = 0.0f;
+        public float period = 1.8f;
 
         void Update() {
-            LastWebSocketError = WebSocket.GetLastError();
+            if (Time.time > nextActionTime)
+            {
+                nextActionTime += period;
 
-            if (!string.IsNullOrEmpty(LastWebSocketError)) {
-                CheckAndHandleWebSocketDisconnect();
-                Debug.LogError(LastWebSocketError);
+                LastWebSocketError = WebSocket.GetLastError();
+
+                if (!string.IsNullOrEmpty(LastWebSocketError))
+                {
+                    CheckAndHandleWebSocketDisconnect();
+                    Debug.LogError(LastWebSocketError);
+                }
+
+                if (IsConnected)
+                    ReceiveWebSocketData();
             }
-
-            if (IsConnected)
-                ReceiveWebSocketData();
         }
 
         void ReceiveWebSocketData() {
