@@ -119,30 +119,25 @@ namespace Com.Wulfram3
                     //team start
                     PunTeams.UpdateTeamsNow();
 
+                    int redPlayers = PunTeams.PlayersPerTeam[PunTeams.Team.red].Count;
+                    int bluePlayers = PunTeams.PlayersPerTeam[PunTeams.Team.blue].Count;
 
-                    Debug.Log("count of players in team " + PunTeams.PlayersPerTeam[PunTeams.Team.red].Count);
-                    if (PunTeams.PlayersPerTeam[PunTeams.Team.blue].Count >= PunTeams.PlayersPerTeam[PunTeams.Team.red].Count)
+                    Debug.Log("Number of Red players: " + redPlayers);
+                    Debug.Log("Number of Blue players: " + bluePlayers);
+                    if (bluePlayers > redPlayers)
                     {
                         Debug.Log("Spawn red tank");
-                        GameObject player = PhotonNetwork.Instantiate("RedTank", spawnPointsRed[PunTeams.PlayersPerTeam[PunTeams.Team.red].Count].position, spawnPointsRed[PunTeams.PlayersPerTeam[PunTeams.Team.red].Count].rotation, 0);
+                        Transform selectedSpawnPoint = spawnPointsRed[0];
+                        GameObject player = PhotonNetwork.Instantiate("RedTank", selectedSpawnPoint.position, selectedSpawnPoint.rotation, 0);
                         PhotonNetwork.player.SetTeam(PunTeams.Team.red);
                     }
-                    else if (PunTeams.PlayersPerTeam[PunTeams.Team.red].Count >= PunTeams.PlayersPerTeam[PunTeams.Team.blue].Count)
+                    else 
                     {
-                        GameObject player = PhotonNetwork.Instantiate("PlayerTank", spawnPointsBlue[PunTeams.PlayersPerTeam[PunTeams.Team.blue].Count].position, spawnPointsBlue[PunTeams.PlayersPerTeam[PunTeams.Team.blue].Count].rotation, 0);
+                        Debug.Log("Spawn blue tank");
+                        Transform selectedSpawnPoint = spawnPointsBlue[0];
+                        GameObject player = PhotonNetwork.Instantiate("PlayerTank", selectedSpawnPoint.position, selectedSpawnPoint.rotation, 0);
                         PhotonNetwork.player.SetTeam(PunTeams.Team.blue);
                     }
-                    else if (PunTeams.PlayersPerTeam[PunTeams.Team.red].Count == PunTeams.PlayersPerTeam[PunTeams.Team.blue].Count)
-                    {
-                        GameObject player = PhotonNetwork.Instantiate("RedTank", spawnPointsRed[PunTeams.PlayersPerTeam[PunTeams.Team.red].Count].position, spawnPointsRed[PunTeams.PlayersPerTeam[PunTeams.Team.red].Count].rotation, 0);
-                        PhotonNetwork.player.SetTeam(PunTeams.Team.red);
-                    }
-
-
-
-
-
-
 
 
                     //team end
