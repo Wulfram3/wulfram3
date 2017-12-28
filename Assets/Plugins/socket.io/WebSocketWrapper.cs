@@ -26,6 +26,8 @@ namespace socket.io {
 
         public event Action<string> OnDataRecieved;
 
+        public event Action<string> OnErrorRecieved;
+
         public bool IsConnected {
             get {
                 return IsConnectedInternal();
@@ -134,13 +136,16 @@ namespace socket.io {
             _webSocket = new WebSocketSharp.WebSocket(url);
             _webSocket.OnError += (sender, e) => {
                 lock (_recvLock)
+                    if (OnErrorRecieved != null)
+                    {
+                        OnErrorRecieved.Invoke(e.Message);
+                    }
                     _errors.Enqueue(e.Message);
             };
             _webSocket.OnMessage += (sender, e) => {
 
                 lock (_recvLock)
                 {
-                    Debug.Log("_webSocket.OnMessage:" + Encoding.UTF8.GetString(e.RawData));
                     if(OnDataRecieved != null)
                     {
                         OnDataRecieved.Invoke(Encoding.UTF8.GetString(e.RawData));

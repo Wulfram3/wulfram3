@@ -32,10 +32,10 @@ namespace socket.io {
                 _onRecv = new Subject<string>();
 
             WebSocket.OnDataRecieved += WebSocketOnDataRecieved;
+            WebSocket.OnErrorRecieved += WebSocketOnErrorRecieved;
             eventHandlerAttached = true;
             return _onRecv;
         }
-
 
 
         protected override void RaiseOnCompletedOnDestroy() {
@@ -86,31 +86,43 @@ namespace socket.io {
                 ReceiveWebSocketData();
         }
 
+        private void WebSocketOnErrorRecieved(string obj)
+        {
+            LastWebSocketError = WebSocket.GetLastError();
+
+            if (!string.IsNullOrEmpty(LastWebSocketError))
+            {
+                CheckAndHandleWebSocketDisconnect();
+                Debug.LogError(LastWebSocketError);
+            }
+        }
+
 
         void Update() {
             if (Time.time > nextActionTime)
             {
                 nextActionTime += period;
 
-                LastWebSocketError = WebSocket.GetLastError();
-
-                if (!string.IsNullOrEmpty(LastWebSocketError))
+                if(!eventHandlerAttached)
                 {
-                    CheckAndHandleWebSocketDisconnect();
-                    Debug.LogError(LastWebSocketError);
-                }
+                    LastWebSocketError = WebSocket.GetLastError();
 
-                if (IsConnected && !eventHandlerAttached)
-                {
-                    ReceiveWebSocketData();
-                }
-                    
+                    if (!string.IsNullOrEmpty(LastWebSocketError))
+                    {
+                        CheckAndHandleWebSocketDisconnect();
+                        Debug.LogError(LastWebSocketError);
+                    }
+
+                    if (IsConnected)
+                    {
+                        ReceiveWebSocketData();
+                    }
+                }     
             }
         }
 
         void ReceiveWebSocketData() {
             var recvData = WebSocket.Recv();
-            Debug.Log("ReceiveWebSocketData:" + recvData);
             if (string.IsNullOrEmpty(recvData))
                 return;
 
