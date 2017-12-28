@@ -16,13 +16,15 @@ namespace socket.io {
         
         public WebSocketWrapper(Uri url) {
             Url = url;
-
+            
             var protocol = Url.Scheme;
             if (!protocol.Equals("ws") && !protocol.Equals("wss"))
                 throw new ArgumentException("Unsupported protocol: " + protocol);
         }
 
         public Uri Url { get; private set; }
+
+        public event Action<string> OnDataRecieved;
 
         public bool IsConnected {
             get {
@@ -135,8 +137,18 @@ namespace socket.io {
                     _errors.Enqueue(e.Message);
             };
             _webSocket.OnMessage += (sender, e) => {
+
                 lock (_recvLock)
+                {
+                    Debug.Log("_webSocket.OnMessage:" + Encoding.UTF8.GetString(e.RawData));
+                    if(OnDataRecieved != null)
+                    {
+                        OnDataRecieved.Invoke(Encoding.UTF8.GetString(e.RawData));
+                    }
+                    
                     _messages.Enqueue(e.RawData);
+                }
+                    
             };
 
             _webSocket.Connect();

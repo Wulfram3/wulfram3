@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using UnityEngine.Events;
 
 namespace socket.io {
 
@@ -293,6 +297,7 @@ namespace socket.io {
         }
 
         void DispatchPacket(Packet pkt) {
+
             if (pkt.nsp != Namespace)
                 return;
 
