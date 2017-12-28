@@ -34,7 +34,7 @@ namespace Com.Wulfram3
         [HideInInspector]
         public Camera normalCamera;
 
-        [HideInInspector]
+        //[HideInInspector]
         public Camera overheadCamera;
 
         private TargetInfoController targetChangeListener;
