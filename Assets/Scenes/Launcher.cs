@@ -24,7 +24,7 @@ namespace Com.Wulfram3 {
         /// The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created.
         /// </summary>   
         [Tooltip("The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
-        public byte MaxPlayersPerRoom = 4;
+        public byte MaxPlayersPerRoom = 40;
 
         [Tooltip("The Ui Panel to let the user enter name, connect and play")]
         public GameObject controlPanel;
