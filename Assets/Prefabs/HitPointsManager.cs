@@ -36,7 +36,7 @@ namespace Com.Wulfram3 {
 
         public void SetHealth(int newHealth) {
             if (PhotonNetwork.isMasterClient) {
-                photonView.RPC("UpdateHealth", PhotonTargets.AllBuffered, newHealth);
+                photonView.RPC("UpdateHealth", PhotonTargets.All, newHealth);
             }
         }
 

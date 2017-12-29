@@ -269,7 +269,7 @@ namespace Com.Wulfram3
                 }
                 Cargo cargo = FindCargoInRange(cargoManager.transform.position, 5f);
                 if (cargo != null) {
-                    cargoManager.photonView.RPC("SetPickedUpCargo", PhotonTargets.AllBuffered, cargo.content);
+                    cargoManager.photonView.RPC("SetPickedUpCargo", PhotonTargets.All, cargo.content);
                     if (cargo.GetComponentInParent<PlayerMovementManager>() != null) {
                     }
                     PhotonNetwork.Destroy(cargo.gameObject);
@@ -315,9 +315,9 @@ namespace Com.Wulfram3
                 if (pickedUpCargo == "") {
                     return;
                 }
-                cargoManager.photonView.RPC("SetPickedUpCargo", PhotonTargets.AllBuffered, "");
+                cargoManager.photonView.RPC("SetPickedUpCargo", PhotonTargets.All, "");
                 GameObject go = PhotonNetwork.Instantiate(cargoPrefab.name, cargoManager.transform.position, Quaternion.identity, 0);
-                go.GetComponent<Cargo>().photonView.RPC("SetContent", PhotonTargets.AllBuffered, pickedUpCargo);
+                go.GetComponent<Cargo>().photonView.RPC("SetContent", PhotonTargets.All, pickedUpCargo);
             }
         }
 

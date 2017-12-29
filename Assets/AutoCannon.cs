@@ -158,7 +158,7 @@ namespace Com.Wulfram3 {
         }
 
         private void SyncShooting() {
-            photonView.RPC("SetShooting", PhotonTargets.AllBuffered, shooting);
+            photonView.RPC("SetShooting", PhotonTargets.All, shooting);
         }
 
         private Vector3 GetRandomPointInCircle() {
