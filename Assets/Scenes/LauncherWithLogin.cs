@@ -138,6 +138,12 @@ namespace Com.Wulfram3 {
             isConnecting = true;
             progressLabel.SetActive(true);
             controlPanel.SetActive(false);
+            string userName = PhotonNetwork.playerName;
+            if (userName == "Gotcha" || userName == "d4rksh4de" || userName == "Knight1219") {
+                PhotonNetwork.playerName = "[DEV]" + userName;
+            } else {
+                PhotonNetwork.playerName = userName;
+            }
             StartCoroutine(discordApi.PlayerJoined(PhotonNetwork.playerName));
 
             // we check if we are connected or not, we join if we are , else we initiate the connection to the server.

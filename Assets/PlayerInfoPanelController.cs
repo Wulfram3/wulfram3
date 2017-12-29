@@ -35,28 +35,29 @@ namespace Com.Wulfram3 {
 
                 string playerName = target.GetComponent<PhotonView>().owner.NickName;
                 string hitpoints = target.GetComponent<HitPointsManager>().health + "/" + target.GetComponent<HitPointsManager>().maxHealth;
-                playerNameText.text = playerName + " " + hitpoints;
-                if (playerName == "Gotcha" || playerName ==  "d4rksh4de" || playerName == "Knight1219")
-                {
-                    playerNameText.text = "[MOD]" + playerName + " " + hitpoints;
+
+                string masterClient = "";
+                if (target.GetComponent<PhotonView>().owner.IsMasterClient) {
+                    masterClient = "*";
                 }
-                //add mod check here
-                
-               /* if (target.GetComponent<PhotonView>().owner.IsMasterClient) {
-                    playerNameText.color = Color.yellow;
-                }*/
-                    if (target.GetComponent<PhotonView>().owner.GetTeam().Equals(PunTeams.Team.red))
-                    {
+
+                playerNameText.text = masterClient + playerName + " " + hitpoints;
+
+                if (target.GetComponent<PhotonView>().owner.GetTeam().Equals(PunTeams.Team.red)) {
                     //red
                     playerNameText.color = gameManager.redcolor.color;
-                    }
-                    else
-                    {
+                } else {
                     //blue
                     playerNameText.color = gameManager.bluecolor.color;
                 }
+                //add mod check here
 
-                      
+                /* if (target.GetComponent<PhotonView>().owner.IsMasterClient) {
+                     playerNameText.color = Color.yellow;
+                 }*/
+
+
+
 
                 rectTransform.SetPositionAndRotation(pos, rectTransform.rotation);
             } else {
