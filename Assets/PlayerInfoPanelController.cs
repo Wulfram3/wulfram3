@@ -36,7 +36,7 @@ namespace Com.Wulfram3 {
                 string playerName = target.GetComponent<PhotonView>().owner.NickName;
                 string hitpoints = target.GetComponent<HitPointsManager>().health + "/" + target.GetComponent<HitPointsManager>().maxHealth;
                 playerNameText.text = playerName + " " + hitpoints;
-                if (playerName == "Gotcha")
+                if (playerName == "Gotcha" || playerName ==  "d4rksh4de" || playerName == "Knight1219")
                 {
                     playerNameText.text = "[MOD]" + playerName + " " + hitpoints;
                 }
