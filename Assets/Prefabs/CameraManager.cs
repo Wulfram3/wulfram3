@@ -16,7 +16,7 @@ namespace Com.Wulfram3 {
         // Use this for initialization
         void Start() {
             if (photonView.isMine) {
-                targetPos = thirdPersonPos;
+                targetPos = firstPersonPos;
                 currentPos = targetPos;
                 cam = Camera.main;
                 cam.transform.SetParent(transform);
