@@ -13,7 +13,7 @@ namespace Com.Wulfram3 {
 
         // Use this for initialization
         void Start() {
-            fuel = maxFuel;      
+            ResetFuel();
         }
 
         // Update is called once per frame
@@ -26,6 +26,10 @@ namespace Com.Wulfram3 {
                     TakeFuel(-1);
                 }
             }
+        }
+
+        public void ResetFuel() {
+            fuel = maxFuel;
         }
 
         private GameManager GetGameManager() {

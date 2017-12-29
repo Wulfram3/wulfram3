@@ -32,6 +32,8 @@ public class RepairPad : MonoBehaviour {
 
             HitPointsManager hitpointsManager = player.GetComponent<HitPointsManager>();
             hitpointsManager.TellServerHealth(hitpointsManager.maxHealth);
+
+            player.GetComponent<FuelManager>().ResetFuel();
         }
     }
 }
