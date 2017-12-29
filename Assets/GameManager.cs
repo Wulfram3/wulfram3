@@ -28,9 +28,15 @@ namespace Com.Wulfram3
 
         public GameObject cargoPrefab;
 
+        public Material redcolor;
+        public Material bluecolor;
+
         public GameObject playerInfoPanelPrefab;
         public Transform[] spawnPointsBlue;
         public Transform[] spawnPointsRed;
+     
+
+
         [HideInInspector]
         public Camera normalCamera;
 

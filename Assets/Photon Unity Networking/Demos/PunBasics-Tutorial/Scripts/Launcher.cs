@@ -33,7 +33,7 @@ namespace ExitGames.Demos.DemoAnimator
 		public Text feedbackText;
 
 		[Tooltip("The maximum number of players per room")]
-		public byte maxPlayersPerRoom = 4;
+		public byte maxPlayersPerRoom = 40;
 
 		[Tooltip("The UI Loader Anime")]
 		public LoaderAnime loaderAnime;

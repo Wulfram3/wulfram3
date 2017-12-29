@@ -11,10 +11,17 @@ namespace Com.Wulfram3 {
 
         public Text playerNameText;
 
+        
+
+
+        //public Color red = new Color(249F/255F, 32F/255F, 57F/255F);
+        //public Color blue = new Color(31F/255F, 118F/255F, 204F/255F);
+
         // Use this for initialization
         void Start() {
             Canvas canvas = FindObjectOfType<Canvas>();
             transform.SetParent(canvas.transform);
+            gameManager = FindObjectOfType<GameManager>();
         }
 
         // Update is called once per frame
@@ -29,11 +36,27 @@ namespace Com.Wulfram3 {
                 string playerName = target.GetComponent<PhotonView>().owner.NickName;
                 string hitpoints = target.GetComponent<HitPointsManager>().health + "/" + target.GetComponent<HitPointsManager>().maxHealth;
                 playerNameText.text = playerName + " " + hitpoints;
-                if (target.GetComponent<PhotonView>().owner.IsMasterClient) {
+                if (playerName == "Gotcha")
+                {
+                    playerNameText.text = "[MOD]" + playerName + " " + hitpoints;
+                }
+                //add mod check here
+                
+               /* if (target.GetComponent<PhotonView>().owner.IsMasterClient) {
                     playerNameText.color = Color.yellow;
-                } else {
-                    playerNameText.color = Color.white;
-                }        
+                }*/
+                    if (target.GetComponent<PhotonView>().owner.GetTeam().Equals(PunTeams.Team.red))
+                    {
+                    //red
+                    playerNameText.color = gameManager.redcolor.color;
+                    }
+                    else
+                    {
+                    //blue
+                    playerNameText.color = gameManager.bluecolor.color;
+                }
+
+                      
 
                 rectTransform.SetPositionAndRotation(pos, rectTransform.rotation);
             } else {
