@@ -21,7 +21,11 @@ namespace Com.Wulfram3 {
                 healthCollected += health;
                 if (healthCollected >= 1f) {
                     healthCollected--;
-                    GetComponent<HitPointsManager>().TakeDamage(-1);
+                    PlayerMovementManager playerMovementmanager = GetComponent<PlayerMovementManager>();
+                    if (playerMovementmanager == null || !playerMovementmanager.isDead) {
+                        GetComponent<HitPointsManager>().TakeDamage(-1);
+                    }
+                    
                 }
             }  
         }
