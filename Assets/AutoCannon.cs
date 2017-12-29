@@ -82,22 +82,30 @@ namespace Com.Wulfram3 {
             ShowFeedback();
         }
 
+        private void SetAndSyncShooting(bool newValue) {
+            if (shooting != newValue) {
+                shooting = newValue;
+                SyncShooting();
+            }
+        }
+
+
         private void CheckAndFire() {
             if (Input.GetMouseButton(0)) {
 
                 float currentTime = Time.time;
                 if (lastFireTime + timeBetweenShots > currentTime ) {
-                    //shooting = false;
-                    //SyncShooting();
+                    return;
+                }
+                if (Cursor.visible || GetComponent<PlayerMovementManager>().isDead) {
+                    SetAndSyncShooting(false);
                     return;
                 }
                 if (!GetComponent<FuelManager>().TakeFuel(fuelPerBullet)) {
-                    shooting = false;
-                    SyncShooting();
+                    SetAndSyncShooting(false);
                     return;
                 }
-                shooting = true;
-                SyncShooting();
+                SetAndSyncShooting(true);
 
                 lastFireTime = currentTime;
 
@@ -122,8 +130,7 @@ namespace Com.Wulfram3 {
                 }
 
             } else {
-                shooting = false;
-                SyncShooting();
+                SetAndSyncShooting(false);
             }
         }
 

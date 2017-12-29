@@ -23,7 +23,10 @@ namespace Com.Wulfram3 {
                 fuleRegenerationCollected += fuel;
                 if (fuleRegenerationCollected >= 1f) {
                     fuleRegenerationCollected--;
-                    TakeFuel(-1);
+                    PlayerMovementManager playerMovementmanager = GetComponent<PlayerMovementManager>();
+                    if (playerMovementmanager == null || !playerMovementmanager.isDead) {
+                        TakeFuel(-1);
+                    }
                 }
             }
         }
