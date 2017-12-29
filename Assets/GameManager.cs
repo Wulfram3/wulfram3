@@ -12,10 +12,6 @@ namespace Com.Wulfram3
 {
     public class GameManager : Photon.PunBehaviour
     {
-
-        [Tooltip("The prefab to use for representing the player")]
-        public GameObject playerPrefab;
-
         public GameObject pulseShellPrefab;
 
         public GameObject flakShellPrefab;
@@ -105,61 +101,38 @@ namespace Com.Wulfram3
 
         public void Start()
         {
+            Debug.Log("We are Instantiating LocalPlayer from " + Application.loadedLevelName);
 
-
-
-            if (playerPrefab == null)
-            {
-                Debug.LogError("<Color=Red><a>Missing</a></Color> playerPrefab Reference. Please set it up in GameObject 'Game Manager'", this);
-            }
-            else
-            {
+            if (PlayerMovementManager.LocalPlayerInstance == null) {
                 Debug.Log("We are Instantiating LocalPlayer from " + Application.loadedLevelName);
-
-                if (PlayerMovementManager.LocalPlayerInstance == null)
-                {
-                    Debug.Log("We are Instantiating LocalPlayer from " + Application.loadedLevelName);
-                    // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
+                // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
 
 
-                    //team start
-                    PunTeams.UpdateTeamsNow();
+                //team start
+                PunTeams.UpdateTeamsNow();
 
-                    int redPlayers = PunTeams.PlayersPerTeam[PunTeams.Team.red].Count;
-                    int bluePlayers = PunTeams.PlayersPerTeam[PunTeams.Team.blue].Count;
+                int redPlayers = PunTeams.PlayersPerTeam[PunTeams.Team.red].Count;
+                int bluePlayers = PunTeams.PlayersPerTeam[PunTeams.Team.blue].Count;
 
-                    Debug.Log("Number of Red players: " + redPlayers);
-                    Debug.Log("Number of Blue players: " + bluePlayers);
-                    if (bluePlayers > redPlayers)
-                    {
-                        Debug.Log("Spawn red tank");
-                        Transform selectedSpawnPoint = spawnPointsRed[0];
-                        GameObject player = PhotonNetwork.Instantiate("RedTank", selectedSpawnPoint.position, selectedSpawnPoint.rotation, 0);
-                        PhotonNetwork.player.SetTeam(PunTeams.Team.red);
-                    }
-                    else 
-                    {
-                        Debug.Log("Spawn blue tank");
-                        Transform selectedSpawnPoint = spawnPointsBlue[0];
-                        GameObject player = PhotonNetwork.Instantiate("PlayerTank", selectedSpawnPoint.position, selectedSpawnPoint.rotation, 0);
-                        PhotonNetwork.player.SetTeam(PunTeams.Team.blue);
-                    }
-
-
-                    //team end
-
-                    /* if (FindObjectOfType<RepairPad>().transform.position != null){
-                         GameObject go = PhotonNetwork.Instantiate(this.playerPrefab.name, FindObjectOfType<RepairPad>().transform.position + new Vector3(0,5,0) , Quaternion.identity, 0);
-                     }*/
+                Debug.Log("Number of Red players: " + redPlayers);
+                Debug.Log("Number of Blue players: " + bluePlayers);
+                if (bluePlayers > redPlayers) {
+                    Debug.Log("Spawn red tank");
+                    Transform selectedSpawnPoint = spawnPointsRed[0];
+                    GameObject player = PhotonNetwork.Instantiate("RedTank", selectedSpawnPoint.position, selectedSpawnPoint.rotation, 0);
+                    PhotonNetwork.player.SetTeam(PunTeams.Team.red);
+                } else {
+                    Debug.Log("Spawn blue tank");
+                    Transform selectedSpawnPoint = spawnPointsBlue[0];
+                    GameObject player = PhotonNetwork.Instantiate("PlayerTank", selectedSpawnPoint.position, selectedSpawnPoint.rotation, 0);
+                    PhotonNetwork.player.SetTeam(PunTeams.Team.blue);
                 }
-                else
-                {
-                    Debug.Log("Ignoring scene load for " + Application.loadedLevelName);
-                }
-                normalCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-                overheadCamera = GameObject.FindGameObjectWithTag("OverheadCamera").GetComponent<Camera>();
-                overheadCamera.enabled = false; //set disabled so that it does't render in the background
+            } else {
+                Debug.Log("Ignoring scene load for " + Application.loadedLevelName);
             }
+            normalCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+            overheadCamera = GameObject.FindGameObjectWithTag("OverheadCamera").GetComponent<Camera>();
+            overheadCamera.enabled = false; //set disabled so that it does't render in the background
         }
 
         [PunRPC]
