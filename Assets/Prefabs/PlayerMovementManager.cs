@@ -162,39 +162,39 @@ namespace Com.Wulfram3 {
                 }
             }
 
-            //pulse was here before
-
-            //Fire Pulse
-            if (Time.time >= timestamp && (Input.GetMouseButtonDown(1)) && !Cursor.visible) {
-                if (GetComponent<FuelManager>().TakeFuel(fuelPerPulse)) {
-                    CmdFirePulseShell();
-                    timestamp = Time.time + timeBetweenShots;
-                }   
-            }
-
-            //Tank Jump
-            if (Time.time >= jumptimestamp && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Keypad0))) {
-                if (GetComponent<FuelManager>().TakeFuel(fuelPerJump)) {
-                    requestJump = true;
-                    jumptimestamp = Time.time + timeBetweenJumps;
+            if (!Cursor.visible) {
+                //Fire Pulse
+                if (Time.time >= timestamp && (Input.GetMouseButtonDown(1))) {
+                    if (GetComponent<FuelManager>().TakeFuel(fuelPerPulse)) {
+                        CmdFirePulseShell();
+                        timestamp = Time.time + timeBetweenShots;
+                    }
                 }
-            }
 
-            if (Input.GetKey(KeyCode.LeftShift)) {
-                // raise level
-                height = Mathf.Min(height + 0.01f, 1.0f);
-                if (isLanded && height > 0.001) {
-                    TakeOff();
+                //Tank Jump
+                if (Time.time >= jumptimestamp && (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Keypad0))) {
+                    if (GetComponent<FuelManager>().TakeFuel(fuelPerJump)) {
+                        requestJump = true;
+                        jumptimestamp = Time.time + timeBetweenJumps;
+                    }
                 }
-            }
 
-            if (!isLanded && Input.GetKey(KeyCode.LeftControl)) {
-                // lower level
-                height = Mathf.Max(height - 0.01f, 0f);
-                if (height < 0.001) {
-                    requestLand = true;
+                if (Input.GetKey(KeyCode.LeftShift)) {
+                    // raise level
+                    height = Mathf.Min(height + 0.01f, 1.0f);
+                    if (isLanded && height > 0.001) {
+                        TakeOff();
+                    }
                 }
-            }
+
+                if (!isLanded && Input.GetKey(KeyCode.LeftControl)) {
+                    // lower level
+                    height = Mathf.Max(height - 0.01f, 0f);
+                    if (height < 0.001) {
+                        requestLand = true;
+                    }
+                }
+            }     
 
             if (requestLand) {
                 if (CanLand()) {
@@ -267,6 +267,14 @@ namespace Com.Wulfram3 {
 
             float x = Input.GetAxis("Horizontal") * 0.1f;
             float z = Input.GetAxis("Vertical") * 0.1f;
+
+            if (Cursor.visible) {
+                x = 0;
+                z = 0;
+            } else {
+                x = Input.GetAxis("Horizontal") * 0.1f;
+                z = Input.GetAxis("Vertical") * 0.1f;
+            }
 
             Ray ray = new Ray(new Vector3(transform.position.x, transform.position.y, transform.position.z), Vector3.down);
             RaycastHit hit;

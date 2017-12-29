@@ -32,7 +32,7 @@ namespace Com.Wulfram3 {
         // Update is called once per frame
         void Update() {
             if (photonView.isMine) {
-                if (Input.GetKeyDown(KeyCode.C)) {
+                if (Input.GetKeyDown(KeyCode.C) && !Cursor.visible) {
                     SwapTargetpos();
                     transitionStartTime = Time.time;
                     transitionComplete = false;
