@@ -57,6 +57,8 @@ namespace Assets.InternalApis.Classes
         public DateTime createdDate { get; set; }
 
         public PlayerScores scores { get; set; }
+
+        public string type { get; set; }
     }
 
     //scores: {
@@ -187,5 +189,7 @@ namespace Assets.InternalApis.Classes
         public int skypumpDeployed { get; set; }
 
         public int darklightDeployed { get; set; }
+
+        public int cargoKills { get;  set; }
     }
 }

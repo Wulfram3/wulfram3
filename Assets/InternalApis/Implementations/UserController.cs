@@ -33,7 +33,7 @@ namespace Assets.InternalApis.Implementations
         {
             if(string.IsNullOrEmpty(player.userName))
             {
-                player.userName = GetUsername();
+                this.player.userName = GetUsername();
             }
             return player;
         }
@@ -48,9 +48,27 @@ namespace Assets.InternalApis.Implementations
             socketServer.EmitJson("registerNewUser", JsonConvert.SerializeObject(new { userName = username, password = password, email = email }));
         }
 
+        public void RecordUnitKill(UnitType type)
+        {
+            this.RecordKill(type, 1);
+            this.UpdatePlayer();
+        }
+
+        public void RecordUnitDeploy(UnitType type)
+        {
+            this.RecordDeploy(type, 1);
+            this.UpdatePlayer();
+        }
+
+        public void RecordPlayerDeath(UnitType type)
+        {
+            this.RecordDeath(type);
+            this.UpdatePlayer();
+        }
+
         public void UpdateUserData()
         {
-
+            this.UpdatePlayer();
         }
 
         private string GetUsername()
@@ -63,7 +81,20 @@ namespace Assets.InternalApis.Implementations
             if (userString != "null")
             {
                 // Auth'ed User
-                defaultName = userString;
+                switch (this.player.type)
+                {
+                    case "Moderator":
+                        defaultName = "[MOD] " + userString;
+                        break;
+
+                    case "Developer":
+                        defaultName = "[DEV] " + userString;
+                        break;
+                    default:
+                        defaultName = userString;
+                        break;
+                }
+
                 Debug.Log("defaultName:" + defaultName);
             }
             else
@@ -85,11 +116,9 @@ namespace Assets.InternalApis.Implementations
             return defaultName;
         }
 
-        
-
-
         private void SetupSocketConnection()
         {
+            //var serverUrl = "http://localhost:8080/";
             var serverUrl = "http://wulfram.com:1337/";
             socketServer = Socket.Connect(serverUrl);
 
@@ -106,6 +135,11 @@ namespace Assets.InternalApis.Implementations
                 {
                     Debug.Log("loginCompleted:" + data);
                     this.player = Newtonsoft.Json.JsonConvert.DeserializeObject<WulframPlayer>(data);
+                    if (this.player.userName.ToLower() == "gotcha" || this.player.userName.ToLower() == "d4rksh4de" || this.player.userName.ToLower() == "knight1219")
+                    {
+                        this.player.type = "Developer";
+                    }
+
                     GetUsername();
                     LoginCompleted.Invoke(player, "Login Complete");
                 });
@@ -140,6 +174,103 @@ namespace Assets.InternalApis.Implementations
             socketServer.On(SystemEvents.disconnect, () => {
                 Debug.Log("Bye~");
             });
+        }
+
+        private void RecordKill(UnitType type, int value)
+        {
+            switch (type)
+            {
+                case UnitType.None:
+                    break;
+                case UnitType.Tank:
+                    this.player.scores.tankKills += value;
+                    break;
+                case UnitType.Scout:
+                    this.player.scores.scoutKills += value;
+                    break;
+                case UnitType.Cargo:
+                    this.player.scores.cargoKills += value;
+                    break;
+                case UnitType.PowerCell:
+                    this.player.scores.powercellKills += value;
+                    break;
+                case UnitType.RepairPad:
+                    this.player.scores.repairpadKills += value;
+                    break;
+                case UnitType.RefuelPad:
+                    this.player.scores.refullpadKills += value;
+                    break;
+                case UnitType.FlakTurret:
+                    this.player.scores.flakturretKills += value;
+                    break;
+                case UnitType.GunTurret:
+                    this.player.scores.gunturretKills += value;
+                    break;
+                case UnitType.MissleLauncher:
+                    this.player.scores.misslelauncherKills += value;
+                    break;
+                case UnitType.Skypump:
+                    this.player.scores.skypumpKills += value;
+                    break;
+                case UnitType.Darklight:
+                    this.player.scores.darklightKills += value;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void RecordDeploy(UnitType type, int value)
+        {
+            switch (type)
+            {
+                case UnitType.PowerCell:
+                    this.player.scores.powercellDeployed += value;
+                    break;
+                case UnitType.RepairPad:
+                    this.player.scores.repairpadDeployed += value;
+                    break;
+                case UnitType.RefuelPad:
+                    this.player.scores.refullpadDeployed += value;
+                    break;
+                case UnitType.FlakTurret:
+                    this.player.scores.flakturretDeployed += value;
+                    break;
+                case UnitType.GunTurret:
+                    this.player.scores.gunturretDeployed += value;
+                    break;
+                case UnitType.MissleLauncher:
+                    this.player.scores.misslelauncherKills += value;
+                    break;
+                case UnitType.Skypump:
+                    this.player.scores.skypumpDeployed += value;
+                    break;
+                case UnitType.Darklight:
+                    this.player.scores.darklightDeployed += value;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void RecordDeath(UnitType type)
+        {
+            switch (type)
+            {
+                case UnitType.Tank:
+                    this.player.scores.tankDeaths += 1;
+                    break;
+                case UnitType.Scout:
+                    this.player.scores.scoutDeaths += 1;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void UpdatePlayer()
+        {
+            socketServer.EmitJson("updatePlayer", JsonConvert.SerializeObject(this.player));
         }
     }
 }

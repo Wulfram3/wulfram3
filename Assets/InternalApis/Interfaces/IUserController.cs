@@ -14,6 +14,12 @@ namespace Assets.InternalApis.Interfaces
 
         void UpdateUserData();
 
+        void RecordUnitKill(UnitType type);
+
+        void RecordUnitDeploy(UnitType type);
+
+        void RecordPlayerDeath(UnitType type);
+
         WulframPlayer GetWulframPlayerData();
 
         void LoginUser(string username, string password);
