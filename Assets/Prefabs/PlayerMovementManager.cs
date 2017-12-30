@@ -84,6 +84,7 @@ namespace Com.Wulfram3 {
         public void Reset() {
             Rigidbody rb = GetComponent<Rigidbody>();
             rb.isKinematic = false;
+            rb.freezeRotation = false;
             isLanded = false;
             requestLand = false;
             requestJump = false;
@@ -102,6 +103,7 @@ namespace Com.Wulfram3 {
         void Update() {
             isDead = hitpointsManager.health <= 0;
             if (isDead && photonView.isMine) {
+                GetComponent<Rigidbody>().freezeRotation = false;
                 timeSinceDead += Time.deltaTime;
                 if (timeSinceDead >= destroyDelayWhenDead) {   
                     //gameManager.SpawnExplosion(transform.position);
@@ -113,56 +115,31 @@ namespace Com.Wulfram3 {
             if (!photonView.isMine || isDead)
                 return;
 
-
-
-            //Ray ray = new Ray(new Vector3(transform.position.x, transform.position.y + 30, transform.position.z), Vector3.down);
-            //RaycastHit hit;
-            //if (terrainCollider.Raycast(ray, out hit, 100.0F)) {
-            //    y = hit.point.y;
-            //}
-
-
-            //transform.Translate(x, 0, z);
-            //Vector3 pos = transform.position;
-            //pos.y = y + 1;
-            //transform.position = pos;
-
-            //float mx = Input.GetAxis("Mouse X") * sensitivityX;
-            //float my = Input.GetAxis("Mouse Y") * sensitivityY;
-            //float deltaX = mx - lastRotationX;
-            //float deltaY = my - lastRotationY;
-            //lastRotationX = mx;
-            //lastRotationY = my;
-            //Quaternion xQuaternion = Quaternion.AngleAxis(mx, Vector3.up);
-            //Quaternion yQuaternion = Quaternion.AngleAxis(my, -Vector3.right);
-            //transform.localRotation = transform.localRotation * xQuaternion * yQuaternion;
-            //transform.Rotate(Vector3.up, mx);
-
-            //NB Uncomment to enable mouse look
-            if (!isLanded && !Cursor.visible) {
-                if (axes == RotationAxes.MouseXAndY) {
-                    // Read the mouse input axis
-                    rotationX += Input.GetAxis("Mouse X") * sensitivityX;
-                    rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
-                    rotationX = ClampAngle(rotationX, minimumX, maximumX);
-                    rotationY = ClampAngle(rotationY, minimumY, maximumY);
-                    Quaternion xQuaternion = Quaternion.AngleAxis(rotationX, Vector3.up);
-                    Quaternion yQuaternion = Quaternion.AngleAxis(rotationY, -Vector3.right);
-                    transform.localRotation = originalRotation * xQuaternion * yQuaternion;
-                } else if (axes == RotationAxes.MouseX) {
-                    rotationX += Input.GetAxis("Mouse X") * sensitivityX;
-                    rotationX = ClampAngle(rotationX, minimumX, maximumX);
-                    Quaternion xQuaternion = Quaternion.AngleAxis(rotationX, Vector3.up);
-                    transform.localRotation = originalRotation * xQuaternion;
-                } else {
-                    rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
-                    rotationY = ClampAngle(rotationY, minimumY, maximumY);
-                    Quaternion yQuaternion = Quaternion.AngleAxis(-rotationY, Vector3.right);
-                    transform.localRotation = originalRotation * yQuaternion;
-                }
-            }
-
             if (!Cursor.visible) {
+                GetComponent<Rigidbody>().freezeRotation = false;
+                if (!isLanded) {
+                    if (axes == RotationAxes.MouseXAndY) {
+                        // Read the mouse input axis
+                        rotationX += Input.GetAxis("Mouse X") * sensitivityX;
+                        rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
+                        rotationX = ClampAngle(rotationX, minimumX, maximumX);
+                        rotationY = ClampAngle(rotationY, minimumY, maximumY);
+                        Quaternion xQuaternion = Quaternion.AngleAxis(rotationX, Vector3.up);
+                        Quaternion yQuaternion = Quaternion.AngleAxis(rotationY, -Vector3.right);
+                        transform.localRotation = originalRotation * xQuaternion * yQuaternion;
+                    } else if (axes == RotationAxes.MouseX) {
+                        rotationX += Input.GetAxis("Mouse X") * sensitivityX;
+                        rotationX = ClampAngle(rotationX, minimumX, maximumX);
+                        Quaternion xQuaternion = Quaternion.AngleAxis(rotationX, Vector3.up);
+                        transform.localRotation = originalRotation * xQuaternion;
+                    } else {
+                        rotationY += Input.GetAxis("Mouse Y") * sensitivityY;
+                        rotationY = ClampAngle(rotationY, minimumY, maximumY);
+                        Quaternion yQuaternion = Quaternion.AngleAxis(-rotationY, Vector3.right);
+                        transform.localRotation = originalRotation * yQuaternion;
+                    }
+                }
+
                 //Fire Pulse
                 if (Time.time >= timestamp && (Input.GetMouseButtonDown(1))) {
                     if (GetComponent<FuelManager>().TakeFuel(fuelPerPulse)) {
@@ -194,7 +171,9 @@ namespace Com.Wulfram3 {
                         requestLand = true;
                     }
                 }
-            }     
+            } else {
+                GetComponent<Rigidbody>().freezeRotation = true;
+            }    
 
             if (requestLand) {
                 if (CanLand()) {
