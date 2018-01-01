@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FrameCounter : MonoBehaviour {
+
+    public Font myFont;
+    GUIStyle style;
     string label = "";
     float count;
 
     IEnumerator Start()
     {
+        style = new GUIStyle();
+        style.font = myFont;
+        style.fontSize = 12;
+        style.normal.textColor = Color.yellow;
         GUI.depth = 2;
         while (true)
         {
@@ -27,7 +34,7 @@ public class FrameCounter : MonoBehaviour {
 
     void OnGUI()
     {
-        GUI.Label(new Rect(5, 40, 100, 25), label);
+        GUI.Label(new Rect(5, 40, 100, 25), label, style);
     }
 }
 

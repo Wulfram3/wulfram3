@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class PingCounter : MonoBehaviour {
 
+    public Font myFont;
+    GUIStyle style;
     string label = "";
     float count;
 
     IEnumerator Start()
     {
+        style = new GUIStyle();
+        style.font = myFont;
+        style.fontSize = 12;
+        style.normal.textColor = Color.yellow;
         GUI.depth = 2;
         while (true)
         {
@@ -28,6 +34,6 @@ public class PingCounter : MonoBehaviour {
 
     void OnGUI()
     {
-        GUI.Label(new Rect(5, 70, 100, 25), label);
+        GUI.Label(new Rect(5, 70, 100, 25), label, style);
     }
 }
