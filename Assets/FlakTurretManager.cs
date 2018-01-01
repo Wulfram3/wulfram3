@@ -11,6 +11,9 @@ namespace Com.Wulfram3 {
         public float scanRadius = 300;
         public float testTargetOnSightInterval = 0.5f;
 
+        public string teamDetect;
+
+
         private GameManager gameManager;
         private float timeSinceLastScan = 0;
         private Transform currentTarget = null;
@@ -79,7 +82,7 @@ namespace Com.Wulfram3 {
                 var cols = Physics.OverlapSphere(transform.position, scanRadius);
                 var rigidbodies = new List<Rigidbody>();
                 foreach (var col in cols) {
-                    if (col.attachedRigidbody != null && !rigidbodies.Contains(col.attachedRigidbody) && col.tag.Equals("Player")) {
+                    if (col.attachedRigidbody != null && !rigidbodies.Contains(col.attachedRigidbody) && col.tag.Equals(teamDetect))  {
                         rigidbodies.Add(col.attachedRigidbody);
                     }
                 }

@@ -30,6 +30,11 @@ public static class PhotonNetwork
     /// <summary>Version number of PUN. Also used in GameVersion to separate client version from each other.</summary>
     public const string versionPUN = "1.88";
 
+    internal static GameObject Instantiate(string v1, Vector3 position, int v2, int v3)
+    {
+        throw new NotImplementedException();
+    }
+
     /// <summary>Version string for your this build. Can be used to separate incompatible clients. Sent during connect.</summary>
     /// <remarks>This is only sent when you connect so that is also the place you set it usually (e.g. in ConnectUsingSettings).</remarks>
     public static string gameVersion { get; set; }

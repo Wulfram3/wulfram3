@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class GroundPlacementController : MonoBehaviour
+public class GroundPlacementController : Photon.PunBehaviour
 {
     [SerializeField]
     private GameObject placeableObjectPrefab;
@@ -16,6 +16,9 @@ public class GroundPlacementController : MonoBehaviour
     private float mouseWheelRotation;
 
     public GameObject placeObject;
+
+    public Material PreviewMaterial;
+
 
     private void Update()
     {
@@ -46,14 +49,19 @@ public class GroundPlacementController : MonoBehaviour
 
     private void MoveCurrentObjectToMouse()
     {
-        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        //RaycastHit hitInfo;
-        //if (Physics.Raycast(ray, out hitInfo))
-        //{
+        RaycastHit hitInfo;
+        if (Physics.Raycast(ray, out hitInfo))
+        {
         currentPlaceableObject.transform.position = placeObject.transform.position;
-         //currentPlaceableObject.transform.rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
-        //}
+            //currentPlaceableObject.transform.position = hitInfo.point;
+  }
+
+        //foreach (var renderer in currentPlaceableObject.GetComponentsInChildren<Renderer>(true))
+          //  renderer.sharedMaterial = PreviewMaterial;
+        foreach (var script in currentPlaceableObject.GetComponentsInChildren<MonoBehaviour>(true))
+            script.enabled = false;
     }
 
     private void RotateFromMouseWheel()
@@ -67,11 +75,22 @@ public class GroundPlacementController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            currentPlaceableObject = null;
+            //currentPlaceableObject = null;
+            Destroy(currentPlaceableObject);
+            PhotonNetwork.Instantiate("FlakTurret", placeObject.transform.position, placeObject.transform.rotation, 0);
         }
     }
 }
 
 
+/* 
+ Logic Flow:.
+    -Create function to strip and ghost the prefab
+    -Based on cargo layer/tag choose type of prefab to instantiate
+     
+     
+ 
 
+ 
+     */
 
