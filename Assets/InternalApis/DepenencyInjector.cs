@@ -34,12 +34,12 @@ namespace Assets.InternalApis
         {
             if (typeInstances.ContainsKey(contract))
             {
-                Debug.Log("Resolve Instance:" + contract.Name);
+                //Debug.Log("Resolve Instance:" + contract.Name);
                 return typeInstances[contract];
             }
             else
             {
-                Debug.Log("Resolve New:" + contract.Name);
+                //Debug.Log("Resolve New:" + contract.Name);
                 Type implementation = types[contract];
                 ConstructorInfo constructor = implementation.GetConstructors().ToList()[0];
                 ParameterInfo[] constructorParameters = constructor.GetParameters();
