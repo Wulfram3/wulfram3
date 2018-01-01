@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: bdf1bf1442e3313488092b3d20ce522e
+labels:
+- manager
+- pool
+- smartpool
+- prefab
+timeCreated: 18446744011573954816
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
