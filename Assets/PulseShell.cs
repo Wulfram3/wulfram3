@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 using UnityStandardAssets.Effects;
+using Com.Wulfram3;
 
 public class PulseShell : NetworkBehaviour {
     public GameObject explosionPrefab;
@@ -21,6 +22,7 @@ public class PulseShell : NetworkBehaviour {
 
     void OnCollisionEnter(Collision col) {
         Combat combat = col.gameObject.GetComponent<Combat>();
+        //TEAM DETECTION CHANGED HERE
         if (combat != null)
         {
             combat.TakeDamage(directHitpointsDamage);
