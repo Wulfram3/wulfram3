@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Umbrace.Unity.PurePool.UNet</name>
+    </assembly>
+    <members>
+        <member name="T:Umbrace.Unity.PurePool.UNet.UNetPooling">
+            <summary>
+            An integration component that allows UNET networking to utilise object pooling.
+            </summary>
+        </member>
+        <member name="F:Umbrace.Unity.PurePool.UNet.UNetPooling.PoolManager">
+            <summary>
+            The <see cref="T:Umbrace.Unity.PurePool.GameObjectPoolManager"/> responsible for managing the pools.
+            </summary>
+        </member>
+        <member name="F:Umbrace.Unity.PurePool.UNet.UNetPooling.AutoRegister">
+            <summary>
+            A value indicating whether to automatically register prefabs with <see cref="T:UnityEngine.Networking.ClientScene"/> when pools are initialised by the manager.
+            </summary>
+        </member>
+        <member name="P:Umbrace.Unity.PurePool.UNet.UNetPooling.Prefabs">
+            <summary>
+            Gets a dictionary of game objects that have been registered for spawning with pooling support.
+            </summary>
+            <remarks>
+            This dictionary is updated when <see cref="M:Umbrace.Unity.PurePool.UNet.UNetPooling.RegisterSpawnHandler(UnityEngine.GameObject)"/> is called.
+            It contains a mapping from the asset ID of the game object's <see cref="T:UnityEngine.Networking.NetworkIdentity"/>, to the game object itself.
+            </remarks>
+        </member>
+        <member name="M:Umbrace.Unity.PurePool.UNet.UNetPooling.ManagerOnPoolAttached(System.Object,Umbrace.Unity.PurePool.PoolEventArgs{Umbrace.Unity.PurePool.GameObjectPool})">
+            <summary>
+            Handles the <see cref="!:GameObjectPoolManager.PoolAttached"/> event.
+            </summary>
+            <param name="sender">The sender of the event.</param>
+            <param name="eventArgs">The <see cref="T:Umbrace.Unity.PurePool.PoolEventArgs`1"/> object containing the event data.</param>
+        </member>
+        <member name="M:Umbrace.Unity.PurePool.UNet.UNetPooling.SpawnHandler(UnityEngine.Vector3,UnityEngine.Networking.NetworkHash128)">
+            <summary>
+            Spawns a <see cref="T:UnityEngine.GameObject"/> that's been registered with <see cref="T:UnityEngine.Networking.ClientScene"/>, with pooling support.
+            </summary>
+            <param name="position">The position to spawn the object at.</param>
+            <param name="assetId">The asset ID of the object to spawn.</param>
+            <returns>The <see cref="T:UnityEngine.GameObject"/> that was spawned.</returns>
+            <remarks>
+            <para>
+            This method should be passed to the <see cref="M:UnityEngine.Networking.ClientScene.RegisterPrefab(UnityEngine.GameObject,UnityEngine.Networking.SpawnDelegate,UnityEngine.Networking.UnSpawnDelegate)"/> or <see cref="M:UnityEngine.Networking.ClientScene.RegisterSpawnHandler(UnityEngine.Networking.NetworkHash128,UnityEngine.Networking.SpawnDelegate,UnityEngine.Networking.UnSpawnDelegate)"/> methods.
+            </para>
+            <para>
+            Objects spawned using <see cref="M:Umbrace.Unity.PurePool.UNet.UNetPooling.SpawnHandler(UnityEngine.Vector3,UnityEngine.Networking.NetworkHash128)"/> should not be destroyed manually, but instead should be passed to <see cref="M:Umbrace.Unity.PurePool.UNet.UNetPooling.UnspawnHandler(UnityEngine.GameObject)"/>, to allow pooling to work.
+            When using UNet, this means you should call <see cref="M:UnityEngine.Networking.NetworkServer.UnSpawn(UnityEngine.GameObject)"/> instead of <see cref="M:UnityEngine.Networking.NetworkServer.Destroy(UnityEngine.GameObject)"/>.
+            </para>
+            </remarks>
+            <exception cref="T:System.ArgumentException">When <paramref name="assetId"/> has not been registered with <see cref="T:UnityEngine.Networking.ClientScene"/>.</exception>
+            <seealso cref="M:Umbrace.Unity.PurePool.UNet.UNetPooling.UnspawnHandler(UnityEngine.GameObject)"/>
+            <seealso cref="M:UnityEngine.Networking.ClientScene.RegisterPrefab(UnityEngine.GameObject,UnityEngine.Networking.SpawnDelegate,UnityEngine.Networking.UnSpawnDelegate)"/>
+            <seealso cref="M:UnityEngine.Networking.ClientScene.RegisterSpawnHandler(UnityEngine.Networking.NetworkHash128,UnityEngine.Networking.SpawnDelegate,UnityEngine.Networking.UnSpawnDelegate)"/>
+            <seealso cref="M:UnityEngine.Networking.NetworkServer.UnSpawn(UnityEngine.GameObject)"/>
+        </member>
+        <member name="M:Umbrace.Unity.PurePool.UNet.UNetPooling.UnspawnHandler(UnityEngine.GameObject)">
+            <summary>
+            Despawns a <see cref="T:UnityEngine.GameObject"/>, with pooling support.
+            </summary>
+            <param name="instance">The <see cref="T:UnityEngine.GameObject"/> to be despawned.</param>
+            <remarks>
+            This method should be passed to the <see cref="M:UnityEngine.Networking.ClientScene.RegisterPrefab(UnityEngine.GameObject,UnityEngine.Networking.SpawnDelegate,UnityEngine.Networking.UnSpawnDelegate)"/> or <see cref="M:UnityEngine.Networking.ClientScene.RegisterSpawnHandler(UnityEngine.Networking.NetworkHash128,UnityEngine.Networking.SpawnDelegate,UnityEngine.Networking.UnSpawnDelegate)"/> methods.
+            Despawning of a networked <see cref="T:UnityEngine.GameObject"/> can then be performed by calling <see cref="M:UnityEngine.Networking.NetworkServer.UnSpawn(UnityEngine.GameObject)"/>.
+            </remarks>
+            <seealso cref="M:Umbrace.Unity.PurePool.UNet.UNetPooling.SpawnHandler(UnityEngine.Vector3,UnityEngine.Networking.NetworkHash128)"/>
+            <seealso cref="M:UnityEngine.Networking.ClientScene.RegisterPrefab(UnityEngine.GameObject,UnityEngine.Networking.SpawnDelegate,UnityEngine.Networking.UnSpawnDelegate)"/>
+            <seealso cref="M:UnityEngine.Networking.ClientScene.RegisterSpawnHandler(UnityEngine.Networking.NetworkHash128,UnityEngine.Networking.SpawnDelegate,UnityEngine.Networking.UnSpawnDelegate)"/>
+            <seealso cref="M:UnityEngine.Networking.NetworkServer.UnSpawn(UnityEngine.GameObject)"/>
+        </member>
+        <member name="M:Umbrace.Unity.PurePool.UNet.UNetPooling.RegisterSpawnHandlers">
+            <summary>
+            Registers pooling-based spawn handlers for all prefabs that have been registered with <see cref="T:UnityEngine.Networking.ClientScene"/>.
+            </summary>
+            <remarks>
+            This method replaces all <see cref="T:UnityEngine.Networking.ClientScene"/> registrations that were made using
+            <see cref="M:UnityEngine.Networking.ClientScene.RegisterPrefab(UnityEngine.GameObject)"/> without pooling support,
+            with new registrations made using <see cref="M:Umbrace.Unity.PurePool.UNet.UNetPooling.RegisterSpawnHandler(UnityEngine.GameObject)"/> to provide pooling support.
+            </remarks>
+        </member>
+        <member name="M:Umbrace.Unity.PurePool.UNet.UNetPooling.RegisterSpawnHandler(UnityEngine.GameObject)">
+            <summary>
+            Registers the specified prefab with the UNET spawning system, with pooling support.
+            </summary>
+            <remarks>
+            This is equivalent to calling <see cref="M:UnityEngine.Networking.ClientScene.RegisterPrefab(UnityEngine.GameObject,UnityEngine.Networking.SpawnDelegate,UnityEngine.Networking.UnSpawnDelegate)"/>, 
+            and passing <see cref="M:Umbrace.Unity.PurePool.UNet.UNetPooling.SpawnHandler(UnityEngine.Vector3,UnityEngine.Networking.NetworkHash128)"/> and <see cref="M:Umbrace.Unity.PurePool.UNet.UNetPooling.UnspawnHandler(UnityEngine.GameObject)"/>, in addition to adding
+            the prefab to the <see cref="P:Umbrace.Unity.PurePool.UNet.UNetPooling.Prefabs"/> dictionary.
+            </remarks>
+            <param name="prefab">The prefab that will be spawned.</param>
+        </member>
+        <member name="M:Umbrace.Unity.PurePool.UNet.UNetPooling.RegisterSpawnHandler(UnityEngine.Networking.NetworkHash128)">
+            <summary>
+            Registers the asset with the specified asset ID with the UNET spawning system, with pooling support.
+            </summary>
+            <param name="assetId">The asset ID of the asset that will be spawned.</param>
+            <remarks>
+            <paramref name="assetId"/> must be present in the <see cref="P:Umbrace.Unity.PurePool.UNet.UNetPooling.Prefabs"/> dictionary, mapping to its prefab game object.
+            If the asset ID is not present in the dictionary, it will not be possible to spawn the object.
+            </remarks>
+        </member>
+        <member name="M:Umbrace.Unity.PurePool.UNet.UNetPooling.CreatePoolsForNetworkedPrefabs">
+            <summary>
+            Creates new pools using the default settings, for every prefab currently registered with <see cref="T:UnityEngine.Networking.ClientScene"/> with pooling support.
+            </summary>
+            <remarks>
+            This is equivalent to calling <see cref="M:Umbrace.Unity.PurePool.GameObjectPoolManager.CreatePool(UnityEngine.GameObject)"/> for each prefab in the <see cref="P:Umbrace.Unity.PurePool.UNet.UNetPooling.Prefabs"/>
+            dictionary.
+            </remarks>
+        </member>
+        <member name="M:Umbrace.Unity.PurePool.UNet.UNetPooling.RegisterNetworkedPrefabsForAllPools">
+            <summary>
+            Registers all prefabs from pools attached to the manager with the UNET spawning system, with pooling support.
+            </summary>
+            <remarks>
+            This is equivalent to calling <see cref="M:Umbrace.Unity.PurePool.UNet.UNetPooling.RegisterSpawnHandler(UnityEngine.GameObject)"/> for each pool in the pool manager's <see cref="!:GameObjectPoolManager.Pools"/> collection.
+            </remarks>
+        </member>
+    </members>
+</doc>
