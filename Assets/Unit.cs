@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Com.Wulfram3 {
     public class Unit : MonoBehaviour {
 
-        public int team;
+        public string team;
         public string name;
 
         // Use this for initialization

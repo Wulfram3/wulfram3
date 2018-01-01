@@ -121,11 +121,14 @@ namespace Com.Wulfram3
                     Transform selectedSpawnPoint = spawnPointsRed[0];
                     GameObject player = PhotonNetwork.Instantiate("RedTank", selectedSpawnPoint.position, selectedSpawnPoint.rotation, 0);
                     PhotonNetwork.player.SetTeam(PunTeams.Team.red);
+                    
+                   
                 } else {
                     Debug.Log("Spawn blue tank");
                     Transform selectedSpawnPoint = spawnPointsBlue[0];
                     GameObject player = PhotonNetwork.Instantiate("PlayerTank", selectedSpawnPoint.position, selectedSpawnPoint.rotation, 0);
                     PhotonNetwork.player.SetTeam(PunTeams.Team.blue);
+                    
                 }
             } else {
                 Debug.Log("Ignoring scene load for " + Application.loadedLevelName);

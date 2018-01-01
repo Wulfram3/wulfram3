@@ -82,7 +82,7 @@ namespace Com.Wulfram3 {
                 var cols = Physics.OverlapSphere(transform.position, scanRadius);
                 var rigidbodies = new List<Rigidbody>();
                 foreach (var col in cols) {
-                    if (col.attachedRigidbody != null && !rigidbodies.Contains(col.attachedRigidbody) && col.tag.Equals(teamDetect))  {
+                    if (col.attachedRigidbody != null && !rigidbodies.Contains(col.attachedRigidbody) && col.tag.Equals("Player") && col.GetComponent<Unit>().team == teamDetect) {
                         rigidbodies.Add(col.attachedRigidbody);
                     }
                 }
