@@ -10,6 +10,7 @@ namespace Com.Wulfram3 {
         public Text hitpoints;
         public Text name;
         public Text team;
+        public Text user;
 
         private GameObject target;
         private Vector3 pos;
@@ -31,10 +32,38 @@ namespace Com.Wulfram3 {
                 //rectTransform.localPosition = new Vector2(0, 100);
                 rectTransform.SetPositionAndRotation(pos, rectTransform.rotation);
 
+                
                 hitpoints.text = target.GetComponent<HitPointsManager>().health + "/" + target.GetComponent<HitPointsManager>().maxHealth;
                 name.text = target.GetComponent<Unit>().name;
                 team.text = "" + target.GetComponent<Unit>().team;
-            } else {
+                var panel = targetInfoPanel.GetComponent<Image>();
+                switch (target.GetComponent<Unit>().unitTeam)
+                {
+                    case PunTeams.Team.none:
+                        panel.color = FindObjectOfType<GameManager>().graycolor.color;
+                        break;
+                    case PunTeams.Team.red:
+                        panel.color = FindObjectOfType<GameManager>().redcolor.color;
+                        break;
+                    case PunTeams.Team.blue:
+                        panel.color = FindObjectOfType<GameManager>().bluecolor.color;
+                        break;
+                    default:
+                        panel.color = FindObjectOfType<GameManager>().graycolor.color;
+                        break;
+                }
+
+                if(target.GetComponent<Unit>().unitType == Assets.InternalApis.Classes.UnitType.Tank || target.GetComponent<Unit>().unitType == Assets.InternalApis.Classes.UnitType.Scout)
+                {
+                    user.text = FindObjectOfType<GameManager>().GetColoredPlayerName(target.GetComponent<PhotonView>().owner.NickName, target.GetComponent<PhotonView>().owner.IsMasterClient);
+                }
+                else
+                {
+                    user.text = "";
+                }
+
+            }
+            else {
                 targetInfoPanel.SetActive(false);
             }
         }

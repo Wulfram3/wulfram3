@@ -26,6 +26,7 @@ namespace Com.Wulfram3
 
         public Material redcolor;
         public Material bluecolor;
+        public Material graycolor;
 
         public GameObject playerInfoPanelPrefab;
         public Transform[] spawnPointsBlue;
@@ -221,6 +222,66 @@ namespace Com.Wulfram3
             }
         }
 
+        public string GetColoredPlayerName(string name, bool isMaster, bool colorFull = false, PunTeams.Team team = PunTeams.Team.none)
+        {
+            string masterClient = "";
+            string modTag = "";
+            string username = "";
+            string teamColor = "";
+            switch (team)
+            {
+                case PunTeams.Team.none:
+                    teamColor = this.graycolor.color.ToHex();
+                    break;
+                case PunTeams.Team.red:
+                    teamColor = this.redcolor.color.ToHex();
+                    break;
+                case PunTeams.Team.blue:
+                    teamColor = this.bluecolor.color.ToHex();
+                    break;
+                default:
+                    teamColor = this.graycolor.color.ToHex();
+                    break;
+            }
+
+
+            if (isMaster)
+            {
+                masterClient = "<color=magenta>*</color>";
+            }
+
+            if (name.Contains("[MOD]"))
+            {
+                var names = name.Split(' ');
+
+                modTag = "<color=yellow>" + names[0] + "</color>"; 
+                if (colorFull == true)
+                {
+                    username = modTag + " " + "<color=" + teamColor + ">" + names[1] + "</color>";
+                }
+                else
+                {
+                    username = modTag + " " + "<color=white>" + names[1] + "</color>";
+                }
+            }
+            else if (name.Contains("[DEV]"))
+            {
+                var names = name.Split(' ');
+
+                modTag = "<color=#e0950b>" + names[0] + "</color>";
+                if (colorFull == true)
+                {
+                    username = modTag + " " + "<color=" + teamColor + ">" + names[1] + "</color>";
+                }
+                else
+                {
+                    username = modTag + " " + "<color=white>" + names[1] + "</color>";
+                }
+            }
+
+            return masterClient + username;
+        }
+
         public void Respawn(PlayerMovementManager player)
         {
 
@@ -341,5 +402,7 @@ namespace Com.Wulfram3
 
 
         #endregion
+
+
     }
 }

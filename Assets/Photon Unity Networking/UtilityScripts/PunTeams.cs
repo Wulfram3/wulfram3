@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Com.Wulfram3;
 using ExitGames.Client.Photon;
 using UnityEngine;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
@@ -130,5 +131,35 @@ public static class TeamExtensions
         {
             player.SetCustomProperties(new Hashtable() { { PunTeams.TeamPlayerProp, (byte)team } });
         }
+    }
+
+    public static PunTeams.Team GetTeam(this GameObject go)
+    {
+        var unit = go.GetComponent<Unit>();
+        if (unit != null)
+        {
+            return unit.unitTeam;
+        }
+
+        return PunTeams.Team.none;
+    }
+
+    public static void SetTeam(this GameObject go, PunTeams.Team team)
+    {
+        var unit = go.GetComponent<Unit>();
+        if (unit != null)
+        {
+            if(unit.unitTeam != team)
+            {
+                unit.unitTeam = team;
+            }
+        }
+    }
+
+    public static string ToHex(this Color color)
+    {
+        Color32 c = color;
+        var hex = string.Format("#{0:X2}{1:X2}{2:X2}{3:X2}", c.r, c.g, c.b, c.a);
+        return hex;
     }
 }

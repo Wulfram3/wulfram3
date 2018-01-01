@@ -36,21 +36,38 @@ namespace Com.Wulfram3 {
                 string playerName = target.GetComponent<PhotonView>().owner.NickName;
                 string hitpoints = target.GetComponent<HitPointsManager>().health + "/" + target.GetComponent<HitPointsManager>().maxHealth;
 
-                string masterClient = "";
-                if (target.GetComponent<PhotonView>().owner.IsMasterClient) {
-                    masterClient = "*";
-                }
+                //string masterClient = "";
+                //string moddevTag = "";
+                //string username = "";
+                //if (target.GetComponent<PhotonView>().owner.IsMasterClient) {
+                //    masterClient = "<color=magenta>*</color>";
+                //}
 
-                playerNameText.text = masterClient + playerName + " " + hitpoints;
+                //if (playerName.Contains("[MOD]"))
+                //{
+                //    moddevTag = "<color=yellow>[MOD]</color>";
+                //}
 
-                if (target.GetComponent<PhotonView>().owner.GetTeam().Equals(PunTeams.Team.red)) {
-                    //red
-                    playerNameText.color = gameManager.redcolor.color;
-                } else {
-                    //blue
-                    playerNameText.color = gameManager.bluecolor.color;
-                }
+                //if (playerName.Contains("[DEV]"))
+                //{
+                //    moddevTag = "<color=orange>[DEV]</color>";
+                //}
+
+
+                var name = gameManager.GetColoredPlayerName(playerName, target.GetComponent<PhotonView>().owner.IsMasterClient, true, target.GetComponent<Unit>().unitTeam);
+                playerNameText.text = name;
+
+                //if (target.GetComponent<PhotonView>().owner.GetTeam().Equals(PunTeams.Team.red)) {
+                //    //red
+                //    playerNameText.color = gameManager.redcolor.color;
+                //} else {
+                //    //blue
+                //    playerNameText.color = gameManager.bluecolor.color;
+                //}
                 //add mod check here
+
+
+
 
                 /* if (target.GetComponent<PhotonView>().owner.IsMasterClient) {
                      playerNameText.color = Color.yellow;
