@@ -278,6 +278,17 @@ namespace Com.Wulfram3
                     username = modTag + " " + "<color=white>" + names[1] + "</color>";
                 }
             }
+            else
+            {
+                if (colorFull == true)
+                {
+                    username = "<color=" + teamColor + ">" + name + "</color>";
+                }
+                else
+                {
+                    username = "<color=white>" + name + "</color>";
+                }
+            }
 
             return masterClient + username;
         }
