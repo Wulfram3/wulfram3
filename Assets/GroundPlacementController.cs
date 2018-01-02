@@ -51,7 +51,7 @@ public class GroundPlacementController : Photon.PunBehaviour
             }
             else
             {
-                currentPlaceableObject = Instantiate(placeableObjectPrefab);
+                currentPlaceableObject = PhotonNetwork.Instantiate(baseUnit, placeObject.transform.position, placeObject.transform.rotation, 0);
             }
         }
     }
@@ -67,25 +67,14 @@ public class GroundPlacementController : Photon.PunBehaviour
             //currentPlaceableObject.transform.position = hitInfo.point;
   }
 
-        Component[] renderers = currentPlaceableObject.GetComponentsInChildren(typeof(Renderer));
-        foreach (Renderer curRenderer in renderers)
-        {
-            Color color;
-            foreach (Material material in curRenderer.materials)
-            {
-                color = material.color;
-                // change alfa for transparency
-                color.a -= 0.5f;
-                if (color.a < 0)
-                {
-                    color.a = 0;
-                }
-                material.color = color;
-            }
-        }
+
+        //foreach (var renderer in currentPlaceableObject.GetComponentsInChildren<MeshRenderer>(true))
+            //renderer.sharedMaterial = PreviewMaterial;
+        ChangeMaterial(PreviewMaterial);
+
 
         foreach (var script in currentPlaceableObject.GetComponentsInChildren<MonoBehaviour>(true))
-            script.enabled = false;
+            script.enabled = true;
     }
 
     public void RotateFromMouseWheel()
@@ -93,6 +82,21 @@ public class GroundPlacementController : Photon.PunBehaviour
         Debug.Log(Input.mouseScrollDelta);
         mouseWheelRotation += Input.mouseScrollDelta.y;
         currentPlaceableObject.transform.Rotate(Vector3.up, mouseWheelRotation * 10f);
+    }
+
+    public void ChangeMaterial(Material newMat)
+    {
+        Renderer[] children;
+        children = currentPlaceableObject.GetComponentsInChildren<Renderer>();
+        foreach (Renderer rend in children)
+        {
+            var mats = new Material[rend.materials.Length];
+            for (var j = 0; j < rend.materials.Length; j++)
+            {
+                mats[j] = newMat;
+            }
+            rend.materials = mats;
+        }
     }
 
     public void ReleaseIfClicked()
