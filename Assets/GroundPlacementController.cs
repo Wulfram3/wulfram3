@@ -1,29 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Com.Wulfram3;
 
 public class GroundPlacementController : Photon.PunBehaviour
 {
     [SerializeField]
-    private GameObject placeableObjectPrefab;
-
+    public GameObject placeableObjectPrefab;
+    
     [SerializeField]
-    private KeyCode newObjectHotkey = KeyCode.Comma;
+    public KeyCode newObjectHotkey = KeyCode.Comma;
 
-    private GameObject currentPlaceableObject;
+    public GameObject currentPlaceableObject;
 
-    private float mouseWheelRotation;
+    public float mouseWheelRotation;
 
     public GameObject placeObject;
 
     public Material PreviewMaterial;
 
+    public GameManager gameManager;
 
-    private void Update()
+    public string baseUnit;
+
+    void Awake()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+        
+    }
+
+    public void Update()
     {
         HandleNewObjectHotkey();
-
+        baseUnit = this.GetComponentInParent<CargoManager>().pickedUpCargo;
         if (currentPlaceableObject != null)
         {
             MoveCurrentObjectToMouse();
@@ -32,9 +41,9 @@ public class GroundPlacementController : Photon.PunBehaviour
         }
     }
 
-    private void HandleNewObjectHotkey()
+    public void HandleNewObjectHotkey()
     {
-        if (Input.GetKeyDown(newObjectHotkey))
+        if (Input.GetKeyDown(newObjectHotkey) && !(baseUnit == ""))
         {
             if (currentPlaceableObject != null)
             {
@@ -47,7 +56,7 @@ public class GroundPlacementController : Photon.PunBehaviour
         }
     }
 
-    private void MoveCurrentObjectToMouse()
+    public void MoveCurrentObjectToMouse()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -58,39 +67,47 @@ public class GroundPlacementController : Photon.PunBehaviour
             //currentPlaceableObject.transform.position = hitInfo.point;
   }
 
-        //foreach (var renderer in currentPlaceableObject.GetComponentsInChildren<Renderer>(true))
-          //  renderer.sharedMaterial = PreviewMaterial;
+        Component[] renderers = currentPlaceableObject.GetComponentsInChildren(typeof(Renderer));
+        foreach (Renderer curRenderer in renderers)
+        {
+            Color color;
+            foreach (Material material in curRenderer.materials)
+            {
+                color = material.color;
+                // change alfa for transparency
+                color.a -= 0.5f;
+                if (color.a < 0)
+                {
+                    color.a = 0;
+                }
+                material.color = color;
+            }
+        }
+
         foreach (var script in currentPlaceableObject.GetComponentsInChildren<MonoBehaviour>(true))
             script.enabled = false;
     }
 
-    private void RotateFromMouseWheel()
+    public void RotateFromMouseWheel()
     {
         Debug.Log(Input.mouseScrollDelta);
         mouseWheelRotation += Input.mouseScrollDelta.y;
         currentPlaceableObject.transform.Rotate(Vector3.up, mouseWheelRotation * 10f);
     }
 
-    private void ReleaseIfClicked()
+    public void ReleaseIfClicked()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            //currentPlaceableObject = null;
+            //get baseunit to deploy based on its name in the resources folder (Must match)
+            
+            Debug.Log(baseUnit);
+          
             Destroy(currentPlaceableObject);
-            PhotonNetwork.Instantiate("FlakTurret", placeObject.transform.position, placeObject.transform.rotation, 0);
+            PhotonNetwork.Instantiate(baseUnit, placeObject.transform.position, placeObject.transform.rotation, 0);
+            this.GetComponentInParent<CargoManager>().SetPickedUpCargo("");
         }
     }
 }
 
-
-/* 
- Logic Flow:.
-    -Create function to strip and ghost the prefab
-    -Based on cargo layer/tag choose type of prefab to instantiate
-     
-     
- 
-
- 
-     */
 

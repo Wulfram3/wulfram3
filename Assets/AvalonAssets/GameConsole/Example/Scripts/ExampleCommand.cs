@@ -28,7 +28,7 @@ namespace AvalonAssets.Example
 				PlayerMovementManager player = PlayerMovementManager.LocalPlayerInstance.GetComponent<PlayerMovementManager>();
 				player.gameObject.GetComponent<CameraManager> ().Detach ();
 				PhotonNetwork.Destroy (player.gameObject);
-				output.Invoke("Spawning Crimson Tank".AddColor(Color.red));
+				output.Invoke("Spawning Red Tank".AddColor(Color.red));
 
 				if (FindObjectOfType<RepairPad>().transform.position != null){
 					GameObject go = PhotonNetwork.Instantiate(this.crimsonTank.name, FindObjectOfType<RepairPad>().transform.position + new Vector3(0,5,0) , Quaternion.identity, 0);
@@ -41,7 +41,7 @@ namespace AvalonAssets.Example
 				PlayerMovementManager player = PlayerMovementManager.LocalPlayerInstance.GetComponent<PlayerMovementManager>();
 				player.gameObject.GetComponent<CameraManager> ().Detach ();
 				PhotonNetwork.Destroy (player.gameObject);
-            	output.Invoke("Spawning Azure Scout".AddColor(Color.red));
+            	output.Invoke("Spawning Red Scout".AddColor(Color.red));
 
 				if (FindObjectOfType<RepairPad>().transform.position != null){
 					GameObject go = PhotonNetwork.Instantiate(this.playerPrefab.name, FindObjectOfType<RepairPad>().transform.position + new Vector3(0,5,0) , Quaternion.identity, 0);

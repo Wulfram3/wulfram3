@@ -144,11 +144,15 @@ namespace Com.Wulfram3 {
                 }
 
                 //Fire Pulse
-                if (Time.time >= timestamp && (Input.GetMouseButtonDown(1))) {
+                if (Time.time >= timestamp && (Input.GetMouseButtonDown(1)) && this.gameObject.GetComponent<Unit>().unitType == Assets.InternalApis.Classes.UnitType.Tank) {
                     if (GetComponent<FuelManager>().TakeFuel(fuelPerPulse)) {
                         CmdFirePulseShell();
                         timestamp = Time.time + timeBetweenShots;
                     }
+                } else
+                {
+
+                    Debug.Log("Im a scout!");
                 }
 
                 //Tank Jump

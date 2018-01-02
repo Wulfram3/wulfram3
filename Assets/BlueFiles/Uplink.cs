@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Cargo : MonoBehaviour
+public class Uplink : MonoBehaviour
 {
 
     public AudioClip pickup;
@@ -23,8 +23,6 @@ public class Cargo : MonoBehaviour
     }
 
 
-
-
     public void OnTriggerStay(Collider other)
     {
         bool canClone = true;
@@ -41,7 +39,7 @@ public class Cargo : MonoBehaviour
         if (Input.GetKeyDown("q"))
         {
 
-            if (other.tag == "Ship")
+            if (other.tag == "Player")
             { // only be picked by the player!
 
                 transform.parent = Camera.main.transform;
@@ -55,20 +53,8 @@ public class Cargo : MonoBehaviour
 			
 
 
-        if (Input.GetKeyDown(","))
-        {
-            if (other.tag == "Ship")
-            {
-                if (gameObject.tag == "FlakCargo" && !isCreated)
-                {
-                    PhotonNetwork.Instantiate("blueft", new Vector3(transform.position.x, transform.position.y + 1.4f, transform.position.z), Quaternion.identity, 0);
-                    isCreated = true;
 
-                }
-                    GameObject.Destroy(gameObject);
-
-                }
             }
         }
-    }
+    
 	

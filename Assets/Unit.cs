@@ -14,6 +14,8 @@ namespace Com.Wulfram3 {
 
         public UnitType unitType;
 
+        
+
         // Use this for initialization
         void Start() {
             switch (team.ToLower())

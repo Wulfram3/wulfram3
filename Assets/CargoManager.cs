@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace Com.Wulfram3 {
     public class CargoManager : Photon.PunBehaviour {
-
+        public AudioClip pickup;
+        public AudioClip dropdown;
         public string pickedUpCargo = "";
 
         // Use this for initialization
@@ -17,6 +18,7 @@ namespace Com.Wulfram3 {
             if (photonView.isMine) {     
                 if (Input.GetKeyDown("q")) {
                     GetGameManager().PickUpCargo(this);
+                    Debug.Log("Picked up cargo: " + pickedUpCargo);
                 }
 
                 if (Input.GetKeyDown("z")) {
@@ -35,9 +37,9 @@ namespace Com.Wulfram3 {
             pickedUpCargo = cargo;
             if (photonView.isMine) {
                 if (cargo != "") {
-                    //TODO: play pickup sound
+                    GetComponent<AudioSource>().PlayOneShot(pickup, 1.0f);
                 } else {
-                    //TODO: play drop sound
+                    GetComponent<AudioSource>().PlayOneShot(dropdown, 1.0f);
                 }
             }
         }

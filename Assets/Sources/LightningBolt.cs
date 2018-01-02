@@ -35,10 +35,10 @@ public class LightningBolt : Photon.PunBehaviour
 	{
 
 
-		//if (!photonView.isMine)
-			//return;
+            //if (!photonView.isMine)
+            //return;
 
-			if (Input.GetMouseButton(1)) {
+            if (Input.GetMouseButtonDown(1)){
 			Vector3 pos = transform.position + (transform.forward * 2.0f + transform.up * 0.2f);
 			Quaternion rotation = transform.rotation;
 
