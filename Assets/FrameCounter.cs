@@ -14,7 +14,7 @@ public class FrameCounter : MonoBehaviour {
         style = new GUIStyle();
         style.font = myFont;
         style.fontSize = 12;
-        style.normal.textColor = Color.yellow;
+        style.normal.textColor = Color.white;
         GUI.depth = 2;
         while (true)
         {

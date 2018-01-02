@@ -82,13 +82,16 @@ namespace Com.Wulfram3 {
 
         [PunRPC]
         public void Reset() {
-            Rigidbody rb = GetComponent<Rigidbody>();
-            rb.isKinematic = false;
-            rb.freezeRotation = false;
-            isLanded = false;
-            requestLand = false;
-            requestJump = false;
-            timeSinceDead = 0;
+            if (photonView.isMine)
+            {
+                Rigidbody rb = GetComponent<Rigidbody>();
+                rb.isKinematic = false;
+                rb.freezeRotation = false;
+                isLanded = false;
+                requestLand = false;
+                requestJump = false;
+                timeSinceDead = 0;
+            }
         }
 
         [PunRPC]
@@ -238,8 +241,8 @@ namespace Com.Wulfram3 {
         }
 
         public void FixedUpdate() {
-            if (!photonView.isMine || isDead)
-                return;
+           if (!photonView.isMine || isDead)
+               return;
             Rigidbody rb = GetComponent<Rigidbody>();
 
             float forceMultiplier = 2.0f;
