@@ -19,4 +19,11 @@ namespace Assets.InternalApis.Classes
         Skypump, 
         Darklight,
     }
+
+    public enum MapType
+    {
+        Mini, 
+        Large, 
+        Spawn,
+    }
 }
