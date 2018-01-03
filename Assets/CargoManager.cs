@@ -44,7 +44,7 @@ namespace Com.Wulfram3 {
             }
         }
 
-        private GameManager GetGameManager() {
+        public GameManager GetGameManager() {
             return FindObjectOfType<GameManager>();
         }
     }
