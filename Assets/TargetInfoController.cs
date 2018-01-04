@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,24 +33,34 @@ namespace Com.Wulfram3 {
                 //rectTransform.localPosition = new Vector2(0, 100);
                 rectTransform.SetPositionAndRotation(pos, rectTransform.rotation);
 
-                
-                hitpoints.text = target.GetComponent<HitPointsManager>().health + "/" + target.GetComponent<HitPointsManager>().maxHealth;
+                PlayerMovementManager player = PlayerMovementManager.LocalPlayerInstance.GetComponent<PlayerMovementManager>();
+                var dist = Math.Round(Vector3.Distance(target.transform.position, player.transform.position), 0);
+
+                hitpoints.text = dist + "M " + target.GetComponent<HitPointsManager>().health + "HP";
                 name.text = target.GetComponent<Unit>().name;
-                team.text = "" + target.GetComponent<Unit>().team;
+                team.text = target.GetComponent<Unit>().team;
+
+
+
+
                 var panel = targetInfoPanel.GetComponent<Image>();
                 switch (target.GetComponent<Unit>().unitTeam)
                 {
                     case PunTeams.Team.none:
-                        panel.color = FindObjectOfType<GameManager>().graycolor.color;
+                        name.color = FindObjectOfType<GameManager>().graycolor.color;
+                        //panel.color = FindObjectOfType<GameManager>().graycolor.color;
                         break;
                     case PunTeams.Team.red:
-                        panel.color = FindObjectOfType<GameManager>().redcolor.color;
+                        name.color = FindObjectOfType<GameManager>().redcolor.color;
+                        //panel.color = FindObjectOfType<GameManager>().redcolor.color;
                         break;
                     case PunTeams.Team.blue:
-                        panel.color = FindObjectOfType<GameManager>().bluecolor.color;
+                        name.color = FindObjectOfType<GameManager>().bluecolor.color;
+                        //panel.color = FindObjectOfType<GameManager>().bluecolor.color;
                         break;
                     default:
-                        panel.color = FindObjectOfType<GameManager>().graycolor.color;
+                        name.color = FindObjectOfType<GameManager>().graycolor.color;
+                        //panel.color = FindObjectOfType<GameManager>().graycolor.color;
                         break;
                 }
 
